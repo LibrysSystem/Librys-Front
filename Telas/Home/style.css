@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+*{
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+:root{
+    --cor1:#734C29;
+    --cor2:#B0805B;
+    --cor3:#CEAA89;
+    --cor4:#F9F1E5;
+
+    --font-padrao: Arial, Verdana, Helvetica, sans-serif;
+
+}
+
+
+header{
+    
+}
