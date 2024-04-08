@@ -1,21 +1,111 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Inter:wght@100..900&display=swap');
 
-*{
-    padding: 0px;
-    margin: 0px;
-    border: none;
-}
 :root{
     --cor1:#734C29;
     --cor2:#B0805B;
     --cor3:#CEAA89;
     --cor4:#F9F1E5;
 
-    --font-padrao: Arial, Verdana, Helvetica, sans-serif;
+    --font-padrao: Inknut Antiqua, cursive, serif;
+    --font-padrao: Inter, sans-serif;
+
+}
+*{
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    box-sizing: border-box;
 
 }
 
 
 header{
+    display: flex;
+    height: 195px;
+    background-color: var(--cor3);
+    color: var(--cor1);
+    justify-content: space-between;
+    align-items: end;
     
+}
+header img{
+    display: flex;
+    position: relative;
+    top: 75px;
+    left: 150px;
+    transform: rotate(-90deg);
+    height: 326px;
+    margin: 15px 3px;
+}
+header > nav{
+    
+}
+header > nav ul{
+    margin-right: 52px;
+}
+header > nav li{
+    display: inline-block;
+    list-style: none;
+    margin: 38px 19px;
+}
+header a{
+    padding: 3px;
+    text-decoration: none;
+    color: var(--cor1);
+    font-size: 1.6em;
+}
+
+
+main{
+    background-color: var(--cor4);
+    justify-content:space-around;
+}
+.sec_main{
+
+}
+#home_inicio{
+    
+    height: 110vh;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+    #firt_contact{
+        position: relative;
+        left: 7%;
+        width: 39.3%;
+        color: var(--cor1);
+
+    }
+    #firt_contact > h2{
+        font-size: 3em;
+    }
+    #firt_contact > p{
+        margin-top: 13px;
+        font-size: 1.3em;
+        line-height: 2em;
+    }
+    #img_firtContact{
+        position: relative;
+        background-color: var(--cor3);
+        border-radius: 15px;
+        height: 65%;
+        width: 38%;
+        left: 17%;    
+        
+    }
+    #img_firtContact > img{   
+        width: 175px;
+        margin: 41px 96px;
+    
+
+    }
+
+
+#home_sobre{
+
+}
+#home_contatos{
+
 }
