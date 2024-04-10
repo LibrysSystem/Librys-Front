@@ -16,13 +16,108 @@
     margin: 0px;
     border: none;
     font-family: var(--font-padrao);
+    font-weight: 600;
 
 }
 html body {
-    height: 100%;
-    background-color: #CEAA89;
+    height: 100vh;
+    background-color: #F9F1E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quad_login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 3px solid #734C29;
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.400);
+    height: 97%;
+    width: 40%;
+}
+
+h1{
+    font-size: 2.7em;
+    color: #734C29;
+    margin-bottom: 42px;
+    margin-top: 20px;
 }
 
 .form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 70%;
+    width: 100%;
+}
+
+#l_email{
+    color: #734C29;
+    font-size: 0.95em;
+    margin-top: 35px;
+    margin-bottom: 13px;
 
 }
+#email{
+    background-color: #F9F1E5;
+    font-family: var(--font-especial);
+    font-weight: 100;
+    border: 1px solid #734C29;
+    border-radius: 30px;
+    height: 5%;
+    padding: 5px;
+    text-indent: 20px;
+    width: 80%;
+}
+
+
+#l_senha{
+    color: #734C29;
+    font-size: 0.95em;
+    margin-top: 35px;
+    margin-bottom: 13px;
+
+}
+#senha{
+    background-color: #F9F1E5;
+    font-family: var(--font-especial);
+    font-weight: 100;
+    border: 1px solid #734C29;
+    border-radius: 30px;
+    height: 5%;
+    padding: 5px;
+    
+    text-indent: 20px;
+    width: 60%;
+
+}
+#esqueci{
+    display: flex;
+    font-size: 0.7em;
+    background-color: #F9F1E5;
+    color: #734C29;
+    margin: 13px;
+
+
+}
+#enviar{
+    display: flex;
+    margin: auto;
+    width: 23%;
+    height: 9%;
+    justify-content: center;
+    align-items: center;
+    background-color: #734C29;
+    border-radius: 17px;
+    color: #F9F1E5;
+    margin-top: 90px;
+    margin-bottom: 30px;
+    font-size: 1em;
+
+
+}
+

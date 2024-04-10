@@ -8,21 +8,19 @@
     <title>Login</title>
 </head>
 <body>
-    <main>
-        <div id="quad_login" class="quad_login">
-            <h1>LOGIN</h1>
-            <div id="form" class="form">
-                <form action="#" method="post">
-                    <label for="email">EMAIL</label>
-                    <input type="email" name="email" id="email">
-                    <label for="senha">SENHA</label>
-                    <input type="password" name="senha" id="senha">
-                    <button id="esqueci">ESQUECI A SENHA</button>
-                    <button id="enviar" type="submit">ENVIAR</button>
-                </form>
-            </div>
-        </div>
-    </main>
-    
+    <div id="quad_login" class="quad_login">
+        <h1>LOGIN</h1>
+        <form id="form" class="form" action="formulario_login.js" method="post">
+            <label id="l_email" for="email">EMAIL</label>
+            <input type="email" name="email" id="email" required placeholder="Digite seu email..." autocomplete="email">
+
+            <label id="l_senha" for="senha">SENHA</label>
+            <input type="password" name="senha" id="senha" required minlength="8" maxlength="15" placeholder="Digite sua senha..." autocomplete="current-password">
+            <button id="esqueci">ESQUECI A SENHA</button>
+
+            <button id="enviar" type="submit">ENTRAR</button>
+        </form>
+        
+    </div>
 </body>
 </html>
