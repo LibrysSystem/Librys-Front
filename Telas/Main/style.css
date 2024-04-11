@@ -9,7 +9,6 @@
 
     --font-padrao: Inknut Antiqua, cursive, serif;
     --font-especial: Inter, sans-serif;
-
 }
 *{
     padding: 0px;
@@ -30,7 +29,7 @@ html body{
 nav{
     display: flex;
     align-items: center;
-    justify-content: baseline;
+    justify-content: space-between;
     flex-direction: column;
     background-color: #CEAA89;
     width: 25%;
@@ -70,35 +69,48 @@ nav{
 #info > p{
     width: 80%;
     height:23px;
-    font-size: 0.6em;
+    font-size: 0.7em;
+    display: flex;
+    align-items: center;
     color: white;
+    font-family: var(--font-especial);
+    font-weight: 300;
     background-color: #B0805B;
     border-radius: 20px;
     text-indent: 10px;
     margin: 12px;
 }
-#livros{
+.sections_nav{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: baseline;
+    width: 100%;
+    height: 70%;
+}
+.sec_nav{
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
     width: 100%;
-    margin: 20px 30px;
-    height: 30%;
+    margin: 17px 0px;
+    /*height: 25%;*/
 }
-#btn_livros_princi{
+.sec_btn{
     display: flex;
     background-color: #734C29;
     color: white;
     border-radius: 30px;
     width: 90%;
-    font-size: 1em;
+    padding: 1px;
+    font-size: 0.9em;
     align-items: center;
-    text-indent: 30px;
+    text-indent: 25px;
     height: 33px;
     margin-bottom: 10px;
 }
-#btns_livros{
+.btns{
     display: flex;
     align-items: baseline;
     justify-content: space-around;
@@ -106,14 +118,42 @@ nav{
     width: 75%;
     height: calc(100% - 33px);
 }
-.btn_livros{
+.btns > button{
     display: flex;
+    align-items: center;
+    cursor: pointer;
     background-color: #B0805B;
     color: white;
+    padding: 3px;
+    font-size: 0.6em;
+    font-family: var(--font-especial);
+    font-weight: 300;
+    text-indent: 6px;
+    border-radius: 20px;
+    width: 60%;
+    height: 19px;
+    margin: 5px;    
+}
+.sec_sair{
+    display: flex;
+    align-items: self-end;
+    justify-content: left;
+    box-sizing: border-box;
+    padding: 15px 22px;
+    width: 100%;
+    height: 7%;
+}
+#btn_sair{
+    display: flex;
+    background-color: #734C29;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 30px;
+    font-size: 0.7em;
+    border-radius: 20px;
 
-
-
-    
 }
 
 
@@ -130,3 +170,61 @@ main{
     justify-content: baseline;
     flex-direction: column;
 }
+.cabecalho{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    height: 20%;
+    padding: 10px 70px 0px 80px;
+}
+.cabecalho > h1{
+    color: #734C29;
+}
+.pesquisar{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 22%;
+}
+.pesquisar button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F9F1E5;
+    margin: 0px 2px;
+}
+.pesquisar span{
+    color: #734C29;
+    transition: 0.1s;
+}
+.pesquisar span:hover{
+    color: #CEAA89;
+}
+.pesquisar > input{
+    background-color: #F9F1E5;
+    border: 1px solid #734C29;
+    border-radius: 30px;
+    text-indent: 20px;
+    color: #734C29;
+    font-family: var(--font-especial);
+    height: 100%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+
+}
+.dados{
+    display: flex;
+    box-sizing: border-box;
+    padding: 40px 80px;
+    width: 100%;
+    height: 80%;
+    flex-wrap: wrap;
+}
+
+
+
+
