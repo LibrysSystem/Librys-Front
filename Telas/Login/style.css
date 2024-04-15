@@ -30,7 +30,7 @@ html body {
 .quad_login{
     display: flex;
     align-items: center;
-    justify-content: center;
+
     flex-direction: column;
     border: 3px solid #734C29;
     border-radius: 20px;
@@ -40,10 +40,13 @@ html body {
 }
 
 h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 2.7em;
     color: #734C29;
-    margin-bottom: 42px;
-    margin-top: 20px;
+    height: 25%;
+    margin-bottom: 40px;
 }
 
 .form{
@@ -51,18 +54,23 @@ h1{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 70%;
     width: 100%;
 }
-
-#l_email{
+.form_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    margin: 10px;
+}
+.labels{
     color: #734C29;
     font-size: 0.95em;
-    margin-top: 35px;
-    margin-bottom: 13px;
+    margin: 10px;
 
 }
-#email{
+.inputs{
     background-color: #F9F1E5;
     font-family: var(--font-especial);
     font-weight: 100;
@@ -71,28 +79,18 @@ h1{
     height: 5%;
     padding: 5px;
     text-indent: 20px;
-    width: 80%;
-}
-
-
-#l_senha{
-    color: #734C29;
-    font-size: 0.95em;
-    margin-top: 35px;
-    margin-bottom: 13px;
-
+    width: 85%;
+    height: 20px;
 }
 #senha{
-    background-color: #F9F1E5;
-    font-family: var(--font-especial);
-    font-weight: 100;
-    border: 1px solid #734C29;
-    border-radius: 30px;
-    height: 5%;
-    padding: 5px;
-    
-    text-indent: 20px;
-    width: 60%;
+    width: 70%;
+}
+.btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
 
 }
 #esqueci{
@@ -100,24 +98,132 @@ h1{
     font-size: 0.7em;
     background-color: #F9F1E5;
     color: #734C29;
-    margin: 13px;
-
-
+    cursor: pointer;
+    transition: 0.3s;
 }
-#enviar{
+#esqueci:hover{
+    text-decoration: underline;
+}
+#entrar{
     display: flex;
     margin: auto;
-    width: 23%;
-    height: 9%;
     justify-content: center;
     align-items: center;
+    width: 24%;
     background-color: #734C29;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     border-radius: 17px;
     color: #F9F1E5;
-    margin-top: 90px;
-    margin-bottom: 30px;
     font-size: 1em;
+    cursor: pointer;
+    margin-top: 110px;
+    transition: 0.4s;
+    
+    
+}
+#entrar:hover{
+    box-shadow: 0px 0px 6px white;
+    
+}
 
+
+
+
+
+
+
+#popup{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+#folha{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: #F9F1E5;
+    border: 1px solid #734C29;
+    border-radius: 20px;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.409);
+    padding: 20px;
+    width: 60%;
+    height: 45%;
+}
+
+#btn_sair{
+    display: flex;
+    background-color: #F9F1E5;
+    color: #734C29;
+    align-items: center;
+    cursor: pointer;
+    justify-content: end;
+    margin-top: 10px;
+    margin-left: 90%;
+    font-size: 1.2em;
+    font-family: var(--font-especial);
 
 }
+#folha p {
+    display: flex;
+    font-family: var(--font-especial);
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-weight: 300;
+    font-size: 1.2em;
+    color: #734C29;
+
+}
+
+#inputs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 50px;
+    width: 100%;
+}
+#esqueci_l_email{
+    color: #734C29;
+    font-size: 0.85em;
+    margin: 10px;
+}
+#esqueci_email{
+    width: 57%;
+    background-color: #F9F1E5;
+    border: 1px solid #734C29;
+    border-radius: 20px;
+    height: 35px;
+    font-family: var(--font-especial);
+    font-size: 0.95em;
+    font-weight: 300;
+    text-indent: 20px;
+}
+#btn_enviar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #734C29;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.39);
+    color: white;
+    border-radius: 15px;
+    height: 40px;
+    width: 120px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+#btn_enviar:hover{
+    box-shadow: 0px 0px 7px white;
+}
+
 
