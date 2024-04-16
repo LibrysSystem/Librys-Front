@@ -1,4 +1,4 @@
-import {Formulario} from "./formulario.js"
+import {Formulario} from "../../Classes/formulario.js"
 
 const btn_cadastrar_livro = document.getElementById("btn_cadastrar_livro")
 

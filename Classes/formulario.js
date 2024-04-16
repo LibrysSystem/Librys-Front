@@ -43,11 +43,9 @@ class Formulario{
             titulo.innerHTML = "CADASTRO DE LIVRO"
             cabecalho.prepend(titulo)
 
-            const form = document.createElement("form")
+            const form = document.createElement("div")
             form.setAttribute("id", "form_CL")
             form.setAttribute("class", "form_cabe")
-            form.setAttribute("action", "actions.js")
-            form.setAttribute("method", "post")
             papel.appendChild(form)
 
             const label_titulo = document.createElement("label")
@@ -151,8 +149,9 @@ class Formulario{
             btn_enviar.setAttribute("class", "btn_salvar")
             btn_enviar.setAttribute("type", "subimt")
             btn_enviar.innerHTML = "SALVAR"
-            btn_enviar.addEventListener("submit", (qmfoi)=>{
-                console.log("valeu")
+            btn_enviar.addEventListener("click", (qmfoi)=>{
+                
+                
             })
             form.appendChild(btn_enviar)
 

@@ -10,24 +10,26 @@
 <body>
     <div id="quad_login" class="quad_login">
         <h1>LOGIN</h1>
+        <div id="err_login"></div>
 
         <div id="form" class="form">
             <div id="form_email" class="form_div">
                 <label id="l_email" class="labels" for="email">EMAIL</label>
+                <div id="err_email" class="erro"></div>
                 <input class="inputs" type="email" name="email" id="email" required placeholder="Digite seu email..." autocomplete="email">
             </div>
             <div id="form_email" class="form_div">
                 <label id="l_senha" class="labels" for="senha">SENHA</label>
+                <div id="err_senha" class="erro"></div>
                 <input class="inputs" type="password" name="senha" id="senha" required minlength="8" maxlength="15" placeholder="Digite sua senha..." autocomplete="current-password">
             </div>
         </div>
-
         <div id="btns" class="btns">
             <button id="esqueci">ESQUECI A SENHA</button>
             <button id="entrar">ENTRAR</button>
         </div>
         
     </div>
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
