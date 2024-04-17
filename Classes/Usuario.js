@@ -1,5 +1,5 @@
 class Usuario{
-    static Suport = false
+    static Tipo = null
     static Nome = null
     static Cpf= null
     static Email= null

@@ -39,7 +39,7 @@ btn_entrar.addEventListener("click", (qmfoi)=>{
         //     }else{
         //         err_login.innerHTML = ""
 
-        //         Usuario.Suport=rest.Suport
+        //         Usuario.Tipo=rest.Tipo
         //         Usuario.Nome=rest.Nome
         //         Usuario.Cpf=rest.Cpf
         //         Usuario.Email=rest.Email
