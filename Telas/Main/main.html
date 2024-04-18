@@ -41,8 +41,8 @@
             <section id="funcionarios" class="sec_nav">
                 <button id="btn_funcionarios_princi"class="sec_btn" >FUNCIONÁRIOS</button>
                 <div id="btns_funcionarios" class="btns">
-                    <button id="btn_cadastrar_cliente" class="bnt_clientes">CADASTRAR</button>
-                    <button id="btn_remover_cliente" class="bnt_clientes">REMOVER</button>
+                    <button id="btn_cadastrar_funcionario" class="bnt_funcionario">CADASTRAR</button>
+                    <button id="btn_remover_funcionario" class="bnt_funcionario">REMOVER</button>
                 </div>
             </section>
         </div>
@@ -51,10 +51,10 @@
     <main>
         <div id="cabecalho" class="cabecalho">
             <div id="h1_main">LIVROS</div>
-            <form id="pesquisar" class="pesquisar" action="actions.js" method="get" >
+            <div id="pesquisar" class="pesquisar">
                 <button id="enviar_pesquia" type="submit"><span class="material-symbols-outlined">search</span></button>
                 <input type="text" name="buscar" id="burcar">
-            </form>
+            </div>
         </div>
         <div id="dados" class="dados">
 
@@ -67,51 +67,60 @@
                 <div id="form_cl" class="form">
                     <div id="div_titulo_cl" class="div_cl">
                         <label for="i_titulo_cl" id="l_titulo_cl">TÍTULO *</label>
-                        <div id="err_titulo_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="text" name="titulo" id="i_titulo_cl" required>
+                        <div id="err_titulo_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_autor_cl" class="div_cl">
                         <label for="i_autor_cl" id="l_autor_cl">AUTOR(A) *</label>
-                        <div id="err_autor_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="text" name="autor" id="i_autor_cl" required>
+                        <div id="err_autor_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_edicao_cl" class="div_cl">
                         <label for="i_edicao_cl" id="l_edicao_cl">EDIÇÃO *</label>
-                        <div id="err_edicao_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="number" name="edicao" id="i_edicao_cl" required min="1">
+                        <div id="err_edicao_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_editora_cl" class="div_cl">
                         <label for="i_editora_cl" id="l_editora_cl">EDITORA *</label>
+                        <input type="text" name="editora" id="i_editora_cl" required>
                         <div id="err_editora_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="number" name="editora" id="i_editora_cl" required min="1">
+                    
                     </div>
                     <div id="div_genero_cl" class="div_cl">
                         <label for="i_genero_cl" id="l_genero_cl">GÊNERO LITERÁRIO *</label>
-                        <div id="err_genero_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="text" name="genero" id="i_genero_cl" required>
+                        <div id="err_genero_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_quantidade_cl" class="div_cl">
                         <label for="i_quantidade_cl" id="l_quantidade_cl">QUANTIDADE *</label>
-                        <div id="err_quantidade_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="number" name="quantidade" id="i_quantidade_cl" required min="1">
+                        <div id="err_quantidade_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_CodId_cl" class="div_cl">
                         <label for="i_CodId_cl" id="l_CodId_cl">CÓDIGO DE IDENTIFICAÇÃO *</label>
+                        <input type="number" name="CodId" id="i_CodId_cl" required disabled>
                         <div id="err_CodId_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="number" name="CodId" id="i_CodId_cl" required min="1" disabled>
+                    
                     </div>
                     <div id="div_CodLoc_cl" class="div_cl">
                         <label for="i_CodLoc_cl" id="l_CodLoc_cl">CÓDIGO DE LOCALIZAÇÃO *</label>
-                        <div id="err_CodLoc_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="text" name="CodLoc" id="i_CodLoc_cl" required>
+                        <div id="err_CodLoc_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_capa_cl" class="div_cl">
                         <label for="i_capa_cl" id="l_capa_cl">IMAGEM DA CAPA *</label>
-                        <div id="err_capa_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="image" name="capa" id="i_capa_cl" required  placeholder="UPLOAD">
+                        <div id="err_capa_cl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                 </div>
-                <button id="btn_salvar_cl" class="btn_salvar">SALVAR</button>
+                <button id="btn_salvar_cl" class="btn_OkForm">SALVAR</button>
             </div>
             <div id="papel_rl" class="papel ">
                 <div id="cabecalho_rl" class="cabecalho_form">
@@ -120,22 +129,25 @@
                 </div>
                 <div id="form_rl" class="form">
                     <div id="div_titulo_rl" class="div_rl">
-                        <label for="i_titulo_rl" id="l_titulo_rl">TÍTULO</label>
+                        <label for="i_titulo_rl" id="l_titulo_rl">TÍTULO *</label>
+                        <input type="text" name="titulo" id="i_titulo_rl" required>
                         <div id="err_titulo_rl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="text" name="titulo" id="i_titulo_rl">
+                    
                     </div>
                     <div id="div_CodId_rl" class="div_rl">
                         <label for="i_CodId_rl" id="l_CodId_rl">CÓDIGO DE IDENTIFICAÇÃO *</label>
-                        <div id="err_CodId_rl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="number" name="CodId" id="i_CodId_rl" required>
+                        <div id="err_CodId_rl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_motivo_rl" class="div_rl">
                         <label for="i_motivo_rl" id="l_motivo_rl">MOTIVO *</label>
-                        <div id="err_motivo_rl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="text" name="motivo" id="i_motivo_rl" required>
+                        <div id="err_motivo_rl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                 </div>
-                <button id="btn_salvar_rl" class="btn_salvar">CONFIRMAR</button>
+                <button id="btn_confirmar_rl" class="btn_OkForm">CONFIRMAR</button>
             </div>
             <div id="papel_al" class="papel ">
                 <div id="cabecalho_al" class="cabecalho_form">
@@ -145,43 +157,50 @@
                 <div id="form_al" class="form">
                     <div id="div_CodId_al" class="div_al">
                         <label for="i_CodId_al" id="l_CodId_al">CÓDICO DE IDENTIFICAÇÃO *</label>
-                        <div id="err_CodId_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="number" name="CodId" id="i_CodId_al" required>
+                        <div id="err_CodId_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_titulo_al" class="div_al">
                         <label for="i_titulo_al" id="l_titulo_al">TÍTULO DO LIVRO *</label>
+                        <input type="text" name="titulo" id="i_titulo_al" required>
                         <div id="err_titulo_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="text" name="titulo" id="i_titulo_al" required disabled>
+                    
                     </div>
                     <div id="div_NomeC_al" class="div_al">
                         <label for="i_NomeC_al" id="l_NomeC_al">NOME DO CLIENTE *</label>
+                        <input type="text" name="NomeC" id="i_NomeC_al" required>
                         <div id="err_NomeC_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="text" name="NomeC" id="i_NomeC_al" required disabled>
+                    
                     </div>
                     <div id="div_cpfC_al" class="div_al">
                         <label for="i_cpfC_al" id="l_cpfC_al">CPF DO CLIENTE *</label>
+                        <input type="number" name="cpfC" id="i_cpfC_al" required>
                         <div id="err_cpfC_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="text" name="cpfC" id="i_cpfC_al" required>
+                    
                     </div>
                     <div id="div_cpfF_al" class="div_al">
                         <label for="i_cpfF_al" id="l_cpfF_al">CPF DO FUNCIONARIO *</label>
+                        <input type="number" name="cpfF" id="i_cpfF_al" required>
                         <div id="err_cpfF_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="text" name="cpfF" id="i_cpfF_al" required>
+                   
                     </div>
                     <div id="div_DataLoc_al" class="div_al">
                         <label for="i_DataLoc_al" id="l_DataLoc_al">DATA DE LOCAÇÃO *</label>
-                        <div id="err_DataLoc_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="date" name="DataLoc" id="i_DataLoc_al" required disabled>
+                        <div id="err_DataLoc_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_DataDev_al" class="div_al">
                         <label for="i_DataDev_al" id="l_DataDev_al">DATA DE DEVOLUÇÃO *</label>
-                        <div id="err_DataDev_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="date" name="DataDev" id="i_DataDev_al" required disabled>
+                        <div id="err_DataDev_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                 </div>
                 <div id="btns_al" class="btns">
-                    <button id="btn_renovar_al" class="btn_renovar">RENOVAR</button>
-                    <button id="btn_alugar_al" class="btn_alugar">ALUGAR</button>
+                    <button id="btn_renovar_al" class="btn_OkForm">RENOVAR</button>
+                    <button id="btn_alugar_al" class="btn_OkForm">ALUGAR</button>
                 </div>
             </div>
             <div id="papel_dl" class="papel ">
@@ -192,36 +211,206 @@
                 <div id="form_dl" class="form">
                     <div id="div_CodId_dl" class="div_dl">
                         <label for="i_CodId_dl" id="l_CodId_dl">CÓDICO DE IDENTIFICAÇÃO *</label>
-                        <div id="err_CodId_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="number" name="CodId" id="i_CodId_dl" required>
+                        <div id="err_CodId_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_cpfC_dl" class="div_dl">
                         <label for="i_cpfC_dl" id="l_cpfC_dl">CPF DO CLIENTE *</label>
+                        <input type="numbert" name="cpfC" id="i_cpfC_dl" required>
                         <div id="err_cpfC_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="text" name="cpfC" id="i_cpfC_dl" required>
+                    
                     </div>
                     <div id="div_NomeC_dl" class="div_dl">
                         <label for="i_NomeC_dl" id="l_NomeC_dl">NOME DO CLIENTE *</label>
+                        <input type="text" name="NomeC" id="i_NomeC_dl" required>
                         <div id="err_NomeC_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="text" name="NomeC" id="i_NomeC_dl" required disabled>
+                    
                     </div>
                     <div id="div_titulo_dl" class="div_dl">
                         <label for="i_titulo_dl" id="l_titulo_dl">TÍTULO DO LIVRO *</label>
+                        <input type="text" name="titulo" id="i_titulo_al" required>
                         <div id="err_titulo_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                        <input type="text" name="titulo" id="i_titulo_al" required disabled>
+                    
                     </div>
                     <div id="div_DataLoc_dl" class="div_dl">
                         <label for="i_DataLoc_dl" id="l_DataLoc_dl">DATA DE LOCAÇÃO *</label>
-                        <div id="err_DataLoc_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="date" name="DataLoc" id="i_DataLoc_dl" required disabled>
+                        <div id="err_DataLoc_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                     <div id="div_DataDev_dl" class="div_dl">
                         <label for="i_DataDev_dl" id="l_DataDev_dl">DATA DE DEVOLUÇÃO *</label>
-                        <div id="err_DataDev_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                         <input type="date" name="DataDev" id="i_DataDev_dl" required disabled>
+                        <div id="err_DataDev_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
                     </div>
                 </div>
-                <button id="btn_finalizar_dl" class="btn_finalizar">FINALIZAR</button>
+                <button id="btn_finalizar_dl" class="btn_OkForm">FINALIZAR</button>
+            </div>
+            <div id="papel_cc" class="papel ">
+                <div id="cabecalho_cc" class="cabecalho_form">
+                    <h1>CADASTRO DE CLIENTE</h1>
+                    <button id="btn_editar_cc" class="btn_editar"><span class="material-symbols-outlined">edit_square</span></button>
+                    <button id="btn_fechar_cc" class="btn_fechar"><span class="material-symbols-outlined">close</span></button>
+                </div>
+                <div id="form_cc" class="form">
+                    <div id="div_nome_cc" class="div_cc">
+                        <label for="i_nome_cc" id="l_nome_cc">NOME COMPLETO *</label>
+                        <input type="text" name="nome" id="i_nome_cc" required>
+                        <div id="err_nome_cc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_cpf_cc" class="div_cc">
+                        <label for="i_cpf_cc" id="l_cpf_cc">CPF *</label>
+                        <input type="number" name="cpf" id="i_cpf_cc" required>
+                        <div id="err_cpf_cc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_DataNasc_cc" class="div_cc">
+                        <label for="i_DataNasc_cc" id="l_DataNasc_cc">DATA DE NASCIMENTO *</label>
+                        <input type="date" name="DataNasc" id="i_DataNasc_cc" required>
+                        <div id="err_DataNasc_cc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_email_cc" class="div_cc">
+                        <label for="i_email_cc" id="l_email_cc">EMAIL *</label>
+                        <input type="email" name="email" id="i_email_cc" required>
+                        <div id="err_email_cc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_celular_cc" class="div_cc">
+                        <label for="i_celular_cc" id="l_celular_cc">CELULAR *</label>
+                        <input type="tel" name="celular" id="i_celular_cc" required>
+                        <div id="err_celular_cc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_endereco_cc" class="div_cc">
+                        <label for="i_endereco_cc" id="l_endereco_cc">ENDEREÇO</label>
+                        <input type="text" name="endereco" id="i_endereco_cc">
+                        <div id="err_endereco_cc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_MenorIdade_cc" class="div_cc">
+                        <label for="i_MenorIdade_cc" id="l_MenorIdade_cc">MENOR DE IDEADE</label>
+                        <input type="radio" name="MenorIdade" id="i_MenorIdade_cc">
+                        <div id="err_MenorIdade_cc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                </div>
+                <button id="btn_salvar_cc" class="btn_OkForm">SALVAR</button>
+            </div>
+            <div id="papel_rc" class="papel ">
+                <div id="cabecalho_rc" class="cabecalho_form">
+                    <h1>FORMULÁRIO DE REMOÇÃO DE CLIENTE</h1>
+                    <button id="btn_fechar_rc" class="btn_fechar"><span class="material-symbols-outlined">close</span></button>
+                </div>
+                <div id="form_rc" class="form">
+                    <div id="div_nome_rc" class="div_rc">
+                        <label for="i_nome_rc" id="l_nome_rc">NOME COMPLETO *</label>
+                        <input type="text" name="nome" id="i_nome_rc" required>
+                        <div id="err_nome_rc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_cpf_rc" class="div_rc">
+                        <label for="i_cpf_rc" id="l_cpf_rc">CPF *</label>
+                        <input type="number" name="cpf" id="i_cpf_rc" required>
+                        <div id="err_cpf_rc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_motivo_rc" class="div_rc">
+                        <label for="i_motivo_rc" id="l_motivo_rc">MOTIVO *</label>
+                        <input type="text" name="motivo" id="i_motivo_rc" required>
+                        <div id="err_motivo_rc" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                </div>
+                <button id="btn_confirmar_rc" class="btn_OkForm">CONFIRMAR</button>
+            </div>
+            <div id="papel_cf" class="papel ">
+                <div id="cabecalho_cf" class="cabecalho_form">
+                    <h1>CADASTRO DE FUNCIONÁRIO</h1>
+                    <button id="btn_editar_cf" class="btn_editar"><span class="material-symbols-outlined">edit_square</span></button>
+                    <button id="btn_fechar_cf" class="btn_fechar"><span class="material-symbols-outlined">close</span></button>
+                </div>
+                <div id="form_cf" class="form">
+                    <div id="div_nome_cf" class="div_cf">
+                        <label for="i_nome_cf" id="l_nome_cf">NOME COMPLETO *</label>
+                        <input type="text" name="nome" id="i_nome_cf" required>
+                        <div id="err_nome_cf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_cpf_cf" class="div_cf">
+                        <label for="i_cpf_cf" id="l_cpf_cf">CPF *</label>
+                        <input type="number" name="cpf" id="i_cpf_cf" required>
+                        <div id="err_cpf_cf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_DataNasc_cf" class="div_cf">
+                        <label for="i_DataNasc_cf" id="l_DataNasc_cf">DATA DE NASCIMENTO *</label>
+                        <input type="date" name="DataNasc" id="i_DataNasc_cf" required>
+                        <div id="err_DataNasc_cf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_email_cf" class="div_cf">
+                        <label for="i_email_cf" id="l_email_cf">EMAIL *</label>
+                        <input type="email" name="email" id="i_email_cf" required>
+                        <div id="err_email_cf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_celular_cf" class="div_cf">
+                        <label for="i_celular_cf" id="l_celular_cf">CELULAR *</label>
+                        <input type="tel" name="celular" id="i_celular_cf" required>
+                        <div id="err_celular_cf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                   
+                    </div>
+                    <div id="div_endereco_cf" class="div_cf">
+                        <label for="i_endereco_cf" id="l_endereco_cf">ENDEREÇO</label>
+                        <input type="text" name="endereco" id="i_endereco_cf">
+                        <div id="err_endereco_cf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_senha_cf" class="div_cf">
+                        <label for="i_senha_cf" id="l_senha_cf">SENHA *</label>
+                        <input type="text" name="senha" id="i_senha_cf" required>
+                        <div id="err_senha_cf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_ConfirmaSenha_cf" class="div_cf">
+                        <label for="i_ConfirmaSenha_cf" id="l_ConfirmaSenha_cf">CONFIRMAÇÃO DE SENHA *</label>
+                        <input type="text" name="ConfirmaSenha" id="i_ConfirmaSenha_cf" required>
+                        <div id="err_ConfirmaSenha_cf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                </div>
+                <button id="btn_salvar_cf" class="btn_OkForm">SALVAR</button>
+            </div>
+            <div id="papel_rf" class="papel ">
+                <div id="cabecalho_rf" class="cabecalho_form">
+                    <h1>FORMULÁRIO DE REMOÇÃO DE FUNCIONÁRIO</h1>
+                    <button id="btn_fechar_rf" class="btn_fechar"><span class="material-symbols-outlined">close</span></button>
+                </div>
+                <div id="form_rf" class="form">
+                    <div id="div_nome_rf" class="div_rf">
+                        <label for="i_nome_rf" id="l_nome_rf">NOME COMPLETO *</label>
+                        <input type="text" name="nome" id="i_nome_rf" required>
+                        <div id="err_nome_rf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_cpf_rf" class="div_rf">
+                        <label for="i_cpf_rf" id="l_cpf_rf">CPF *</label>
+                        <input type="number" name="cpf" id="i_cpf_rf" required>
+                        <div id="err_cpf_rf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                    <div id="div_motivo_rf" class="div_rf">
+                        <label for="i_motivo_rf" id="l_motivo_rf">MOTIVO *</label>
+                        <input type="text" name="motivo" id="i_motivo_rf" required>
+                        <div id="err_motivo_rf" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>
+                </div>
+                <button id="btn_confirmar_rf" class="btn_OkForm">CONFIRMAR</button>
             </div>
 
         </div>

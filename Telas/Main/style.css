@@ -188,23 +188,22 @@ main{
     flex-direction: column;
     box-sizing: border-box;
     width: 100%;
-    height: 20%;
+    height: 25%;
     padding: 10px 70px 0px 80px;
 }
 #h1_main{
     display: flex;
-    align-items: center;
+    align-items: end;
     font-size: 2.3em;
     font-weight: 700;
     color: #734C29;
-    margin-top: 60px;
-    margin-bottom: 20px;
+    height: 80%;
 }
 .pesquisar{
     display: flex;
     align-items: center;
     width: 100%;
-    height: 22%;
+    height: 20%;
 }
 .pesquisar button{
     display: flex;
@@ -240,7 +239,6 @@ main{
     padding: 40px 80px;
     width: 100%;
     height: 80%;
-    flex-wrap: wrap;
 }
 
 

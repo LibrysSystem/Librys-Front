@@ -5,28 +5,37 @@ class Formulario{
     static papelFormRL
     static papelFormAL
     static papelFormDL
+    static papelFormCC
+    static papelFormRC
+    static papelFormCF
+    static papelFormRF
 
     static TemFormAberto = false
     
 
     static GetForms=()=>{
-        const papelFormCL = document.getElementById("papel_cl")
-        this.papelFormCL = papelFormCL
-        papelFormCL.setAttribute("class", "papel disabled")
-        const papelFormRL = document.getElementById("papel_rl")
-        this.papelFormRL = papelFormRL
-        papelFormRL.setAttribute("class", "papel disabled")
-        const papelFormAL = document.getElementById("papel_al")
-        this.papelFormAL = papelFormAL
-        papelFormAL.setAttribute("class", "papel disabled")
-        const papelFormDL = document.getElementById("papel_dl")
-        this.papelFormDL = papelFormDL
-        papelFormDL.setAttribute("class", "papel disabled")
+        this.papelFormCL = document.getElementById("papel_cl")
+        this.papelFormCL.setAttribute("class", "papel disabled")
+        this.papelFormRL = document.getElementById("papel_rl")
+        this.papelFormRL.setAttribute("class", "papel disabled")
+        this.papelFormAL = document.getElementById("papel_al")
+        this.papelFormAL.setAttribute("class", "papel disabled")
+        this.papelFormDL = document.getElementById("papel_dl")
+        this.papelFormDL.setAttribute("class", "papel disabled")
+        this.papelFormCC = document.getElementById("papel_cc")
+        this.papelFormCC.setAttribute("class", "papel disabled")
+        this.papelFormRC = document.getElementById("papel_rc")
+        this.papelFormRC.setAttribute("class", "papel disabled")
+        this.papelFormCF = document.getElementById("papel_cf")
+        this.papelFormCF.setAttribute("class", "papel disabled")
+        this.papelFormRF = document.getElementById("papel_rf")
+        this.papelFormRF.setAttribute("class", "papel disabled")
     }
 
 
     static AbrirFormulario=(tipo)=>{
         if(!this.TemFormAberto){
+            this.TemFormAberto = true
             switch (tipo) {
             case "cl":
                 this.papelFormCL.setAttribute("class", "papel")
@@ -34,10 +43,7 @@ class Formulario{
                 document.getElementById("btn_fechar_cl").addEventListener("click", (qmfoi)=>{
                     this.FecharFormulario("cl")
                 })
-
-
-
-                this.TemFormAberto = true
+                
                 break;
             case "rl":
                 this.papelFormRL.setAttribute("class", "papel")
@@ -46,9 +52,7 @@ class Formulario{
                     this.FecharFormulario("rl")
                 })
 
-
-
-                this.TemFormAberto = true
+                
                 break;    
             case "al":
                 this.papelFormAL.setAttribute("class", "papel")
@@ -57,9 +61,7 @@ class Formulario{
                     this.FecharFormulario("al")
                 })
 
-
-
-                this.TemFormAberto = true
+                
                 break;
             case "dl":
                 this.papelFormDL.setAttribute("class", "papel")
@@ -68,18 +70,54 @@ class Formulario{
                     this.FecharFormulario("dl")
                 })
 
+               
+                break;
+            case "cc":
+                this.papelFormCC.setAttribute("class", "papel")
 
+                document.getElementById("btn_fechar_cc").addEventListener("click", (qmfoi)=>{
+                    this.FecharFormulario("cc")
+                })
+                
+                break;
+            case "rc":
+                this.papelFormRC.setAttribute("class", "papel")
 
-                this.TemFormAberto = true
+                document.getElementById("btn_fechar_rc").addEventListener("click", (qmfoi)=>{
+                    this.FecharFormulario("rc")
+                })
+
+                
+                break;    
+            case "cf":
+                this.papelFormCF.setAttribute("class", "papel")
+
+                document.getElementById("btn_fechar_cf").addEventListener("click", (qmfoi)=>{
+                    this.FecharFormulario("cf")
+                })
+
+                
+                break;
+            case "rf":
+                this.papelFormRF.setAttribute("class", "papel")
+
+                document.getElementById("btn_fechar_rf").addEventListener("click", (qmfoi)=>{
+                    this.FecharFormulario("rf")
+                })
+
+                
                 break;
             default:
                 break;
-        }}
+        }}else{
+            alert("JA EXISTE UM FORMULÁRIO ABERTO!")
+        }
     }
 
 
     static FecharFormulario=(tipo)=>{
         if(this.TemFormAberto){
+            this.TemFormAberto = false
             switch (tipo) {
             case "cl":
                 document.getElementById("i_titulo_cl").value = null
@@ -93,7 +131,6 @@ class Formulario{
                 document.getElementById("i_capa_cl").value = null
 
                 this.papelFormCL.setAttribute("class", "papel disabled")
-                this.TemFormAberto = false
 
                 break;
             case "rl":
@@ -102,7 +139,6 @@ class Formulario{
                 document.getElementById("i_motivo_rl").value = null
 
                 this.papelFormRL.setAttribute("class", "papel disabled")
-                this.TemFormAberto = false
                 break;    
             case "al":
                 document.getElementById("i_CodId_al").value = null
@@ -114,7 +150,6 @@ class Formulario{
                 document.getElementById("i_DataDev_al").value = null
 
                 this.papelFormAL.setAttribute("class", "papel disabled")
-                this.TemFormAberto = false
                 break;
             case "dl":
                 document.getElementById("i_CodId_dl").value = null
@@ -125,7 +160,44 @@ class Formulario{
                 document.getElementById("i_DataDev_dl").value = null
 
                 this.papelFormDL.setAttribute("class", "papel disabled")
-                this.TemFormAberto = false
+                break;
+            case "cc":
+                document.getElementById("i_nome_cc").value = null
+                document.getElementById("i_cpf_cc").value = null
+                document.getElementById("i_DataNasc_cc").value = null
+                document.getElementById("i_email_cc").value = null
+                document.getElementById("i_celular_cc").value = null
+                document.getElementById("i_endereco_cc").value = null
+                document.getElementById("i_MenorIdade_cc").value = null
+
+                this.papelFormCC.setAttribute("class", "papel disabled")
+                break;
+
+            case "rc":
+                document.getElementById("i_nome_rc").value = null
+                document.getElementById("i_cpf_rc").value = null
+                document.getElementById("i_motivo_rc").value = null
+
+                this.papelFormRC.setAttribute("class", "papel disabled")
+                break;
+            case "cf":
+                document.getElementById("i_nome_cf").value = null
+                document.getElementById("i_cpf_cf").value = null
+                document.getElementById("i_DataNasc_cf").value = null
+                document.getElementById("i_email_cf").value = null
+                document.getElementById("i_celular_cf").value = null
+                document.getElementById("i_endereco_cf").value = null
+                document.getElementById("i_senha_cf").value = null
+                document.getElementById("i_ConfirmaSenha_cf").value = null
+
+                this.papelFormCF.setAttribute("class", "papel disabled")
+                break;
+            case "rf":
+                document.getElementById("i_nome_rf").value = null
+                document.getElementById("i_cpf_rf").value = null
+                document.getElementById("i_motivo_rf").value = null
+
+                this.papelFormRF.setAttribute("class", "papel disabled")
                 break;
             default:
                 break;

@@ -1,5 +1,6 @@
 import {Formulario} from "../../Classes/formulario.js"
 import { Usuario } from "../../Classes/Usuario.js";
+import { MudarAba } from "../../Classes/FuncPack.js";
 
 document.addEventListener("DOMContentLoaded", (qmfoi)=>{
 
@@ -13,30 +14,53 @@ document.addEventListener("DOMContentLoaded", (qmfoi)=>{
 
 
 document.getElementById("btn_livros_princi").addEventListener("click", (qmfoi)=>{
-    //criar func mudar de aba
-    document.getElementById("h1_main").innerHTML = "LIVROS"
+    MudarAba("l")
 })
 document.getElementById("btn_clientes_princi").addEventListener("click", (qmfoi)=>{
-    document.getElementById("h1_main").innerHTML = "CLIENTES"
+    MudarAba("c")
 })
 document.getElementById("btn_funcionarios_princi").addEventListener("click", (qmfoi)=>{
-    document.getElementById("h1_main").innerHTML = "FUNCIONÁRIOS"
+    MudarAba("f")
 })
 
 
-const btn_cadastrar_livro = document.getElementById("btn_cadastrar_livro")
-btn_cadastrar_livro.addEventListener("click", ()=>{
+
+document.getElementById("btn_cadastrar_livro").addEventListener("click", ()=>{
     Formulario.AbrirFormulario("cl")
+    MudarAba("l")
 })
-const btn_remover_livro = document.getElementById("btn_remover_livro")
-btn_remover_livro.addEventListener("click", ()=>{
+document.getElementById("btn_remover_livro").addEventListener("click", ()=>{
     Formulario.AbrirFormulario("rl")
+    MudarAba("l")
+
 })
-const btn_alugar_livro = document.getElementById("btn_alugar_livro")
-btn_alugar_livro.addEventListener("click", ()=>{
+document.getElementById("btn_alugar_livro").addEventListener("click", ()=>{
     Formulario.AbrirFormulario("al")
+    MudarAba("l")
+
 })
-const btn_devolver_livro = document.getElementById("btn_devolver_livro")
-btn_devolver_livro.addEventListener("click", ()=>{
+document.getElementById("btn_devolver_livro").addEventListener("click", ()=>{
     Formulario.AbrirFormulario("dl")
+    MudarAba("l")
+
+})
+document.getElementById("btn_cadastrar_cliente").addEventListener("click", ()=>{
+    Formulario.AbrirFormulario("cc")
+    MudarAba("c")
+
+})
+document.getElementById("btn_remover_cliente").addEventListener("click", ()=>{
+    Formulario.AbrirFormulario("rc")
+    MudarAba("c")
+
+})
+document.getElementById("btn_cadastrar_funcionario").addEventListener("click", ()=>{
+    Formulario.AbrirFormulario("cf")
+    MudarAba("f")
+
+})
+document.getElementById("btn_remover_funcionario").addEventListener("click", ()=>{
+    Formulario.AbrirFormulario("rf")
+    MudarAba("f")
+
 })
