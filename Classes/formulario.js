@@ -43,6 +43,13 @@ class Formulario{
                 document.getElementById("btn_fechar_cl").addEventListener("click", (qmfoi)=>{
                     this.FecharFormulario("cl")
                 })
+                document.getElementById("file_name_cl").addEventListener("click", ()=>{
+                    document.getElementById("l_capa_cl").click()
+                })
+                
+                document.getElementById("i_capa_cl").addEventListener('change', ()=>{
+                document.getElementById("file_name_cl").innerText= document.getElementById("i_capa_cl").value;
+                });
                 
                 break;
             case "rl":

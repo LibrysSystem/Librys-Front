@@ -109,7 +109,9 @@ nav{
     text-indent: 25px;
     height: 33px;
     margin-bottom: 10px;
+    cursor: pointer;
     transition: 0.2s;
+
 }
 .sec_btn:hover{
     border:1px solid #734C29;
@@ -198,12 +200,12 @@ main{
     font-weight: 700;
     color: #734C29;
     height: 80%;
+    margin-bottom: 15px;
 }
 .pesquisar{
     display: flex;
     align-items: center;
     width: 100%;
-    height: 20%;
 }
 .pesquisar button{
     display: flex;
@@ -215,6 +217,7 @@ main{
 .pesquisar span{
     color: #734C29;
     transition: 0.1s;
+    cursor: pointer;
 }
 .pesquisar span:hover{
     color: #CEAA89;
@@ -236,6 +239,8 @@ main{
 .dados{
     display: flex;
     box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
     padding: 40px 80px;
     width: 100%;
     height: 80%;
