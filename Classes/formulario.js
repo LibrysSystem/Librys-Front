@@ -48,7 +48,7 @@ class Formulario{
                 })
                 
                 document.getElementById("i_capa_cl").addEventListener('change', ()=>{
-                document.getElementById("file_name_cl").innerText= document.getElementById("i_capa_cl").value;
+                document.getElementById("file_name_cl").innerText = document.getElementById("i_capa_cl").value;
                 });
                 
                 break;
