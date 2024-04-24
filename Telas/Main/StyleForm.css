@@ -337,8 +337,6 @@ input[type='file'] {
     width: 40%;
 }
 #i_DataNasc_cc{
-    background-color: #734C29;
-    color: white;
     padding: 12px 5px;
 }
 #div_email_cc{
@@ -352,4 +350,76 @@ input[type='file'] {
 }
 #i_MenorIdade_cc{
     width: 80px;
+}
+
+/* REMOCAO DE CLIENTE */
+
+#cabecalho_rc h1{
+    width: 320px;
+    margin-left: 30%;
+    margin-right: 25%;
+}
+#div_nome_rc{
+    width: 88%;
+}
+#div_cpf_rc{
+    width: 88%;
+}
+#div_motivo_rc{
+    margin-top: 0px;
+    width: 88%;
+    height: 200px
+}
+
+/* CADASTRO DE FUNCIONARIO */
+#cabecalho_cf h1{
+    width: 230px;
+    margin-left: 36%;
+    margin-right: 24%;
+}
+#div_nome_cf{
+    width: 88%;
+}
+#div_cpf_cf{
+    width: 40%;
+}
+#div_DataNasc_cf{
+    width: 40%;
+}
+#i_DataNasc_cf{
+    padding: 12px 5px;
+}
+#div_email_cf{
+    width: 40%;
+}
+#div_celular_cf{
+    width: 40%;
+}
+#div_endereco_cf{
+    width: 88%;
+}
+#div_senha_cf{
+    width: 40%;
+}
+#div_ConfirmaSenha_cf{
+    width: 40%;
+}
+
+/* REAMOCAO DE FUNCIONARIO */
+
+#cabecalho_rf h1{
+    width: 360px;
+    margin-left: 28%;
+    margin-right: 22%;
+}
+#div_nome_rf{
+    width: 88%;
+}
+#div_cpf_rf{
+    width: 88%;
+}
+#div_motivo_rf{
+    margin-top: 0px;
+    width: 88%;
+    height: 200px
 }

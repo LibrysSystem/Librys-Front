@@ -20,4 +20,8 @@ function MudarAba(qualaba){
     }
 }
 
-export{MudarAba}
+function MostrarDados(){
+
+}
+
+export{MudarAba, MostrarDados}
