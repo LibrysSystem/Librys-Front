@@ -1,4 +1,6 @@
 import { Funcionario, Livro, Cliente } from "../Classes/FLC.js"
+import { MudarAba, Validar } from "../Classes/FuncPack.js";
+
 
 class Formulario{
     static papelFormCL
@@ -38,7 +40,9 @@ class Formulario{
             this.TemFormAberto = true
             switch (tipo) {
             case "cl":
+
                 this.papelFormCL.setAttribute("class", "papel")
+                this.Avaliar(false)
 
                 document.getElementById("btn_fechar_cl").addEventListener("click", (qmfoi)=>{
                     this.FecharFormulario("cl")
@@ -49,7 +53,13 @@ class Formulario{
                 
                 document.getElementById("i_capa_cl").addEventListener('change', ()=>{
                 document.getElementById("file_name_cl").innerText = document.getElementById("i_capa_cl").value;
-                });
+                })
+
+                document.getElementById("btn_salvar_cl").addEventListener("click", ()=>{
+                    const okk = this.Avaliar(true)
+                    if(okk == "ok"){this.FecharFormulario("cl")}
+                })
+
                 
                 break;
             case "rl":
@@ -209,6 +219,27 @@ class Formulario{
             default:
                 break;
         }}
+    }
+    static Avaliar(enviar) {
+
+        if(!enviar){
+            const inputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
+            console.log(inputs)
+            inputs.map((el)=>{
+                
+                el.addEventListener("click",(qmfoi)=>{
+                    Validar(el.id, false)
+                })
+                el.addEventListener("keyup",(qmfoi)=>{
+                    Validar(el.id, false)
+                })
+            })
+        }else{
+            const ok =  Validar(false, true)
+            return ok
+
+        }
+
     }
 
     

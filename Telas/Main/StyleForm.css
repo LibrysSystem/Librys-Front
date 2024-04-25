@@ -86,7 +86,7 @@
 .form > div { 
     display: flex;
     align-items: baseline;
-    justify-content: end;
+    justify-content: flex-start;
     flex-direction: column;
     height: 55px;
     margin: 8px 30px;
@@ -144,6 +144,10 @@
 
 /* CADASTRO DE LIVRO! */
 
+#form_cl{
+    height: 400px;
+}
+
 #cabecalho_cl h1{
     width: 180px;
     margin-left: 39%;
@@ -181,7 +185,7 @@
     align-items: baseline;
     justify-content: flex-start;
     width: 50%;
-    margin: 0px 20px;
+    margin: 15px 20px 0px 20px;
 
 }
 #l_capa_cl{
