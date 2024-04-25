@@ -2,7 +2,7 @@ import {Formulario} from "../../Classes/formulario.js"
 import { Usuario } from "../../Classes/Usuario.js";
 import { MudarAba, Validar } from "../../Classes/FuncPack.js";
 
-//INICIOoo
+//INICIOoooooooooooooooooooo
 document.addEventListener("DOMContentLoaded", (qmfoi)=>{
 
     document.getElementById("user_nome").innerHTML = Usuario.Nome
