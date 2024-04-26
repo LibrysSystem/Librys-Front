@@ -109,6 +109,9 @@ h1{
     width: 85%;
     height: 22px;
 }
+input:focus{
+    outline: 1px solid #734C29;
+}
 #senha{
     width: 70%;
 }

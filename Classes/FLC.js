@@ -1,33 +1,33 @@
 const Funcionario ={
-    Nome:"",
-    Cpf:"",
-    Data_Nasc:"",
-    Email:"",
-    Celular:"",
-    Endereco:"",
-    Senha:""
+    nome:"",
+    cpf:"",
+    dataNasc:"",
+    email:"",
+    celular:"",
+    endereco:"",
+    senha:""
 }
 
 const Livro={
-    Titulo:"",
-    Autor:"",
-    Edicao:"",
-    Editora:"",
-    Genero_Lit:"",
-    Quantidade:"",
-    Codigo_Id:"",
-    Codigo_Loc:"",
-    Capa:"",
+    titulo:"",
+    autor:"",
+    edicao:"",
+    editora:"",
+    genero:"",
+    quantidade:"",
+    codigoId:"",
+    codigoLoc:"",
+    capa:"",
 }
 
 const Cliente ={
-    Nome:"",
-    Cpf:"",
-    Data_Nasc:"",
-    Email:"",
-    Celular:"",
-    Endereco:"",
-    Menor:""
+    nome:"",
+    cpf:"",
+    dataNasc:"",
+    email:"",
+    celular:"",
+    endereco:"",
+    menor:""
 }
 
 export{Funcionario, Livro, Cliente}

@@ -116,6 +116,9 @@
     font-weight: 300;
     font-family: var(--font-especial);
 }
+.form input:focus{
+    outline: 1px solid #734C29;
+}
 .form textarea{
     background-color: #F9F1E5;
     color: #734C29;

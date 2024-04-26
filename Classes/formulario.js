@@ -47,6 +47,7 @@ class Formulario{
                 document.getElementById("btn_fechar_cl").addEventListener("click", (qmfoi)=>{
                     this.FecharFormulario("cl")
                 })
+            
                 document.getElementById("file_name_cl").addEventListener("click", ()=>{
                     document.getElementById("l_capa_cl").click()
                 })
@@ -56,8 +57,8 @@ class Formulario{
                 })
 
                 document.getElementById("btn_salvar_cl").addEventListener("click", ()=>{
-                    const okk = this.Avaliar(true)
-                    if(okk == "ok"){this.FecharFormulario("cl")}
+                    const okkk = this.Avaliar(true)
+                    if(okkk == "ok"){this.FecharFormulario("cl")}
                 })
 
                 
@@ -224,7 +225,6 @@ class Formulario{
 
         if(!enviar){
             const inputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
-            console.log(inputs)
             inputs.map((el)=>{
                 
                 el.addEventListener("click",(qmfoi)=>{
@@ -235,8 +235,8 @@ class Formulario{
                 })
             })
         }else{
-            const ok =  Validar(false, true)
-            return ok
+            const okay =  Validar(false, true)
+            return okay
 
         }
 

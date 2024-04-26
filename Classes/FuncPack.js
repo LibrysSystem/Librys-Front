@@ -25,17 +25,42 @@ function MostrarDados(){
 
 }
 
-function CriarJSONForm(){
-    let objJASON
-    const todosinputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
-        todosinputs.map((el)=>{
-            objJASON += `${el.name}: ${el.value}`
-        })
-    return objJASON
+async function CriarJSONForm() {
+    let objJSON = {};
+    const todosinputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")];
+
+    await Promise.all(todosinputs.map(async (el) => {
+        if (el.type === "file") {
+
+            if (el.files.length > 0) {
+
+                const fileContents = await readFile(el.files[0]);
+                objJSON[el.name] = fileContents;
+            } else {
+                objJSON[el.name] = null;
+            }
+        } else {
+            objJSON[el.name] = el.value;
+        }
+    }));
+
+    return objJSON;
 }
 
+function readFile(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+
 function Validar(id, enviar){
-    let ok = null
+    let ok = true
 
     if(!enviar){
         document.getElementById(id).nextSibling.nextSibling.innerHTML = " "
@@ -46,39 +71,30 @@ function Validar(id, enviar){
     }else if(enviar){
         const todosinputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
         todosinputs.map((el)=>{
-            ok = el.checkValidity()
+            ok = (ok)&&(el.checkValidity())
+        
         })
 
         if(ok){
-            const formSON = CriarJSONForm()
-            console.log(formSON)
+            async function main() {
+                const formJSON = await CriarJSONForm();
+                console.log(formJSON);
+                console.log(JSON.stringify(formJSON));
+            }
+            
+            main();
 
             // fetch('endponit', {
             //     method: 'POST',
             //     headers: {
             //         'Content-Type': 'application/json'
             //     },
-            //     body: JSON.stringify({
-            //         email: i_email.value,
-            //         senha: i_senha.value,
-            //     })
+            //     body: JSON.parse(formSON)
             // })
             // .then(resp=>resp.json())
             // .then(rest=>{
             //     console.log(rest)
-            //     if(!rest){
-            //         err_login.innerHTML = "* EMAIL OU SENHA INCORRETOS! *"
-            //     }else{
-            //         err_login.innerHTML = ""
-
-            //         Usuario.Tipo=rest.Tipo
-            //         Usuario.Nome=rest.Nome
-            //         Usuario.Cpf=rest.Cpf
-            //         Usuario.Email=rest.Email
-            //         Usuario.Senha=rest.Senha
-
-            //         window.open('../Main/main.html', '_self')
-            //     }
+                
             // })
             return "ok"
 
