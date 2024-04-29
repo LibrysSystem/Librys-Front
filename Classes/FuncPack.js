@@ -1,23 +1,14 @@
 
 function MudarAba(qualaba){
-    switch (qualaba) {
-        case "l":
-            document.getElementById("h1_main").innerHTML = "LIVROS"
 
-            break;
+    let qualnome = qualaba.split("_")
+    qualnome = qualnome[2]
 
-        case "c":
-            document.getElementById("h1_main").innerHTML = "CLIENTES"
+    if(qualnome=="funcionario"){
+        document.getElementById("h1_main").innerHTML = `FUNCIONÁRIOS`
 
-            break;
-
-        case "f":
-            document.getElementById("h1_main").innerHTML = "FUNCIONÁRIOS"
-
-            break;
-    
-        default:
-            break;
+    }else{
+        document.getElementById("h1_main").innerHTML = `${qualnome.toUpperCase()}S`
     }
 }
 
@@ -68,7 +59,7 @@ function Validar(id, enviar){
         if(!document.getElementById(id).checkValidity()){
             document.getElementById(id).nextSibling.nextSibling.innerHTML = `* ${document.getElementById(id).validationMessage}`
         }
-    }else if(enviar){
+    }else {
         const todosinputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
         todosinputs.map((el)=>{
             ok = (ok)&&(el.checkValidity())
@@ -78,24 +69,26 @@ function Validar(id, enviar){
         if(ok){
             async function main() {
                 const formJSON = await CriarJSONForm();
+
                 console.log(formJSON);
-                console.log(JSON.stringify(formJSON));
+
+                // fetch('endponit', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify(formJSON)
+                // })
+                // .then(resp=>resp.json())
+                // .then(rest=>{
+                //     console.log(rest)
+                    
+                // })
+
             }
             
-            main();
+            main()
 
-            // fetch('endponit', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.parse(formSON)
-            // })
-            // .then(resp=>resp.json())
-            // .then(rest=>{
-            //     console.log(rest)
-                
-            // })
             return "ok"
 
         }else{

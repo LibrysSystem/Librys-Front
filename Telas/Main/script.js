@@ -14,73 +14,26 @@ document.addEventListener("DOMContentLoaded", (qmfoi)=>{
 });
 
 // NAVBAR
-document.getElementById("btn_livros_princi").addEventListener("click", (qmfoi)=>{
-    MudarAba("l")
-})
-document.getElementById("btn_clientes_princi").addEventListener("click", (qmfoi)=>{
-    MudarAba("c")
-})
-document.getElementById("btn_funcionarios_princi").addEventListener("click", (qmfoi)=>{
-    MudarAba("f")
+
+const princ_btns = [...document.querySelectorAll(".sec_btn")]
+princ_btns.map((el)=>{
+    el.addEventListener("click", (qmfoi)=>{
+        MudarAba(el.nextElementSibling.firstElementChild.id)
+    })
 })
 
-document.getElementById("btn_cadastrar_livro").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("l")
-    }
-        Formulario.AbrirFormulario("cl")
+const navPequenosBtns = [...document.querySelectorAll(".btns button")]
+navPequenosBtns.map((el)=>{
+    el.addEventListener("click", (qmfoi)=>{
 
-    
-})
-document.getElementById("btn_remover_livro").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("l")
-    }
-    Formulario.AbrirFormulario("rl")
+        if(!Formulario.TemFormAberto){
+            MudarAba(el.id)
+        }
+        Formulario.AbrirFormulario(el.id)
 
+    })
 })
-document.getElementById("btn_alugar_livro").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("l")
-    }
-    Formulario.AbrirFormulario("al")
 
-})
-document.getElementById("btn_devolver_livro").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("l")
-    }
-    Formulario.AbrirFormulario("dl")
-
-})
-document.getElementById("btn_cadastrar_cliente").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("c")
-    }
-    Formulario.AbrirFormulario("cc")
-
-})
-document.getElementById("btn_remover_cliente").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("c")
-    }
-    Formulario.AbrirFormulario("rc")
-
-})
-document.getElementById("btn_cadastrar_funcionario").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("f")
-    }
-    Formulario.AbrirFormulario("cf")
-
-})
-document.getElementById("btn_remover_funcionario").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("f")
-    }    
-    Formulario.AbrirFormulario("rf")
-
-})
 
 
 //MAIN
