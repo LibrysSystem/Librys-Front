@@ -1,15 +1,45 @@
+import { Funcionario, Livro, Cliente } from "../Classes/FLC"
 
 function MudarAba(qualaba){
 
     let qualnome = qualaba.split("_")
     qualnome = qualnome[2]
 
-    if(qualnome=="funcionario"){
-        document.getElementById("h1_main").innerHTML = `FUNCIONÁRIOS`
+    switch (qualnome) {
+        case "livro":
+            document.getElementById("h1_main").innerHTML = `LIVROS`
 
-    }else{
-        document.getElementById("h1_main").innerHTML = `${qualnome.toUpperCase()}S`
+            fetch('Read_Livros')
+            .then(resp=>resp.json())
+            .then(rest=>{
+                
+            })
+
+            break;  
+        case "funcionario":
+            document.getElementById("h1_main").innerHTML = `FUNCIONÁRIOS`
+
+            fetch('Read_Funcionarios')
+            .then(resp=>resp.json())
+            .then(rest=>{
+                  
+            })
+
+            break;
+        case "cliente":
+            document.getElementById("h1_main").innerHTML = `CLIENTES`
+
+            fetch('Read_Clientes')
+            .then(resp=>resp.json())
+            .then(rest=>{
+                  
+            })
+
+            break;  
+        default:
+            break;
     }
+
 }
 
 function MostrarDados(){
@@ -52,6 +82,7 @@ function readFile(file) {
 
 function Validar(id, enviar){
     let ok = true
+    let objetoFrom
 
     if(!enviar){
         document.getElementById(id).nextSibling.nextSibling.innerHTML = " "
@@ -67,36 +98,38 @@ function Validar(id, enviar){
         })
 
         if(ok){
-            async function main() {
-                const formJSON = await CriarJSONForm();
+            // async function main() {
+            //     const formJSON = await CriarJSONForm();
 
-                console.log(formJSON);
+            //     console.log(formJSON);
+                
 
-                // fetch('endponit', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json'
-                //     },
-                //     body: JSON.stringify(formJSON)
-                // })
-                // .then(resp=>resp.json())
-                // .then(rest=>{
-                //     console.log(rest)
+            //     // fetch('endponit', {
+            //     //     method: 'POST',
+            //     //     headers: {
+            //     //         'Content-Type': 'application/json'
+            //     //     },
+            //     //     body: JSON.stringify(formJSON)
+            //     // })
+            //     // .then(resp=>resp.json())
+            //     // .then(rest=>{
+            //     //     console.log(rest)
                     
-                // })
+            //     // })
+                
 
-            }
-            
-            main()
+            // }
+            // main()
 
             return "ok"
 
         }else{
             alert("Preencha todos os campos do formulário corretamente!")
+            return "erro"
         }
         
     }
 }
 
-export{MudarAba, MostrarDados, Validar}
+export{MudarAba, MostrarDados, Validar, CriarJSONForm}
 
