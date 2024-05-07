@@ -5,6 +5,7 @@ import { MudarAba, Validar, CriarJSONForm } from "../Classes/FuncPack.js";
 class Formulario{
 
     static TemFormAberto = false
+    static oLivroExiste = false
     
     static GetForms=()=>{
 
@@ -15,7 +16,7 @@ class Formulario{
     }
 
 
-    static AbrirFormulario=(tipo)=>{
+    static AbrirFormulario=async (tipo)=>{
         if(!this.TemFormAberto){
             this.TemFormAberto = true
 
@@ -23,23 +24,28 @@ class Formulario{
             const qualFormAbrir = ids[1].charAt(0) + ids[2].charAt(0)
 
             document.getElementById(`papel_${qualFormAbrir}`).setAttribute("class", "papel")
-            this.Avaliar(false)
+            this.Avaliar(false, ".papel:not(.disabled) .input_form")
 
             document.getElementById(`btn_fechar_${qualFormAbrir}`).addEventListener("click", (qmfoi)=>{
                 this.FecharFormulario(qualFormAbrir)
+                if(qualFormAbrir == "cc"){
+                    this.FecharFormulario("ccm")
+                }
             }) 
 
-            document.getElementById(`btn_salvar_${qualFormAbrir}`).addEventListener("click", async ()=>{
-                const okkk = this.Avaliar(true)
-                if(okkk == "ok"){
-                    const resposta = await this.Enviar(qualFormAbrir)
-                    if(resposta.status == 404){
-                        document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
-                    }else{
-                        this.FecharFormulario(qualFormAbrir)
-                    }
-                }
-            })
+            if((qualFormAbrir != "cc") && (qualFormAbrir != "al")){
+                document.getElementById(`btn_salvar_${qualFormAbrir}`).addEventListener("click", async ()=>{
+                    const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
+                    if(okkk == "ok"){
+                        const resposta = await this.Enviar(qualFormAbrir)
+                        if(resposta.status == 404){
+                            document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                        }else{
+                            this.FecharFormulario(qualFormAbrir)
+                        }
+                    }  
+                })
+            }
             
             switch (qualFormAbrir) {
                 case "cl":
@@ -52,12 +58,99 @@ class Formulario{
                     })                    
                     
                     break;
-                case "al":{
-                    document.getElementById("btn_renovar_al")
-                    document.getElementById("btn_alugar_al")
+                case "al":
+                    document.getElementById("btn_renovar_al").addEventListener("click", async ()=>{
+                        const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
+                        if(okkk == "ok"){
+        
+                            fetch('read_livro', {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: document.getElementById("i_CodId_al").value
+                            })
+                            .then(resp=>resp.json())
+                            .then(rest=>{
+                                console.log(rest)
+                                this.oLivroExiste = rest                        
+        
+                            })
+        
+                            if(this.oLivroExiste.status!= 404){
+                                if(this.oLivroExiste.alugado == true){
+                                    const resposta = await this.Enviar(qualFormAbrir)
+                                    if(resposta.status == 404){
+                                        document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                                    }else{
+                                        this.FecharFormulario(qualFormAbrir)
+                                    }
+                                }else{
+                                    document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ainda não foi alugado."
+                                }    
+                            }else{
+                                document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = this.oLivroExiste.detalhe
+                            }
+                        }                      
+                    })
+                    document.getElementById("btn_alugar_al").addEventListener("click", async ()=>{
+                        const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
+                        if(okkk == "ok"){
+        
+                            fetch('read_livro', {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: document.getElementById("i_CodId_al").value
+                            })
+                            .then(resp=>resp.json())
+                            .then(rest=>{
+                                console.log(rest)
+                                this.oLivroExiste = rest                        
+        
+                            })
+        
+                            if(this.oLivroExiste.status!= 404){
+                                if(this.oLivroExiste.alugado == false){
+                                    const resposta = await this.Enviar(qualFormAbrir)
+                                    if(resposta.status == 404){
+                                        document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                                    }else{
+                                        this.FecharFormulario(qualFormAbrir)
+                                    }
+                                }else{
+                                    document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ja foi foi alugado."
+                                }    
+                            }else{
+                                document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = this.oLivroExiste.detalhe
+                            }
+                        }    
+                    })
+                    break;                   
+                case 'cc':
+                    document.getElementById("btn_salvar_cc_E_menor").addEventListener("click", async ()=>{
+                        const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
+                        if(okkk == "ok"){
+                            const dataNasc = new Date(document.getElementById("i_DataNasc_cc").value)
+                            const dataAtual = new Date()
 
-                }
-            
+                            if(((dataAtual-dataNasc)/(31557600000)) < 18){
+                                document.getElementById("i_MenorIdade_cc").checked = true
+                                this.abrirFormMenor()
+                            }
+                            else{
+                                const resposta = await this.Enviar(qualFormAbrir)
+                                if(resposta.status == 404){
+                                    document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                                }else{
+                                    this.FecharFormulario(qualFormAbrir)
+                                    this.FecharFormulario("ccm")
+                                }
+                            }
+                        } 
+                    })
+                    break;
                 default:
                     break;
             }
@@ -69,20 +162,30 @@ class Formulario{
 
 
     static FecharFormulario=(tipo)=>{
-        if(this.TemFormAberto){
+
+        let quaisInputs = ".papel:not(.disabled) .input_form"
+        if(tipo == "ccm"){quaisInputs = ".papel_especial .input_form"}
+
+        if(this.TemFormAberto || tipo=="ccm"){
             this.TemFormAberto = false
 
-            const inputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
+            const inputs = [...document.querySelectorAll(quaisInputs)]
             inputs.map((el)=>{
                 el.value = null
             })
-            document.getElementById(`papel_${tipo}`).setAttribute("class", "papel disabled")
+            if(tipo == "ccm"){
+                document.getElementById("papel_ccm").setAttribute("class", "papel_especial disabled")
+            }else{
+                document.getElementById(`papel_${tipo}`).setAttribute("class", "papel disabled")
+                
+            }
         }
+
     }
-    static Avaliar=(enviar)=>{
+    static Avaliar=(enviar, quais)=>{
 
         if(!enviar){
-            const inputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
+            const inputs = [...document.querySelectorAll(quais)]
             inputs.map((el)=>{
                 
                 el.addEventListener("click",(qmfoi)=>{
@@ -93,16 +196,37 @@ class Formulario{
                 })
             })
         }else{
-            const okay =  Validar(false, true)
+            const okay =  Validar(false, true, quais)
             return okay
 
         }
+
+    }
+    static async abrirFormMenor(){
+
+        document.getElementById("papel_ccm").setAttribute("class", "papel_especial")
+        this.Avaliar(false, "#papel_ccm .input_form")
+        
+        document.getElementById("btn_salvar_ccm").addEventListener("click", async ()=>{
+            const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form, #papel_ccm .input_form")
+            if(okkk == "ok"){
+                const resposta = await this.Enviar("ccm")
+                if(resposta.status == 404){
+                    document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                }else{
+                    this.FecharFormulario("ccm")
+                }
+            }  
+        })
+
 
     }
 
     static async Enviar(defEnd){
         let endponit
         let metodo
+        let quemEnviar = ".papel:not(.disabled) .input_form"
+
 
         switch (defEnd) {
             case "cl":
@@ -155,14 +279,18 @@ class Formulario{
                 metodo = "PATCH"
             
             break;
-        
+            case "ccm": 
+                endponit = "Criar_Cliente"
+                metodo = "POST"  
+                quemEnviar = ".papel:not(.disabled) .input_form, #papel_ccm .input_form"  
+
+                break;
             default:
                 break;
         }
 
         async function main() {
-            const formJSON = await CriarJSONForm();
-            console.log(formJSON);
+            const formJSON = await CriarJSONForm(quemEnviar);
 
             // fetch(endponit, {
             //     method: metodo,

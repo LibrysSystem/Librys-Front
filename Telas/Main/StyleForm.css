@@ -31,18 +31,19 @@
     width: 800px;
     height: 95%;
     border: 1px solid #734C29;
+    background-color: #F9F1E5;
     border-radius: 25px;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
     padding: 25px 35px;
 }
-.cabecalho_form{
+.cabecalho_form, .cabecalho_form_especial{
     display: flex;
     align-items: center;
     height: 5%;
     width: 100%;
 
 }
-.cabecalho_form h1{
+.cabecalho_form h1, .cabecalho_form_especial h1{
     display: flex;
     align-items: center;
     font-size: 0.8em;
@@ -86,12 +87,12 @@
     display: flex;
 }
 
-.form{
+.form, .form_especial{
     display: flex;
     height: 75%;
     flex-wrap: wrap;
 }
-.form > div { 
+.form > div, .form_especial > div { 
     display: flex;
     align-items: baseline;
     justify-content: flex-start;
@@ -99,7 +100,7 @@
     height: 55px;
     margin: 8px 30px;
 }
-.form label{
+.form label, .form_especial label{
     display: flex;
     font-size: 0.75em;
     color: #734C29;
@@ -111,7 +112,7 @@
     color: rgb(255, 68, 68);
     text-indent: 15px;
 }
-.form input{
+.form input, .form_especial input{
     height: 25px;
     width: 100%;
     background-color: #F9F1E5;
@@ -124,7 +125,7 @@
     font-weight: 300;
     font-family: var(--font-especial);
 }
-.form input:focus{
+.form input:focus, .form_especial input:focus{
     outline: 1px solid #734C29;
 }
 .form textarea{
@@ -370,6 +371,10 @@ input[type='file'] {
 }
 #i_MenorIdade_cc{
     width: 80px;
+    outline: none;
+}
+#i_MenorIdade_cc:focus{
+    outline: none;
 }
 
 /* REMOCAO DE CLIENTE */
@@ -442,4 +447,34 @@ input[type='file'] {
     margin-top: 0px;
     width: 88%;
     height: 200px
+}
+
+
+
+
+
+
+
+/* FORMULARIOS ESPECIAIS */
+#papel_cc{
+    position: relative;
+    z-index: 10;
+    
+}
+
+.papel_especial{
+    display: flex;
+    position: relative;
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 350px;
+    width: 600px;
+    background-color: #F9F1E5;
+    border: 1px solid #734C29;
+    border-radius: 25px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    padding: 25px 35px;
+
 }

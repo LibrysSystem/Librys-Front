@@ -237,7 +237,8 @@ main{
 
 }
 .dados{
-    display: flex;
+    position: relative;
+    display: grid;
     box-sizing: border-box;
     align-items: center;
     justify-content: center;

@@ -1,4 +1,4 @@
-import { Funcionario, Livro, Cliente } from "../Classes/FLC"
+import { Funcionario, Livro, Cliente } from "../Classes/FLC.js"
 
 function MudarAba(qualaba){
 
@@ -9,31 +9,31 @@ function MudarAba(qualaba){
         case "livro":
             document.getElementById("h1_main").innerHTML = `LIVROS`
 
-            fetch('Read_Livros')
-            .then(resp=>resp.json())
-            .then(rest=>{
+            // fetch('Read_Livros')
+            // .then(resp=>resp.json())
+            // .then(rest=>{
                 
-            })
+            // })
 
             break;  
         case "funcionario":
             document.getElementById("h1_main").innerHTML = `FUNCIONÁRIOS`
 
-            fetch('Read_Funcionarios')
-            .then(resp=>resp.json())
-            .then(rest=>{
+            // fetch('Read_Funcionarios')
+            // .then(resp=>resp.json())
+            // .then(rest=>{
                   
-            })
+            // })
 
             break;
         case "cliente":
             document.getElementById("h1_main").innerHTML = `CLIENTES`
 
-            fetch('Read_Clientes')
-            .then(resp=>resp.json())
-            .then(rest=>{
+            // fetch('Read_Clientes')
+            // .then(resp=>resp.json())
+            // .then(rest=>{
                   
-            })
+            // })
 
             break;  
         default:
@@ -46,9 +46,9 @@ function MostrarDados(){
 
 }
 
-async function CriarJSONForm() {
+async function CriarJSONForm(quemEnviar) {
     let objJSON = {};
-    const todosinputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")];
+    const todosinputs = [...document.querySelectorAll(quemEnviar)];
 
     await Promise.all(todosinputs.map(async (el) => {
         if (el.type === "file") {
@@ -80,9 +80,8 @@ function readFile(file) {
 }
 
 
-function Validar(id, enviar){
+function Validar(id, enviar, Quais){
     let ok = true
-    let objetoFrom
 
     if(!enviar){
         document.getElementById(id).nextSibling.nextSibling.innerHTML = " "
@@ -91,13 +90,15 @@ function Validar(id, enviar){
             document.getElementById(id).nextSibling.nextSibling.innerHTML = `* ${document.getElementById(id).validationMessage}`
         }
     }else {
-        const todosinputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
+        const todosinputs = [...document.querySelectorAll(Quais)]
         todosinputs.map((el)=>{
             ok = (ok)&&(el.checkValidity())
         
         })
 
         if(ok){
+        //TALVEZ NAO SEJA UTILIZADO MAIS
+
             // async function main() {
             //     const formJSON = await CriarJSONForm();
 
