@@ -189,10 +189,10 @@ class Formulario{
             inputs.map((el)=>{
                 
                 el.addEventListener("click",(qmfoi)=>{
-                    Validar(el.id, false)
+                    Validar(el.id, false, quais)
                 })
                 el.addEventListener("keyup",(qmfoi)=>{
-                    Validar(el.id, false)
+                    Validar(el.id, false, quais)
                 })
             })
         }else{

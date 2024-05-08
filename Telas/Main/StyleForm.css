@@ -26,10 +26,10 @@
 .papel{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-direction: column;
     width: 800px;
-    height: 95%;
+    height: 490px;
     border: 1px solid #734C29;
     background-color: #F9F1E5;
     border-radius: 25px;
@@ -56,7 +56,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    justify-self: end;
     width: 30px;
     margin: 0px 10px;
     cursor: pointer;
@@ -71,7 +70,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    justify-self: end;
     width: 30px;
     margin: 0px 5px;
     cursor: pointer;
@@ -89,7 +87,7 @@
 
 .form, .form_especial{
     display: flex;
-    height: 75%;
+    height: 80%;
     flex-wrap: wrap;
 }
 .form > div, .form_especial > div { 
@@ -98,7 +96,7 @@
     justify-content: flex-start;
     flex-direction: column;
     height: 55px;
-    margin: 8px 30px;
+    margin: 8px 30px !important;
 }
 .form label, .form_especial label{
     display: flex;
@@ -107,6 +105,7 @@
     text-indent: 15px;
 }
 .err{
+    display: flex;
     font-size: 0.5em;
     font-weight: 300;
     color: rgb(255, 68, 68);
@@ -125,9 +124,13 @@
     font-weight: 300;
     font-family: var(--font-especial);
 }
+input[type="date"]{
+    padding: 12px 4px;
+} 
 .form input:focus, .form_especial input:focus{
     outline: 1px solid #734C29;
 }
+
 .form textarea{
     background-color: #F9F1E5;
     color: #734C29;
@@ -139,63 +142,40 @@
     font-weight: 300;
     font-family: var(--font-especial); 
     resize: none;
-
+}
+.textareaa{
+    height: 200px !important;
 }
 .btn_OkForm{
     background-color: #734C29;
     color: white;
-    padding: 2px 15px;
+    padding: 2px 20px;
     border-radius: 20px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     display: flex;
-    margin-top: 40px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
-#btn_salvar_cl{
-    margin-top: 10px;
-}
+
 .btn_OkForm:hover{
     box-shadow: 0px 0px 3px white;
+}
+
+.grande{
+    width: 88%;
+}
+.pequeno{
+    width: 40%;
 }
 
 
 
 /* CADASTRO DE LIVRO! */
-
-#form_cl{
-    height: 400px;
-}
-
 #cabecalho_cl h1{
     width: 180px;
     margin-left: 39%;
     margin-right: 28%;
 }
-
-#div_titulo_cl{
-    width: 88%;
-}
-#div_autor_cl{
-    width: 88%;
-}
-#div_edicao_cl{
-    width: 40%;
-}
-#div_editora_cl{
-    width: 40%;
-}
-#div_genero_cl{
-    width: 40%;
-}
-#div_quantidade_cl{
-    width: 40%;
-}
-#div_CodId_cl{
-    width: 40%;
-}
-#div_CodLoc_cl{
-    width: 40%;
-}
-
 #div_capa_cl{
     display: flex;
     flex-wrap: wrap;
@@ -203,12 +183,10 @@
     justify-content: flex-start;
     width: 50%;
     margin: 15px 20px 0px 20px;
-
 }
 #l_capa_cl{
     cursor: pointer;
 }
-
 input[type='file'] {
     display: none
 }
@@ -233,67 +211,21 @@ input[type='file'] {
 #file_name_cl:hover{
     box-shadow: 0px 0px 4px white;
 }
-#err_capa_cl{
-    display: flex;
-
-}
-
 /* REMOCAO DE LIVRO */
-
 #cabecalho_rl h1{
     width: 300px;
     margin-left: 34%;
     margin-right: 23%;
 }
-#div_titulo_rl{
-    width: 98%;
-}
-#div_CodId_rl{
-    width: 98%;
-    
-}
-#div_motivo_rl{
-    margin-top: 0px;
-    width: 98%;
-    height: 200px
-    
-}
-
 /* ALUGUEL DE LIVRO */
 #cabecalho_al h1{
     width: 400px;
     margin-left: 28%;
     margin-right: 17%;
 }
-
-#div_CodId_al{
-    width: 40%;
-
-}
-#div_titulo_al{
-    width: 88%;
-}
-#div_NomeC_al{
-    width: 88%;
-}
-#div_cpfC_al{
-    width: 40%;
-}
-#div_cpfF_al{
-    width: 40%;
-}
-#div_DataLoc_al{
-    width: 40%;
-    
-}
-#div_DataDev_al{
-    width: 40%;
-    
-}
 #i_DataLoc_al{
     background-color: #734C29;
     color: white;
-
 }
 #i_DataDev_al{
     background-color: #734C29;
@@ -305,69 +237,20 @@ input[type='file'] {
     align-items: center;
     justify-content: space-around;
 }
-
 /* DEVOLUCAO DE LIVRO */
-
 #cabecalho_dl h1{
     width: 320px;
     margin-left: 30%;
     margin-right: 25%;
 }
-
-#div_CodId_dl{
-    width: 40%;
+#form_dl{
+    padding: 25px 0px;
 }
-#div_cpfC_dl{
-    width: 40%;
-}
-#div_NomeC_dl{
-    width: 88%;
-}
-#div_titulo_dl{
-    width: 88%;
-}
-#div_DataLoc_dl{
-    width: 40%;
-}
-#div_DataDev_dl{
-    width: 40%;
-}
-#i_DataLoc_dl{
-    background-color: #734C29;
-    color: white;
-
-}
-#i_DataDev_dl{
-    background-color: #734C29;
-    color: white;
-}
-
 /* CADASTRO DE CLIENTE */
 #cabecalho_cc h1{
     width: 190px;
     margin-left: 39%;
     margin-right: 26%;
-}
-#div_nome_cc{
-    width: 88%;
-}
-#div_cpf_cc{
-    width: 40%;
-}
-#div_DataNasc_cc{
-    width: 40%;
-}
-#i_DataNasc_cc{
-    padding: 12px 5px;
-}
-#div_email_cc{
-    width: 40%;
-}
-#div_celular_cc{
-    width: 40%;
-}
-#div_endereco_cc{
-    width: 88%;
 }
 #i_MenorIdade_cc{
     width: 80px;
@@ -376,60 +259,18 @@ input[type='file'] {
 #i_MenorIdade_cc:focus{
     outline: none;
 }
-
 /* REMOCAO DE CLIENTE */
-
 #cabecalho_rc h1{
     width: 320px;
     margin-left: 30%;
     margin-right: 25%;
 }
-#div_nome_rc{
-    width: 88%;
-}
-#div_cpf_rc{
-    width: 88%;
-}
-#div_motivo_rc{
-    margin-top: 0px;
-    width: 88%;
-    height: 200px
-}
-
 /* CADASTRO DE FUNCIONARIO */
 #cabecalho_cf h1{
     width: 230px;
     margin-left: 36%;
     margin-right: 24%;
 }
-#div_nome_cf{
-    width: 88%;
-}
-#div_cpf_cf{
-    width: 40%;
-}
-#div_DataNasc_cf{
-    width: 40%;
-}
-#i_DataNasc_cf{
-    padding: 12px 5px;
-}
-#div_email_cf{
-    width: 40%;
-}
-#div_celular_cf{
-    width: 40%;
-}
-#div_endereco_cf{
-    width: 88%;
-}
-#div_senha_cf{
-    width: 40%;
-}
-#div_ConfirmaSenha_cf{
-    width: 40%;
-}
-
 /* REAMOCAO DE FUNCIONARIO */
 
 #cabecalho_rf h1{
@@ -437,19 +278,6 @@ input[type='file'] {
     margin-left: 28%;
     margin-right: 22%;
 }
-#div_nome_rf{
-    width: 88%;
-}
-#div_cpf_rf{
-    width: 88%;
-}
-#div_motivo_rf{
-    margin-top: 0px;
-    width: 88%;
-    height: 200px
-}
-
-
 
 
 
@@ -458,23 +286,40 @@ input[type='file'] {
 /* FORMULARIOS ESPECIAIS */
 #papel_cc{
     position: relative;
-    z-index: 10;
-    
+    z-index: 1;
 }
 
 .papel_especial{
     display: flex;
     position: relative;
-    z-index: 300;
+    z-index: 2 !important;
+    top: -485px;
+    left: 107px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
-    height: 350px;
+    height: 400px;
     width: 600px;
     background-color: #F9F1E5;
     border: 1px solid #734C29;
     border-radius: 25px;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
     padding: 25px 35px;
-
 }
+
+#cabecalho_ccm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#cabecalho_ccm h1{
+    margin: auto;
+}
+
+#form_ccm{
+    padding: 15px 0px;
+}
+#cabecalho_ccm{
+    margin-bottom: 10px;
+}
+
