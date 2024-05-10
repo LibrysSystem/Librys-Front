@@ -1,5 +1,5 @@
 import { Funcionario, Livro, Cliente } from "../Classes/FLC.js"
-import { MudarAba, Validar, CriarJSONForm } from "../Classes/FuncPack.js";
+import { Validar, CriarJSONForm, popUp } from "../Classes/FuncPack.js";
 
 
 class Formulario{
@@ -37,12 +37,12 @@ class Formulario{
                 document.getElementById(`btn_salvar_${qualFormAbrir}`).addEventListener("click", async ()=>{
                     const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
                     if(okkk == "ok"){
-                        const resposta = await this.Enviar(qualFormAbrir)
-                        if(resposta.status == 404){
-                            document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
-                        }else{
+                        // const resposta = await this.Enviar(qualFormAbrir)
+                        // if(resposta.status == 404){
+                        //     document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                        // }else{
                             this.FecharFormulario(qualFormAbrir)
-                        }
+                        //}
                     }  
                 })
             }
@@ -63,68 +63,68 @@ class Formulario{
                         const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
         
-                            fetch('read_livro', {
-                                method: 'GET',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: document.getElementById("i_CodId_al").value
-                            })
-                            .then(resp=>resp.json())
-                            .then(rest=>{
-                                console.log(rest)
-                                this.oLivroExiste = rest                        
+                            // fetch('read_livro', {
+                            //     method: 'GET',
+                            //     headers: {
+                            //         'Content-Type': 'application/json'
+                            //     },
+                            //     body: document.getElementById("i_CodId_al").value
+                            // })
+                            // .then(resp=>resp.json())
+                            // .then(rest=>{
+                            //     console.log(rest)
+                            //     this.oLivroExiste = rest                        
         
-                            })
+                            // })
         
-                            if(this.oLivroExiste.status!= 404){
-                                if(this.oLivroExiste.alugado == true){
-                                    const resposta = await this.Enviar(qualFormAbrir)
-                                    if(resposta.status == 404){
-                                        document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
-                                    }else{
+                            // if(this.oLivroExiste.status!= 404){
+                            //     if(this.oLivroExiste.alugado == true){
+                            //         const resposta = await this.Enviar(qualFormAbrir)
+                            //         if(resposta.status == 404){
+                            //             document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                            //         }else{
                                         this.FecharFormulario(qualFormAbrir)
-                                    }
-                                }else{
-                                    document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ainda não foi alugado."
-                                }    
-                            }else{
-                                document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = this.oLivroExiste.detalhe
-                            }
+                            //         }
+                            //     }else{
+                            //         document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ainda não foi alugado."
+                            //     }    
+                            // }else{
+                            //     document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = this.oLivroExiste.detalhe
+                            // }
                         }                      
                     })
                     document.getElementById("btn_alugar_al").addEventListener("click", async ()=>{
                         const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
         
-                            fetch('read_livro', {
-                                method: 'GET',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: document.getElementById("i_CodId_al").value
-                            })
-                            .then(resp=>resp.json())
-                            .then(rest=>{
-                                console.log(rest)
-                                this.oLivroExiste = rest                        
+                            // fetch('read_livro', {
+                            //     method: 'GET',
+                            //     headers: {
+                            //         'Content-Type': 'application/json'
+                            //     },
+                            //     body: document.getElementById("i_CodId_al").value
+                            // })
+                            // .then(resp=>resp.json())
+                            // .then(rest=>{
+                            //     console.log(rest)
+                            //     this.oLivroExiste = rest                        
         
-                            })
+                            // })
         
-                            if(this.oLivroExiste.status!= 404){
-                                if(this.oLivroExiste.alugado == false){
-                                    const resposta = await this.Enviar(qualFormAbrir)
-                                    if(resposta.status == 404){
-                                        document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
-                                    }else{
+                            // if(this.oLivroExiste.status!= 404){
+                            //     if(this.oLivroExiste.alugado == false){
+                            //         const resposta = await this.Enviar(qualFormAbrir)
+                            //         if(resposta.status == 404){
+                            //             document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                            //         }else{
                                         this.FecharFormulario(qualFormAbrir)
-                                    }
-                                }else{
-                                    document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ja foi foi alugado."
-                                }    
-                            }else{
-                                document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = this.oLivroExiste.detalhe
-                            }
+                            //         }
+                            //     }else{
+                            //         document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ja foi foi alugado."
+                            //     }    
+                            // }else{
+                            //     document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = this.oLivroExiste.detalhe
+                            // }
                         }    
                     })
                     break;                   
@@ -140,13 +140,13 @@ class Formulario{
                                 this.abrirFormMenor()
                             }
                             else{
-                                const resposta = await this.Enviar(qualFormAbrir)
-                                if(resposta.status == 404){
-                                    document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
-                                }else{
+                                // const resposta = await this.Enviar(qualFormAbrir)
+                                // if(resposta.status == 404){
+                                //     document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                                // }else{
                                     this.FecharFormulario(qualFormAbrir)
                                     this.FecharFormulario("ccm")
-                                }
+                                //}
                             }
                         } 
                     })
@@ -156,7 +156,7 @@ class Formulario{
             }
 
         }else{
-            alert("JA EXISTE UM FORMULÁRIO ABERTO!")
+            popUp("FORMULÁRIO ABERTO", "Já existe em formulário em execução. Porfavor, complete-o ou feche-o antes de abrir um novo formulário.")
         }
     }
 
@@ -184,8 +184,8 @@ class Formulario{
     }
     static Avaliar=(enviar, quais)=>{
 
+        const inputs = [...document.querySelectorAll(quais)]
         if(!enviar){
-            const inputs = [...document.querySelectorAll(quais)]
             inputs.map((el)=>{
                 
                 el.addEventListener("click",(qmfoi)=>{
@@ -197,6 +197,10 @@ class Formulario{
             })
         }else{
             const okay =  Validar(false, true, quais)
+            if(okay == "erro"){
+                document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML ="*PREENCHA TODOS OS CAMPOS DO FORMULÁRIO CORRETAMENTE!"
+                document.querySelector(".papel_especial:not(.disabled) .err_geral_form").innerHTML ="*PREENCHA TODOS OS CAMPOS DO FORMULÁRIO CORRETAMENTE!"
+            }
             return okay
 
         }
@@ -211,11 +215,12 @@ class Formulario{
             const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form, #papel_ccm .input_form")
             if(okkk == "ok"){
                 const resposta = await this.Enviar("ccm")
-                if(resposta.status == 404){
-                    document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
-                }else{
+                // if(resposta.status == 404){
+                //     document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
+                // }else{
+                    this.FecharFormulario("cc")
                     this.FecharFormulario("ccm")
-                }
+                //}
             }  
         })
 

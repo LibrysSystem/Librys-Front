@@ -18,6 +18,14 @@
     font-weight: 600;
 
 }
+@keyframes modal-pop{
+    from{
+        transform: scale(0.8);
+    }
+    to{
+        transform: scale(1);
+    }
+}
 
 .disabled{
     display: none !important;
@@ -29,12 +37,14 @@
     justify-content: space-between;
     flex-direction: column;
     width: 800px;
-    height: 490px;
+    height: 480px;
     border: 1px solid #734C29;
     background-color: #F9F1E5;
     border-radius: 25px;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
     padding: 25px 35px;
+    animation-name: modal-pop;
+    animation-duration: 0.15s;
 }
 .cabecalho_form, .cabecalho_form_especial{
     display: flex;
@@ -155,6 +165,7 @@ input[type="date"]{
     display: flex;
     margin-top: 30px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .btn_OkForm:hover{
@@ -179,10 +190,10 @@ input[type="date"]{
 #div_capa_cl{
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: flex-start;
     width: 50%;
-    margin: 15px 20px 0px 20px;
+    margin: 15px 20px 0px 20px !important;
+    flex-direction: row;
+    align-items: baseline;
 }
 #l_capa_cl{
     cursor: pointer;
@@ -210,6 +221,9 @@ input[type='file'] {
 }
 #file_name_cl:hover{
     box-shadow: 0px 0px 4px white;
+}
+#btn_salvar_cl{
+    margin: 20px 0px 0px 0px !important;
 }
 /* REMOCAO DE LIVRO */
 #cabecalho_rl h1{
