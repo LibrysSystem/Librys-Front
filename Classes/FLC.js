@@ -17,7 +17,7 @@ const Livro={
     quantidade:"",
     codigoId:"",
     codigoLoc:"",
-    capa:"",
+    capa:""
 }
 
 const Cliente ={

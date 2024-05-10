@@ -1,6 +1,6 @@
 import {Formulario} from "../../Classes/formulario.js"
 import { Usuario } from "../../Classes/Usuario.js";
-import { MudarAba, Validar } from "../../Classes/FuncPack.js";
+import { MudarAba, Pesquisar } from "../../Classes/FuncPack.js";
 
 //INICIO
 document.addEventListener("DOMContentLoaded", (qmfoi)=>{
@@ -10,96 +10,39 @@ document.addEventListener("DOMContentLoaded", (qmfoi)=>{
     if(Usuario.Tipo == "Funcionario"){
         document.getElementById("funcionarios").setAttribute("class", "sec_nav disabled")
     }
+    MudarAba.mudarAba("aba_de_livro")
     Formulario.GetForms()
 });
 
 // NAVBAR
-document.getElementById("btn_livros_princi").addEventListener("click", (qmfoi)=>{
-    MudarAba("l")
-})
-document.getElementById("btn_clientes_princi").addEventListener("click", (qmfoi)=>{
-    MudarAba("c")
-})
-document.getElementById("btn_funcionarios_princi").addEventListener("click", (qmfoi)=>{
-    MudarAba("f")
+
+const princ_btns = [...document.querySelectorAll(".sec_btn")]
+princ_btns.map((el)=>{
+    el.addEventListener("click", (qmfoi)=>{
+        MudarAba.mudarAba(el.nextElementSibling.firstElementChild.id)
+    })
 })
 
-document.getElementById("btn_cadastrar_livro").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("l")
-    }
-        Formulario.AbrirFormulario("cl")
+const navPequenosBtns = [...document.querySelectorAll(".btns button")]
+navPequenosBtns.map((el)=>{
+    el.addEventListener("click", (qmfoi)=>{
 
-    
-})
-document.getElementById("btn_remover_livro").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("l")
-    }
-    Formulario.AbrirFormulario("rl")
+        if(!Formulario.TemFormAberto){
+            MudarAba.mudarAba(el.id)
+        }
+        Formulario.AbrirFormulario(el.id)
 
+    })
 })
-document.getElementById("btn_alugar_livro").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("l")
-    }
-    Formulario.AbrirFormulario("al")
 
-})
-document.getElementById("btn_devolver_livro").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("l")
-    }
-    Formulario.AbrirFormulario("dl")
-
-})
-document.getElementById("btn_cadastrar_cliente").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("c")
-    }
-    Formulario.AbrirFormulario("cc")
-
-})
-document.getElementById("btn_remover_cliente").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("c")
-    }
-    Formulario.AbrirFormulario("rc")
-
-})
-document.getElementById("btn_cadastrar_funcionario").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("f")
-    }
-    Formulario.AbrirFormulario("cf")
-
-})
-document.getElementById("btn_remover_funcionario").addEventListener("click", ()=>{
-    if(!Formulario.TemFormAberto){
-        MudarAba("f")
-    }    
-    Formulario.AbrirFormulario("rf")
-
-})
 
 
 //MAIN
-document.getElementById("enviar_pesquia").addEventListener("click", (qmfoi)=>{
-    const pesquisa = document.getElementById("buscar").value
-    // fetch('endponit', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         pesquisar: pesquisa, 
-    //     })
-    // })
-    // .then(resp=>resp.json())
-    // .then(rest=>{
-    //     console.log(rest)
-        
-    // })
+document.getElementById("i_buscar").addEventListener("keyup", (qmfoi)=>{
+    Pesquisar(document.getElementById("i_buscar").value, false)
+})
+document.getElementById("enviar_pesquia").addEventListener("click", ()=>{
+    Pesquisar(document.getElementById("i_buscar").value, true)
 })
 
 //FORMULARIOS

@@ -1,33 +1,112 @@
+import { Funcionario, Livro, Cliente } from "../Classes/FLC.js"
 
-function MudarAba(qualaba){
-    switch (qualaba) {
-        case "l":
-            document.getElementById("h1_main").innerHTML = "LIVROS"
+class MudarAba{
+
+    static abaAtual = " "
+
+    static mudarAba = (qualaba)=>{
+
+        let qualnome = qualaba.split("_")
+        qualnome = qualnome[2]
+
+        switch (qualnome) {
+        case "livro":
+            document.getElementById("h1_main").innerHTML = `LIVROS`
+            this.abaAtual = "livros"
+
+            // fetch('Read_Livros')
+            // .then(resp=>resp.json())
+            // .then(rest=>{
+                
+            // })
+
+            break;  
+        case "funcionario":
+            document.getElementById("h1_main").innerHTML = `FUNCIONÁRIOS`
+            this.abaAtual = "funcionarios"
+
+
+            // fetch('Read_Funcionarios')
+            // .then(resp=>resp.json())
+            // .then(rest=>{
+                  
+            // })
+
+            break;
+        case "cliente":
+            document.getElementById("h1_main").innerHTML = `CLIENTES`
+            this.abaAtual = "clientes"
+
+
+            // fetch('Read_Clientes')
+            // .then(resp=>resp.json())
+            // .then(rest=>{
+                  
+            // })
+
+            break;  
+        default:
+            break;
+    }}
+
+}
+
+function Pesquisar(oquePesquisar, submit){ 
+
+    let aondePesquisar
+    switch (MudarAba.abaAtual) {
+        case 'livros':
+            aondePesquisar = "endpoit_readLivros"
 
             break;
 
-        case "c":
-            document.getElementById("h1_main").innerHTML = "CLIENTES"
-
+        case 'clientes':
+            aondePesquisar = "endpoit_readClientes"
+        
             break;
 
-        case "f":
-            document.getElementById("h1_main").innerHTML = "FUNCIONÁRIOS"
+        case 'funcionarios':
+            aondePesquisar = "endpoit_readFuncionarios"
 
-            break;
-    
+            break; 
+
         default:
             break;
     }
+    
+    fetch(aondePesquisar, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            filtro: oquePesquisar
+        })
+    })
+    .then(resp=>resp.json())
+    .then(rest=>{
+
+        const dados =  rest
+        if(submit){
+            mostrarDados(dados, MudarAba.abaAtual)
+        }else{
+            document.getElementById("opcoesDados").innerHTML = ""
+            const titulos = dados.map(livro => livro.titulo)
+            titulos.map((el)=>{
+                const opcao = document.createElement("option")
+                opcao.innerHTML=el
+                document.getElementById("opcoesDados").appendChild(opcao)
+            })
+        }
+    })
+}
+function mostrarDados(dados, tipo){
+    //pego a lista de objetos e transformo cada 1 em um modulo de mostar bonitinho e adiciono no DADOS conforme o tipo (cliente, livro, funcionario)
 }
 
-function MostrarDados(){
-
-}
-
-async function CriarJSONForm() {
+async function CriarJSONForm(quemEnviar) {
     let objJSON = {};
-    const todosinputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")];
+    const todosinputs = [...document.querySelectorAll(quemEnviar)];
 
     await Promise.all(todosinputs.map(async (el) => {
         if (el.type === "file") {
@@ -59,7 +138,7 @@ function readFile(file) {
 }
 
 
-function Validar(id, enviar){
+function Validar(id, enviar, Quais){
     let ok = true
 
     if(!enviar){
@@ -68,42 +147,78 @@ function Validar(id, enviar){
         if(!document.getElementById(id).checkValidity()){
             document.getElementById(id).nextSibling.nextSibling.innerHTML = `* ${document.getElementById(id).validationMessage}`
         }
-    }else if(enviar){
-        const todosinputs = [...document.querySelectorAll(".papel:not(.disabled) .input_form")]
+    }else {
+        const todosinputs = [...document.querySelectorAll(Quais)]
         todosinputs.map((el)=>{
             ok = (ok)&&(el.checkValidity())
         
         })
 
         if(ok){
-            async function main() {
-                const formJSON = await CriarJSONForm();
-                console.log(formJSON);
-                console.log(JSON.stringify(formJSON));
-            }
-            
-            main();
+        //TALVEZ NAO SEJA UTILIZADO MAIS
 
-            // fetch('endponit', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.parse(formSON)
-            // })
-            // .then(resp=>resp.json())
-            // .then(rest=>{
-            //     console.log(rest)
+            // async function main() {
+            //     const formJSON = await CriarJSONForm();
+
+            //     console.log(formJSON);
                 
-            // })
+
+            //     // fetch('endponit', {
+            //     //     method: 'POST',
+            //     //     headers: {
+            //     //         'Content-Type': 'application/json'
+            //     //     },
+            //     //     body: JSON.stringify(formJSON)
+            //     // })
+            //     // .then(resp=>resp.json())
+            //     // .then(rest=>{
+            //     //     console.log(rest)
+                    
+            //     // })
+                
+
+            // }
+            // main()
+
             return "ok"
 
         }else{
-            alert("Preencha todos os campos do formulário corretamente!")
+            //SAIU DAQUI
+            // console.log(document.getElementById(id).parentElement.parentElement.parentElement.firstChild.nextSibling)
+            // document.getElementById(id).parentElement.parentElement.parentElement.firstChild.nextSibling.innerHTML="Preencha todos os campos do formulário corretamente!"
+            return "erro"
         }
         
     }
 }
 
-export{MudarAba, MostrarDados, Validar}
+function popUp(titulo, mensagem, escurecer){
+    const telaEscura = document.createElement("div")
+    telaEscura.setAttribute("id", "divEscura")
+
+    const popUp = document.createElement("div")
+    popUp.setAttribute("id", "caixaPopUp")
+
+    const h1Tilulo = document.createElement("h1")
+    h1Tilulo.innerHTML = titulo
+    popUp.appendChild(h1Tilulo)
+
+    const msg = document.createElement("p")
+    msg.innerHTML = mensagem
+    popUp.appendChild(msg)
+
+    const btnOkPopUp = document.createElement("button")
+    btnOkPopUp.innerHTML = "OK"
+    btnOkPopUp.addEventListener("click", ()=>{
+        telaEscura.remove()
+    })
+    popUp.appendChild(btnOkPopUp)
+    telaEscura.appendChild(popUp)
+
+    document.querySelector("body").prepend(telaEscura)
+
+}
+
+
+export{MudarAba, Pesquisar, Validar, CriarJSONForm, popUp}
 
