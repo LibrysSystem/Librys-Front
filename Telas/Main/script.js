@@ -1,6 +1,6 @@
-import {Formulario} from "../../Classes/formulario.js"
+import {Formulario} from "../../Classes/Formulario.js"
 import { Usuario } from "../../Classes/Usuario.js";
-import { MudarAba, Pesquisar } from "../../Classes/FuncPack.js";
+import { MudarAba, pesquisar } from "../../Classes/FuncPack.js";
 
 //INICIO
 document.addEventListener("DOMContentLoaded", (qmfoi)=>{
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", (qmfoi)=>{
         document.getElementById("funcionarios").setAttribute("class", "sec_nav disabled")
     }
     MudarAba.mudarAba("aba_de_livro")
-    Formulario.GetForms()
+    Formulario.getForms()
 });
 
 // NAVBAR
@@ -30,7 +30,7 @@ navPequenosBtns.map((el)=>{
         if(!Formulario.TemFormAberto){
             MudarAba.mudarAba(el.id)
         }
-        Formulario.AbrirFormulario(el.id)
+        Formulario.abrirFormulario(el.id)
 
     })
 })
@@ -39,10 +39,10 @@ navPequenosBtns.map((el)=>{
 
 //MAIN
 document.getElementById("i_buscar").addEventListener("keyup", (qmfoi)=>{
-    Pesquisar(document.getElementById("i_buscar").value, false)
+    pesquisar(document.getElementById("i_buscar").value, false)
 })
 document.getElementById("enviar_pesquia").addEventListener("click", ()=>{
-    Pesquisar(document.getElementById("i_buscar").value, true)
+    pesquisar(document.getElementById("i_buscar").value, true)
 })
 
 //FORMULARIOS

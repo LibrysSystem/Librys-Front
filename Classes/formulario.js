@@ -1,5 +1,5 @@
-import { Funcionario, Livro, Cliente } from "../Classes/FLC.js"
-import { Validar, CriarJSONForm, popUp } from "../Classes/FuncPack.js";
+import { Funcionario, Livro, Cliente } from "./FLC.js"
+import { validarInputs, criarJSONForm, popUp } from "./FuncPack.js";
 
 
 class Formulario{
@@ -7,7 +7,7 @@ class Formulario{
     static TemFormAberto = false
     static oLivroExiste = false
     
-    static GetForms=()=>{
+    static getForms=()=>{
 
         const papeis = [...document.querySelectorAll(".papel")]
         papeis.map((el)=>{
@@ -16,7 +16,7 @@ class Formulario{
     }
 
 
-    static AbrirFormulario=async (tipo)=>{
+    static abrirFormulario=async (tipo)=>{
         if(!this.TemFormAberto){
             this.TemFormAberto = true
 
@@ -24,24 +24,24 @@ class Formulario{
             const qualFormAbrir = ids[1].charAt(0) + ids[2].charAt(0)
 
             document.getElementById(`papel_${qualFormAbrir}`).setAttribute("class", "papel")
-            this.Avaliar(false, ".papel:not(.disabled) .input_form")
+            this.avaliarFormulario(false, ".papel:not(.disabled) .input_form")
 
             document.getElementById(`btn_fechar_${qualFormAbrir}`).addEventListener("click", (qmfoi)=>{
-                this.FecharFormulario(qualFormAbrir)
+                this.fecharFormulario(qualFormAbrir)
                 if(qualFormAbrir == "cc"){
-                    this.FecharFormulario("ccm")
+                    this.fecharFormulario("ccm")
                 }
             }) 
 
             if((qualFormAbrir != "cc") && (qualFormAbrir != "al")){
                 document.getElementById(`btn_salvar_${qualFormAbrir}`).addEventListener("click", async ()=>{
-                    const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
+                    const okkk = this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                     if(okkk == "ok"){
-                        // const resposta = await this.Enviar(qualFormAbrir)
+                        // const resposta = await this.enviarFormulario(qualFormAbrir)
                         // if(resposta.status == 404){
                         //     document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
                         // }else{
-                            this.FecharFormulario(qualFormAbrir)
+                            this.fecharFormulario(qualFormAbrir)
                         //}
                     }  
                 })
@@ -60,7 +60,7 @@ class Formulario{
                     break;
                 case "al":
                     document.getElementById("btn_renovar_al").addEventListener("click", async ()=>{
-                        const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
+                        const okkk = this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
         
                             // fetch('read_livro', {
@@ -79,11 +79,11 @@ class Formulario{
         
                             // if(this.oLivroExiste.status!= 404){
                             //     if(this.oLivroExiste.alugado == true){
-                            //         const resposta = await this.Enviar(qualFormAbrir)
+                            //         const resposta = await this.enviarFormulario(qualFormAbrir)
                             //         if(resposta.status == 404){
                             //             document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
                             //         }else{
-                                        this.FecharFormulario(qualFormAbrir)
+                                        this.fecharFormulario(qualFormAbrir)
                             //         }
                             //     }else{
                             //         document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ainda não foi alugado."
@@ -94,7 +94,7 @@ class Formulario{
                         }                      
                     })
                     document.getElementById("btn_alugar_al").addEventListener("click", async ()=>{
-                        const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
+                        const okkk = this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
         
                             // fetch('read_livro', {
@@ -113,11 +113,11 @@ class Formulario{
         
                             // if(this.oLivroExiste.status!= 404){
                             //     if(this.oLivroExiste.alugado == false){
-                            //         const resposta = await this.Enviar(qualFormAbrir)
+                            //         const resposta = await this.enviarFormulario(qualFormAbrir)
                             //         if(resposta.status == 404){
                             //             document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
                             //         }else{
-                                        this.FecharFormulario(qualFormAbrir)
+                                        this.fecharFormulario(qualFormAbrir)
                             //         }
                             //     }else{
                             //         document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ja foi foi alugado."
@@ -130,7 +130,7 @@ class Formulario{
                     break;                   
                 case 'cc':
                     document.getElementById("btn_salvar_cc_E_menor").addEventListener("click", async ()=>{
-                        const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form")
+                        const okkk = this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
                             const dataNasc = new Date(document.getElementById("i_DataNasc_cc").value)
                             const dataAtual = new Date()
@@ -140,12 +140,12 @@ class Formulario{
                                 this.abrirFormMenor()
                             }
                             else{
-                                // const resposta = await this.Enviar(qualFormAbrir)
+                                // const resposta = await this.enviarFormulario(qualFormAbrir)
                                 // if(resposta.status == 404){
                                 //     document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
                                 // }else{
-                                    this.FecharFormulario(qualFormAbrir)
-                                    this.FecharFormulario("ccm")
+                                    this.fecharFormulario(qualFormAbrir)
+                                    this.fecharFormulario("ccm")
                                 //}
                             }
                         } 
@@ -161,7 +161,7 @@ class Formulario{
     }
 
 
-    static FecharFormulario=(tipo)=>{
+    static fecharFormulario=(tipo)=>{
 
         let quaisInputs = ".papel:not(.disabled) .input_form"
         if(tipo == "ccm"){quaisInputs = ".papel_especial .input_form"}
@@ -182,21 +182,21 @@ class Formulario{
         }
 
     }
-    static Avaliar=(enviar, quais)=>{
+    static avaliarFormulario=(enviar, quais)=>{
 
         const inputs = [...document.querySelectorAll(quais)]
         if(!enviar){
             inputs.map((el)=>{
                 
                 el.addEventListener("click",(qmfoi)=>{
-                    Validar(el.id, false, quais)
+                    validarInputs(el.id, false, quais)
                 })
                 el.addEventListener("keyup",(qmfoi)=>{
-                    Validar(el.id, false, quais)
+                    validarInputs(el.id, false, quais)
                 })
             })
         }else{
-            const okay =  Validar(false, true, quais)
+            const okay =  validarInputs(false, true, quais)
             if(okay == "erro"){
                 document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML ="*PREENCHA TODOS OS CAMPOS DO FORMULÁRIO CORRETAMENTE!"
                 document.querySelector(".papel_especial:not(.disabled) .err_geral_form").innerHTML ="*PREENCHA TODOS OS CAMPOS DO FORMULÁRIO CORRETAMENTE!"
@@ -209,17 +209,17 @@ class Formulario{
     static async abrirFormMenor(){
 
         document.getElementById("papel_ccm").setAttribute("class", "papel_especial")
-        this.Avaliar(false, "#papel_ccm .input_form")
+        this.avaliarFormulario(false, "#papel_ccm .input_form")
         
         document.getElementById("btn_salvar_ccm").addEventListener("click", async ()=>{
-            const okkk = this.Avaliar(true, ".papel:not(.disabled) .input_form, #papel_ccm .input_form")
+            const okkk = this.avaliarFormulario(true, ".papel:not(.disabled) .input_form, #papel_ccm .input_form")
             if(okkk == "ok"){
-                const resposta = await this.Enviar("ccm")
+                const resposta = await this.enviarFormulario("ccm")
                 // if(resposta.status == 404){
                 //     document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
                 // }else{
-                    this.FecharFormulario("cc")
-                    this.FecharFormulario("ccm")
+                    this.fecharFormulario("cc")
+                    this.fecharFormulario("ccm")
                 //}
             }  
         })
@@ -227,7 +227,7 @@ class Formulario{
 
     }
 
-    static async Enviar(defEnd){
+    static async enviarFormulario(defEnd){
         let endponit
         let metodo
         let quemEnviar = ".papel:not(.disabled) .input_form"
@@ -295,7 +295,7 @@ class Formulario{
         }
 
         async function main() {
-            const formJSON = await CriarJSONForm(quemEnviar);
+            const formJSON = await criarJSONForm(quemEnviar);
 
             // fetch(endponit, {
             //     method: metodo,

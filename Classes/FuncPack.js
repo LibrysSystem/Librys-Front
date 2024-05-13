@@ -51,7 +51,7 @@ class MudarAba{
 
 }
 
-function Pesquisar(oquePesquisar, submit){ 
+function pesquisar(oquePesquisar, submit){ 
 
     let aondePesquisar
     switch (MudarAba.abaAtual) {
@@ -104,7 +104,7 @@ function mostrarDados(dados, tipo){
     //pego a lista de objetos e transformo cada 1 em um modulo de mostar bonitinho e adiciono no DADOS conforme o tipo (cliente, livro, funcionario)
 }
 
-async function CriarJSONForm(quemEnviar) {
+async function criarJSONForm(quemEnviar) {
     let objJSON = {};
     const todosinputs = [...document.querySelectorAll(quemEnviar)];
 
@@ -138,7 +138,7 @@ function readFile(file) {
 }
 
 
-function Validar(id, enviar, Quais){
+function validarInputs(id, enviar, Quais){
     let ok = true
 
     if(!enviar){
@@ -220,5 +220,5 @@ function popUp(titulo, mensagem, escurecer){
 }
 
 
-export{MudarAba, Pesquisar, Validar, CriarJSONForm, popUp}
+export{MudarAba, pesquisar, validarInputs, criarJSONForm, popUp}
 
