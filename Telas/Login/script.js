@@ -20,43 +20,28 @@ btn_entrar.addEventListener("click", (qmfoi)=>{
             err_senha.innerHTML =`* ${i_senha.validationMessage}`
         }
     }else{
-        //
-        // fetch('endponit', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         email: i_email.value,
-        //         senha: i_senha.value,
-        //     })
-        // })
-        // .then(resp=>resp.json())
-        // .then(rest=>{
-        //     console.log(rest)
-        //     if(!rest){
-        //         err_login.innerHTML = "* EMAIL OU SENHA INCORRETOS! *"
-        //     }else{
-        //         err_login.innerHTML = ""
+        fetch(`http://localhost:8080/funcionarios`, {
+            method: 'GET'
+        }).then(resp=>resp.json())
+        .then(rest=>{
+            console.log(rest)
+            // if(!rest){
+            //     // err_login.innerHTML = "* EMAIL OU SENHA INCORRETOS! *"
+            // }else{
+            //     // err_login.innerHTML = ""
 
-        //         Usuario.Tipo=rest.Tipo
-        //         Usuario.Nome=rest.Nome
-        //         Usuario.Cpf=rest.Cpf
-        //         Usuario.Email=rest.Email
-        //         Usuario.Senha=rest.Senha
+            //     // Usuario.Tipo=rest.Tipo
+            //     // Usuario.Nome=rest.Nome
+            //     // Usuario.Cpf=rest.Cpf
+            //     // Usuario.Email=rest.Email
+            //     // Usuario.Senha=rest.Senha
 
-        //         window.open('../Main/main.html', '_self')
-        //     }
-        // })
-        //
-        err_login.innerHTML = ""
-        window.open('../Main/main.html', '_self')
+            //     //window.open('../Main/main.html', '_self')
+            // }
+        })
     }
     
 })
-
-
-
 
 
 
