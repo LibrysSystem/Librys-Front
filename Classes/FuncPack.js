@@ -104,7 +104,7 @@ function mostrarDados(dados, tipo){
     //pego a lista de objetos e transformo cada 1 em um modulo de mostar bonitinho e adiciono no DADOS conforme o tipo (cliente, livro, funcionario)
 }
 
-async function criarJSONForm(quemEnviar) {
+async function criarJSONObject(quemEnviar) {
     let objJSON = {};
     const todosinputs = [...document.querySelectorAll(quemEnviar)];
 
@@ -218,7 +218,17 @@ function popUp(titulo, mensagem, escurecer){
     document.querySelector("body").prepend(telaEscura)
 
 }
+async function pegarIdDe(qualInput){
+    fetch(`${endponit}clientes/${document.getElementById(qualInput).value}`, {
+    method: "GET"
+})
+.then(resp=>resp.json())
+.then(rest=>{
+    console.log(rest)
+    
+    return rest.id
+})} 
 
 
-export{MudarAba, pesquisar, validarInputs, criarJSONForm, popUp}
+export{MudarAba, pesquisar, validarInputs, criarJSONObject, popUp, pegarIdDe}
 

@@ -53,12 +53,11 @@
             <div id="h1_main">LIVROS</div>
             <div id="pesquisar" class="pesquisar">
                 <button id="enviar_pesquia"><span class="material-symbols-outlined">search</span></button>
-                <input type="text" name="buscar" id="i_burcar" list="opcoesDados">
+                <input type="text" name="buscar" id="i_buscar" list="opcoesDados">
                 <datalist id="opcoesDados"></datalist>
             </div>
         </div>
         <div id="dados" class="dados">
-
             <div id="papel_cl" class="papel ">
                 <div id="cabecalho_cl" class="cabecalho_form">
                     <h1>CADASTRO DE LIVRO</h1>
@@ -160,18 +159,25 @@
                 </div>
                 <div id="err_geral_al" class="err_geral_form">*ADVERTENCIA PROCESSO DE TRANCA INICIADO*</div>
                 <div id="form_al" class="form">
-                    <div id="div_titulo_al" class="div_al grande">
-                        <label for="i_titulo_al" id="l_titulo_al">TÍTULO DO LIVRO *</label>
-                        <input type="text" name="titulo" id="i_titulo_al" class="input_form" required>
-                        <div id="err_titulo_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                    
-                    </div>                    
                     <div id="div_CodId_al" class="div_al pequeno">
                         <label for="i_CodId_al" id="l_CodId_al">CÓDICO DE IDENTIFICAÇÃO *</label>
                         <input type="text" name="CodId" id="i_CodId_al" class="input_form" required>
                         <div id="err_CodId_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                     
                     </div>
+                    <div id="div_CodId_al" class="div_al pequeno">
+                        <label for="i_CodTrans_al" id="l_CodTrans_al">CÓDICO DE TRANSAÇÂO</label>
+                        <input type="text" name="CodTrans" id="i_CodTrans_al" class="input_form">
+                        <div id="err_CodTrans_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>                    
+                    <div id="div_titulo_al" class="div_al grande">
+                        <label for="i_titulo_al" id="l_titulo_al">TÍTULO DO LIVRO *</label>
+                        <input type="text" name="titulo" id="i_titulo_al" class="input_form" required>
+                        <div id="err_titulo_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    
+                    </div>                    
+
                     <div id="div_NomeC_al" class="div_al grande">
                         <label for="i_NomeC_al" id="l_NomeC_al">NOME DO CLIENTE *</label>
                         <input type="text" name="NomeC" id="i_NomeC_al" class="input_form" required>
@@ -190,18 +196,6 @@
                         <div id="err_cpfF_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                    
                     </div>
-                    <div id="div_DataLoc_al" class="div_al pequeno">
-                        <label for="i_DataLoc_al" id="l_DataLoc_al">DATA DE LOCAÇÃO *</label>
-                        <input type="text" name="DataLoc" id="i_DataLoc_al" class="input_form" required disabled>
-                        <div id="err_DataLoc_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                    
-                    </div>
-                    <div id="div_DataDev_al" class="div_al pequeno">
-                        <label for="i_DataDev_al" id="l_DataDev_al">DATA DE DEVOLUÇÃO *</label>
-                        <input type="text" name="DataDev" id="i_DataDev_al" class="input_form" required disabled>
-                        <div id="err_DataDev_al" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                    
-                    </div>
                 </div>
                 <div id="btns_al" class="btns_forms">
                     <button id="btn_renovar_al" class="btn_OkForm">RENOVAR</button>
@@ -215,6 +209,11 @@
                 </div>
                 <div id="err_geral_dl" class="err_geral_form">*ADVERTENCIA PROCESSO DE TRANCA INICIADO*</div>
                 <div id="form_dl" class="form">
+                    <div id="div_titulo_dl" class="div_dl grande">
+                        <label for="i_titulo_dl" id="l_titulo_dl">TÍTULO DO LIVRO *</label>
+                        <input type="text" name="titulo" id="i_titulo_dl" class="input_form" required>
+                        <div id="err_titulo_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
+                    </div>                    
                     <div id="div_CodId_dl" class="div_dl pequeno">
                         <label for="i_CodId_dl" id="l_CodId_dl">CÓDICO DE IDENTIFICAÇÃO *</label>
                         <input type="text" name="CodId" id="i_CodId_dl" class="input_form" required>
@@ -231,25 +230,11 @@
                         <label for="i_NomeC_dl" id="l_NomeC_dl">NOME DO CLIENTE *</label>
                         <input type="text" name="NomeC" id="i_NomeC_dl" class="input_form" required>
                         <div id="err_NomeC_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                    
                     </div>
-                    <div id="div_titulo_dl" class="div_dl grande">
-                        <label for="i_titulo_dl" id="l_titulo_dl">TÍTULO DO LIVRO *</label>
-                        <input type="text" name="titulo" id="i_titulo_dl" class="input_form" required>
-                        <div id="err_titulo_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                    
-                    </div>
-                    <div id="div_DataLoc_dl" class="div_dl pequeno">
-                        <label for="i_DataLoc_dl" id="l_DataLoc_dl">DATA DE LOCAÇÃO *</label>
-                        <input type="text" name="DataLoc" id="i_DataLoc_dl" class="input_form" required disabled>
-                        <div id="err_DataLoc_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                    
-                    </div>
-                    <div id="div_DataDev_dl" class="div_dl pequeno">
-                        <label for="i_DataDev_dl" id="l_DataDev_dl">DATA DE DEVOLUÇÃO *</label>
-                        <input type="text" name="DataDev" id="i_DataDev_dl" class="input_form" required disabled>
-                        <div id="err_DataDev_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
-                    
+                    <div id="div_codTrans_dl" class="div_dl pequeno">
+                        <label for="i_codTrans_dl" id="l_codTrans_dl">CÓDIGO DE TRANSAÇÃO *</label>
+                        <input type="text" name="codTrans" id="i_codTrans_dl" class="input_form" required>
+                        <div id="err_codTrans_dl" class="err">erro 404 modulo de sarcasmo nao encontrado</div>
                     </div>
                 </div>
                 <button id="btn_salvar_dl" class="btn_OkForm">FINALIZAR</button>

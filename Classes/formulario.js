@@ -1,5 +1,5 @@
 import { Funcionario, Livro, Cliente } from "./FLC.js"
-import { validarInputs, criarJSONForm, popUp } from "./FuncPack.js";
+import { validarInputs, criarJSONObject, popUp, pegarIdDe} from "./FuncPack.js";
 
 
 class Formulario{
@@ -60,71 +60,29 @@ class Formulario{
                     break;
                 case "al":
                     document.getElementById("btn_renovar_al").addEventListener("click", async ()=>{
+                        document.getElementById("i_CodTrans_al").setAttribute("required", "true")
                         const okkk = this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
-        
-                            // fetch('read_livro', {
-                            //     method: 'GET',
-                            //     headers: {
-                            //         'Content-Type': 'application/json'
-                            //     },
-                            //     body: document.getElementById("i_CodId_al").value
-                            // })
-                            // .then(resp=>resp.json())
-                            // .then(rest=>{
-                            //     console.log(rest)
-                            //     this.oLivroExiste = rest                        
-        
-                            // })
-        
-                            // if(this.oLivroExiste.status!= 404){
-                            //     if(this.oLivroExiste.alugado == true){
-                            //         const resposta = await this.enviarFormulario(qualFormAbrir)
-                            //         if(resposta.status == 404){
-                            //             document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
-                            //         }else{
-                                        this.fecharFormulario(qualFormAbrir)
-                            //         }
-                            //     }else{
-                            //         document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ainda não foi alugado."
-                            //     }    
+
+                            // const resposta = await this.enviarFormulario("rnl")
+                            // if(resposta.status == 404){
+                            //     document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
                             // }else{
-                            //     document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = this.oLivroExiste.detalhe
-                            // }
+                                this.fecharFormulario(qualFormAbrir)
+                            //}
                         }                      
                     })
+
                     document.getElementById("btn_alugar_al").addEventListener("click", async ()=>{
                         const okkk = this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
-        
-                            // fetch('read_livro', {
-                            //     method: 'GET',
-                            //     headers: {
-                            //         'Content-Type': 'application/json'
-                            //     },
-                            //     body: document.getElementById("i_CodId_al").value
-                            // })
-                            // .then(resp=>resp.json())
-                            // .then(rest=>{
-                            //     console.log(rest)
-                            //     this.oLivroExiste = rest                        
-        
-                            // })
-        
-                            // if(this.oLivroExiste.status!= 404){
-                            //     if(this.oLivroExiste.alugado == false){
-                            //         const resposta = await this.enviarFormulario(qualFormAbrir)
-                            //         if(resposta.status == 404){
-                            //             document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
-                            //         }else{
-                                        this.fecharFormulario(qualFormAbrir)
-                            //         }
-                            //     }else{
-                            //         document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = "O livro ja foi foi alugado."
-                            //     }    
+
+                            // const resposta = await this.enviarFormulario("al")
+                            // if(resposta.status == 404){
+                            //     document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = resposta.detalhe
                             // }else{
-                            //     document.getElementById(".papel:not(.disabled) .err_geral_form").innerHTML = this.oLivroExiste.detalhe
-                            // }
+                                this.fecharFormulario(qualFormAbrir)
+                            //}
                         }    
                     })
                     break;                   
@@ -228,93 +186,133 @@ class Formulario{
     }
 
     static async enviarFormulario(defEnd){
-        let endponit
+        let endponit = `http://localhost:8080/`
         let metodo
         let quemEnviar = ".papel:not(.disabled) .input_form"
-
+        let objetoAEnviar = null
 
         switch (defEnd) {
             case "cl":
-                endponit = "Criar_Livro"
+                endponit += `livros`
                 metodo = "POST"
-                
+                objetoAEnviar = await criarJSONObject(quemEnviar);
+
                 break;
             case "rl":
-                endponit = "Delete_Livro"
+                endponit += `livros/${document.getElementById("i_CodId_rl").value}`
                 metodo = "DELETE"
                 
                 break;
             case "al":
-                endponit = "Update_Livro"
-                metodo = "PATCH"
+
+                endponit += "gerencia-livro/alugar"
+                metodo = "POST"
+                objetoAEnviar = {
+                    "livro": {
+                        "id": `${document.getElementById("i_CodId_al").value}`
+                    },
+                    "cliente": {
+                        "id": `${await pegarIdDe("i_cpfC_al")}`
+                    }
+                }
             
             break;
+            case "rnl":
+
+                endponit += `gerencia-livro/renovar/${document.getElementById("i_CodTrans_al").value}`
+                metodo = "PUT"
+                objetoAEnviar = {
+                    "livro": {
+                        "id": `${document.getElementById("i_CodId_al").value}`
+                    },
+                    "cliente": {
+                        "id": `${await pegarIdDe("i_cpfC_al")}`
+                    }
+                }
+
+            break;
             case "dl":
-                endponit = "Update_Livro"
-                metodo = "PATCH"
+                endponit += `gerencia-livro/devolver/${document.getElementById("i_CodTrans_dl").value}`
+                metodo = "DELETE"
             
             break;
             case "cc":
-                endponit = "Criar_Cliente"
+                endponit += "clientes"
                 metodo = "POST"
+                objetoAEnviar = await criarJSONObject(quemEnviar)
                 
                 break;
             case "rc":
-                endponit = "Delete_Cliente"
+                
+                endponit += `clientes/${await pegarIdDe("i_cpf_rc")}`
                 metodo = "DELETE"
                 
                 break;
             case "cf":
-                endponit = "Criar_Funcionario"
+                endponit += "funcionarios"
                 metodo = "POST"
+                objetoAEnviar = await criarJSONObject(quemEnviar)
             
             break;
-            case "rf":
-                endponit = "Delete_Funcionario"
+            case "rf":                
+
+                endponit += `clientes/${await pegarIdDe("i_cpf_rf")}`
                 metodo = "DELETE"
             
             break;
             case "ac":
-                endponit = "Update_Cliente"
-                metodo = "PATCH"
+                endponit += `clientes/${await pegarIdDe("i_cpf_cc")}`
+                metodo = "PUT"
+                objetoAEnviar = await criarJSONObject(quemEnviar)
                 
                 break;
             case "af":
-                endponit = "Update_Funcionario"
-                metodo = "PATCH"
+                endponit += `funcionarios/${await pegarIdDe("i_cpf_cf")}`
+                metodo = "PUT"
+                objetoAEnviar = await criarJSONObject(quemEnviar)
             
             break;
             case "ccm": 
-                endponit = "Criar_Cliente"
+                endponit += "clientes"
                 metodo = "POST"  
-                quemEnviar = ".papel:not(.disabled) .input_form, #papel_ccm .input_form"  
-
+                quemEnviar = ".papel:not(.disabled) .input_form, #papel_ccm .input_form" 
+                objetoAEnviar = await criarJSONObject(quemEnviar) 
                 break;
             default:
                 break;
         }
 
         async function main() {
-            const formJSON = await criarJSONForm(quemEnviar);
 
-            // fetch(endponit, {
-            //     method: metodo,
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(formJSON)
-            // })
-            // .then(resp=>resp.json())
-            // .then(rest=>{
-            //     console.log(rest)
+            // if(objetoAEnviar!=null){
+            //     fetch(endponit, {
+            //         method: metodo,
+            //         headers: {
+            //             'Content-Type': 'application/json'
+            //         },
+            //         body: JSON.stringify(objetoAEnviar)
+            //     })
+            //     .then(resp=>resp.json())
+            //     .then(rest=>{
+            //         console.log(rest)
 
-            //     return rest
-            // })
+            //         return rest
+            //     })
+            // }else{
+            //     fetch(endponit, {
+            //         method: metodo
+            //     })
+            //     .then(resp=>resp.json())
+            //     .then(rest=>{
+            //         console.log(rest)
+
+            //         return rest
+            //     })                
+            // }
         }
+
         return await main()
     }
-
-    
 
 }
 export{Formulario}

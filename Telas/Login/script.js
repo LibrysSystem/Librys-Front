@@ -20,24 +20,24 @@ btn_entrar.addEventListener("click", (qmfoi)=>{
             err_senha.innerHTML =`* ${i_senha.validationMessage}`
         }
     }else{
-        fetch(`http://localhost:8080/funcionarios`, {
+        fetch(`http://localhost:8080/funcionarios/${document.getElementById("email").value}`, {
             method: 'GET'
         }).then(resp=>resp.json())
         .then(rest=>{
             console.log(rest)
-            // if(!rest){
-            //     // err_login.innerHTML = "* EMAIL OU SENHA INCORRETOS! *"
-            // }else{
-            //     // err_login.innerHTML = ""
+            if(!rest){
+                err_login.innerHTML = "* EMAIL OU SENHA INCORRETOS! *"
+            }else{
+                err_login.innerHTML = ""
 
-            //     // Usuario.Tipo=rest.Tipo
-            //     // Usuario.Nome=rest.Nome
-            //     // Usuario.Cpf=rest.Cpf
-            //     // Usuario.Email=rest.Email
-            //     // Usuario.Senha=rest.Senha
+                Usuario.Tipo=rest.Tipo
+                Usuario.Nome=rest.Nome
+                Usuario.Cpf=rest.Cpf
+                Usuario.Email=rest.Email
+                Usuario.Senha=rest.Senha
 
-            //     //window.open('../Main/main.html', '_self')
-            // }
+                window.open('../Main/main.html', '_self')
+            }
         })
     }
     
