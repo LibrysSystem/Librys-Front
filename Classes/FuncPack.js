@@ -1,10 +1,10 @@
 import { Funcionario, Livro, Cliente } from "../Classes/FLC.js"
 
-class MudarAba{
+class AbaDados{
 
     static abaAtual = " "
 
-    static mudarAba = (qualaba)=>{
+    static async mudarAba(qualaba){
 
         let qualnome = qualaba.split("_")
         qualnome = qualnome[2]
@@ -51,10 +51,10 @@ class MudarAba{
 
 }
 
-function pesquisar(oquePesquisar, submit){ 
+ async function pesquisar(oquePesquisar, submit){ 
 
     let aondePesquisar
-    switch (MudarAba.abaAtual) {
+    switch (AbaDados.abaAtual) {
         case 'livros':
             aondePesquisar = "endpoit_readLivros"
 
@@ -75,20 +75,14 @@ function pesquisar(oquePesquisar, submit){
     }
     
     fetch(aondePesquisar, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            filtro: oquePesquisar
-        })
+        method: 'GET'
     })
     .then(resp=>resp.json())
-    .then(rest=>{
+    .then(async rest=>{
 
         const dados =  rest
         if(submit){
-            mostrarDados(dados, MudarAba.abaAtual)
+            await mostrarDados(dados, AbaDados.abaAtual)
         }else{
             document.getElementById("opcoesDados").innerHTML = ""
             const titulos = dados.map(livro => livro.titulo)
@@ -100,10 +94,13 @@ function pesquisar(oquePesquisar, submit){
         }
     })
 }
-function mostrarDados(dados, tipo){
+ async function mostrarDados(dados, tipo){
     //pego a lista de objetos e transformo cada 1 em um modulo de mostar bonitinho e adiciono no DADOS conforme o tipo (cliente, livro, funcionario)
 }
 
+// async function criarCartao(){
+
+// }
 async function criarJSONObject(quemEnviar) {
     let objJSON = {};
     const todosinputs = [...document.querySelectorAll(quemEnviar)];
@@ -118,7 +115,10 @@ async function criarJSONObject(quemEnviar) {
             } else {
                 objJSON[el.name] = null;
             }
-        } else {
+        }else if(el.type === "radio"){
+            objJSON[el.name] = el.checked;
+
+        }else {
             objJSON[el.name] = el.value;
         }
     }));
@@ -126,7 +126,7 @@ async function criarJSONObject(quemEnviar) {
     return objJSON;
 }
 
-function readFile(file) {
+async function readFile(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -137,8 +137,7 @@ function readFile(file) {
     });
 }
 
-
-function validarInputs(id, enviar, Quais){
+ async function validarInputs(id, enviar, Quais){
     let ok = true
 
     if(!enviar){
@@ -153,46 +152,16 @@ function validarInputs(id, enviar, Quais){
             ok = (ok)&&(el.checkValidity())
         
         })
-
         if(ok){
-        //TALVEZ NAO SEJA UTILIZADO MAIS
-
-            // async function main() {
-            //     const formJSON = await CriarJSONForm();
-
-            //     console.log(formJSON);
-                
-
-            //     // fetch('endponit', {
-            //     //     method: 'POST',
-            //     //     headers: {
-            //     //         'Content-Type': 'application/json'
-            //     //     },
-            //     //     body: JSON.stringify(formJSON)
-            //     // })
-            //     // .then(resp=>resp.json())
-            //     // .then(rest=>{
-            //     //     console.log(rest)
-                    
-            //     // })
-                
-
-            // }
-            // main()
-
             return "ok"
-
         }else{
-            //SAIU DAQUI
-            // console.log(document.getElementById(id).parentElement.parentElement.parentElement.firstChild.nextSibling)
-            // document.getElementById(id).parentElement.parentElement.parentElement.firstChild.nextSibling.innerHTML="Preencha todos os campos do formulário corretamente!"
             return "erro"
         }
         
     }
 }
 
-function popUp(titulo, mensagem, escurecer){
+async function popUp(titulo, mensagem, escurecer){
     const telaEscura = document.createElement("div")
     telaEscura.setAttribute("id", "divEscura")
 
@@ -227,8 +196,10 @@ async function pegarIdDe(qualInput){
     console.log(rest)
     
     return rest.id
-})} 
+})}
 
 
-export{MudarAba, pesquisar, validarInputs, criarJSONObject, popUp, pegarIdDe}
+
+
+export{AbaDados, pesquisar, validarInputs, criarJSONObject, popUp, pegarIdDe}
 

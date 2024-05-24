@@ -187,7 +187,7 @@ input[type="date"]{
     margin-left: 39%;
     margin-right: 28%;
 }
-#div_capa_cl{
+/* #div_capa_cl{
     display: flex;
     flex-wrap: wrap;
     width: 50%;
@@ -221,7 +221,7 @@ input[type='file'] {
 }
 #file_name_cl:hover{
     box-shadow: 0px 0px 4px white;
-}
+} */
 #btn_salvar_cl{
     margin: 20px 0px 0px 0px !important;
 }
