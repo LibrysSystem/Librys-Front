@@ -141,10 +141,10 @@ async function readFile(file) {
     let ok = true
 
     if(!enviar){
-        document.getElementById(id).nextSibling.nextSibling.innerHTML = " "
+        document.getElementById(id).nextElementSibling.innerHTML = " "
 
         if(!document.getElementById(id).checkValidity()){
-            document.getElementById(id).nextSibling.nextSibling.innerHTML = `* ${document.getElementById(id).validationMessage}`
+            document.getElementById(id).nextElementSibling.innerHTML = `* ${document.getElementById(id).validationMessage}`
         }
     }else {
         const todosinputs = [...document.querySelectorAll(Quais)]
@@ -172,7 +172,7 @@ async function popUp(titulo, mensagem, escurecer){
     h1Tilulo.innerHTML = titulo
     popUp.appendChild(h1Tilulo)
 
-    const msg = document.createElement("p")
+    const msg = document.createElement("div")
     msg.innerHTML = mensagem
     popUp.appendChild(msg)
 
@@ -188,15 +188,23 @@ async function popUp(titulo, mensagem, escurecer){
 
 }
 async function pegarIdDe(qualInput){
-    fetch(`${endponit}clientes/${document.getElementById(qualInput).value}`, {
-    method: "GET"
-})
-.then(resp=>resp.json())
-.then(rest=>{
-    console.log(rest)
-    
-    return rest.id
-})}
+    let response
+    response = await fetch(`http://localhost:8080/clientes/por-cpf?cpf=${document.getElementById(qualInput).value}`, {
+    method: "GET"});
+
+    console.log(response)
+
+    if(!(response.ok)){
+        document.getElementById(qualInput).parentElement.parentElement.parentElement.firstElementChild.nextElementSibling.innerHTML = responseData.detalhe
+        return null
+
+    }else{
+        const responseData = await response.json();
+        return responseData[0].id;
+
+    }
+
+}
 
 
 

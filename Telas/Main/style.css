@@ -310,8 +310,9 @@ main{
     border-radius: 20px 20px 0px 0px;
     background-color: #734C29;
 }
-#caixaPopUp > p{
-    margin: auto;
+#caixaPopUp > div{
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-padrao);
     line-height: 1.7em;
     font-size: 0.9em;
