@@ -14,35 +14,39 @@ class AbaDados{
             document.getElementById("h1_main").innerHTML = `LIVROS`
             this.abaAtual = "livros"
 
-            // fetch('Read_Livros')
-            // .then(resp=>resp.json())
-            // .then(rest=>{
-                
-            // })
+            const response = await fetch("http://localhost:8080/livros", {
+                method: 'GET'
+            })
+            if(response.ok){
+                const dados = await response.json()
+                await mostrarDados(dados, "livros")
+            }
 
             break;  
         case "funcionario":
             document.getElementById("h1_main").innerHTML = `FUNCIONÁRIOS`
             this.abaAtual = "funcionarios"
 
-
-            // fetch('Read_Funcionarios')
-            // .then(resp=>resp.json())
-            // .then(rest=>{
-                  
-            // })
+            const response2 = await fetch("http://localhost:8080/funcionarios", {
+                method: 'GET'
+            })
+            if(response2.ok){
+                const dados = await response2.json()
+                await mostrarDados(dados, "funcionarios")
+            }
 
             break;
         case "cliente":
             document.getElementById("h1_main").innerHTML = `CLIENTES`
             this.abaAtual = "clientes"
 
-
-            // fetch('Read_Clientes')
-            // .then(resp=>resp.json())
-            // .then(rest=>{
-                  
-            // })
+            const response3 = await fetch("http://localhost:8080/clientes", {
+                method: 'GET'
+            })
+            if(response3.ok){
+                const dados = await response3.json()
+                await mostrarDados(dados, "clientes")
+            }
 
             break;  
         default:
@@ -86,7 +90,7 @@ class AbaDados{
         }else{
             document.getElementById("opcoesDados").innerHTML = ""
             const titulos = dados.map(livro => livro.titulo)
-            titulos.map((el)=>{
+            titulos.map(async(el)=>{
                 const opcao = document.createElement("option")
                 opcao.innerHTML=el
                 document.getElementById("opcoesDados").appendChild(opcao)
@@ -96,11 +100,93 @@ class AbaDados{
 }
  async function mostrarDados(dados, tipo){
     //pego a lista de objetos e transformo cada 1 em um modulo de mostar bonitinho e adiciono no DADOS conforme o tipo (cliente, livro, funcionario)
+
+    if(document.getElementById("dados").firstElementChild.className == "container"){
+        document.getElementById("dados").firstElementChild.remove()
+    }
+
+    const container = document.createElement("div")
+    container.setAttribute("id", "container_"+tipo)
+    container.setAttribute("class", "container")
+
+    switch (tipo) {
+        case "livros":
+            dados.map(async(item, index)=>{
+
+                const modulo = document.createElement("div")
+                modulo.setAttribute("id", "modulo_livro_"+index)
+                modulo.setAttribute("class", "modulo_livro")
+
+                const capa = document.createElement("img")
+                capa.setAttribute("src", item.imagemUrl)
+                modulo.appendChild(capa)
+
+                const detalhes = document.createElement("div")
+                detalhes.setAttribute("class", "livros_detalhes")
+
+                for(let prop in item){
+                    if(item.hasOwnProperty(prop)){
+                        if(prop != 'imagemUrl'){
+                            const propriedade = document.createElement("p")
+                            propriedade.innerHTML = `<strong>${prop.charAt(0).toUpperCase()+prop.slice(1)}:</strong> ${item[prop]}`
+                            detalhes.appendChild(propriedade)
+                        }}}
+
+                modulo.appendChild(detalhes)
+                container.appendChild(modulo)
+            })
+            
+            break;
+        case "clientes":
+            dados.map(async(item, index)=>{
+
+                const modulo = document.createElement("div")
+                modulo.setAttribute("id", "modulo_cliente_"+index)
+                modulo.setAttribute("class", "modulo_cliente")
+    
+                for(let prop in item){
+                    if(item.hasOwnProperty(prop)){
+                        if(item[prop] != null){
+                            const propriedade = document.createElement("div")
+                            propriedade.innerHTML = `<strong>${prop.charAt(0).toUpperCase()+prop.slice(1)}:</strong> ${item[prop]}`
+                            modulo.appendChild(propriedade)
+                        }}}
+    
+                container.appendChild(modulo)
+            })
+
+            break;
+        case "funcionarios":
+            dados.map(async(item, index)=>{
+
+                const modulo = document.createElement("div")
+                modulo.setAttribute("id", "modulo_funcionario_"+index)
+                modulo.setAttribute("class", "modulo_funcionario")
+    
+                for(let prop in item){
+                    if(item.hasOwnProperty(prop)){
+                        if(item[prop] != null){
+                            const propriedade = document.createElement("div")
+                            propriedade.innerHTML = `<strong>${prop.charAt(0).toUpperCase()+prop.slice(1)}:</strong> ${item[prop]}`
+                            modulo.appendChild(propriedade)
+                        }}}
+    
+                container.appendChild(modulo)
+            })
+            
+            break;
+        
+        default:
+            break;
+    }
+    document.getElementById("dados").prepend(container)
 }
 
-// async function criarCartao(){
 
-// }
+
+
+
+
 async function criarJSONObject(quemEnviar) {
     let objJSON = {};
     const todosinputs = [...document.querySelectorAll(quemEnviar)];
@@ -118,6 +204,8 @@ async function criarJSONObject(quemEnviar) {
         }else if(el.type === "radio"){
             objJSON[el.name] = el.checked;
 
+        }else if(el.name == "confirmaSenha"){
+            
         }else {
             objJSON[el.name] = el.value;
         }
@@ -173,7 +261,7 @@ async function popUp(titulo, mensagem, escurecer){
     popUp.appendChild(h1Tilulo)
 
     const msg = document.createElement("div")
-    msg.innerHTML = mensagem
+    msg.innerHTML = mensagem.replace(/\n/g, "<br>")
     popUp.appendChild(msg)
 
     const btnOkPopUp = document.createElement("button")
@@ -187,9 +275,9 @@ async function popUp(titulo, mensagem, escurecer){
     document.querySelector("body").prepend(telaEscura)
 
 }
-async function pegarIdDe(qualInput){
+async function pegarIdDe(qualInput, tipo){
     let response
-    response = await fetch(`http://localhost:8080/clientes/por-cpf?cpf=${document.getElementById(qualInput).value}`, {
+    response = await fetch(`http://localhost:8080/${tipo}/por-cpf?cpf=${document.getElementById(qualInput).value}`, {
     method: "GET"});
 
     console.log(response)
@@ -205,9 +293,6 @@ async function pegarIdDe(qualInput){
     }
 
 }
-
-
-
 
 export{AbaDados, pesquisar, validarInputs, criarJSONObject, popUp, pegarIdDe}
 

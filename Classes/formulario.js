@@ -209,7 +209,7 @@ class Formulario{
                 metodo = "POST"
                 objetoAEnviar = {
                     "livroId": parseInt(document.getElementById("i_CodId_al").value, 10),
-                    "clienteId": await pegarIdDe("i_cpfC_al")
+                    "clienteId": await pegarIdDe("i_cpfC_al",'clientes')
                 }
             
                 break;
@@ -230,6 +230,21 @@ class Formulario{
             case "dl":
                 endponit += `gerencia-livro/devolver/${document.getElementById("i_codTrans_dl").value}`
                 metodo = "DELETE"
+
+
+
+                const respostaaas = await fetch(`http://localhost:8080/gerencia-livro/${document.getElementById("i_codTrans_dl").value}`,{
+                    method: 'GET'
+                })
+                if(respostaaas.ok){
+                    const resp = await respostaaas.json()
+                    let dataDev = new Date(resp.dataDevolucao)
+                    let dataAtual = new Date()
+                    if(dataDev < dataAtual){
+                        popUp("LIVRO ATRASADO", `O livro a ser devolvido está atrasdo!\nCertifique-se que a multa referente ao(s) ${Math.floor((dataAtual-dataDev)/(1000*60*60*24))} dias foi paga, antes de efetuar a devolução!`)
+                    }
+                }
+
             
                 break;
             case "cc":
@@ -240,7 +255,7 @@ class Formulario{
                 break;
             case "rc":
                 //(await pegarIdDe("i_cpf_rc") ? await pegarIdDe("i_cpf_rc") : "")
-                endponit = (await pegarIdDe("i_cpf_rc") ? `http://localhost:8080/clientes/${await pegarIdDe("i_cpf_rc")}` : " ")
+                endponit = (await pegarIdDe("i_cpf_rc", "clientes") ? `http://localhost:8080/clientes/${await pegarIdDe("i_cpf_rc", "clientes")}` : " ")
                 metodo = "DELETE"
                 
                 break;
@@ -252,18 +267,18 @@ class Formulario{
                 break;
             case "rf":                
 
-                endponit += `clientes/${await pegarIdDe("i_cpf_rf")}`
+                endponit += `funcionarios/${await pegarIdDe("i_cpf_rf", "funcionarios")}`
                 metodo = "DELETE"
             
                 break;
             case "ac":
-                endponit += `clientes/${await pegarIdDe("i_cpf_cc")}`
+                endponit += `clientes/${await pegarIdDe("i_cpf_cc", "clientes")}`
                 metodo = "PUT"
                 objetoAEnviar = await criarJSONObject(quemEnviar)
                 
                 break;
             case "af":
-                endponit += `funcionarios/${await pegarIdDe("i_cpf_cf")}`
+                endponit += `funcionarios/${await pegarIdDe("i_cpf_cf", "funcionarios")}`
                 metodo = "PUT"
                 objetoAEnviar = await criarJSONObject(quemEnviar)
             
@@ -275,7 +290,7 @@ class Formulario{
                 objetoAEnviar = await criarJSONObject(quemEnviar) 
                 break;
             case "acm":
-                endponit += `clientes/${await pegarIdDe("i_cpf_cc")}`
+                endponit += `clientes/${await pegarIdDe("i_cpf_cc", "clientes")}`
                 metodo = "PUT"
                 quemEnviar = ".papel:not(.disabled) .input_form, #papel_ccm .input_form" 
                 objetoAEnviar = await criarJSONObject(quemEnviar)
@@ -324,10 +339,12 @@ class Formulario{
 
     static async terminarFormulario(resposta, qualFormu){
         document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = ""
-        console.log("resp")
 
         if ( !(resposta.ok)){
             const resppp = await resposta.json()
+            console.log('entrou no if de erro')
+            console.log(resppp)
+
             document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = resppp.detalhe
             // if(resppp.status === 409 && qualFormu == 'al'){
             //     document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = "*ESTE LIVRO JA ESTÁ ALUGADO!*"
@@ -336,7 +353,7 @@ class Formulario{
         }else{
 
             let resp
-            if(qualFormu != 'dl' && qualFormu != 'rc' && qualFormu != 'rl'){
+            if(qualFormu != 'dl' && qualFormu != 'rc' && qualFormu != 'rl' && qualFormu != 'rf'){
                 resp = await resposta.json()
             }else{
                 resp = resposta
@@ -448,6 +465,16 @@ class Formulario{
                 })
 
 
+                break;
+            case 'rf':
+                document.getElementById("i_cpf_rf").addEventListener("keyup", async(qmfoi)=>{
+                    respostaaas = await fetch(`http://localhost:8080/funcionarios/por-cpf?cpf=${qmfoi.target.value}`, {
+                        method: 'GET'
+                    })
+                    const responseData = await respostaaas.json()
+                    document.getElementById("i_nome_rf").value = responseData[0].nome
+
+                })
                 break;
             default:
                 break;
