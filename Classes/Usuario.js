@@ -1,9 +1,10 @@
 class Usuario{
-    static Tipo = null
-    static Nome = null
-    static Cpf= null
-    static Email= null
-    static Senha= null
+    
+    static tipo = null
+    static nome = null
+    static cpf = null
+    static email = null
+    static senha = null
 
 }
 export{Usuario}

@@ -36,9 +36,10 @@
 .modulo_cliente, .modulo_funcionario {
     display: flex;
     margin-bottom: 20px;
-    margin-left: 130px;
+    margin-left: 100px;
     padding: 13px;
     background-color: var(--cor4);
+    position: relative;
     border-radius: 15px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     width: 85%;
@@ -115,4 +116,45 @@
 
 .modulo_livro:hover .livros_detalhes {
     opacity: 100%;
+}
+.modulo_livro:hover .btn_editar_livro{
+    opacity: 100%;
+}
+
+
+
+.btn_editar_isso{
+    background-color: #F9F1E5;
+    color: #734C29;
+    width: 20px;
+    height: 20px;
+}
+
+.btn_editar_isso>span{
+    transition: 0.2s;
+}
+
+.btn_editar_isso:hover >span{
+    cursor: pointer;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.btn_editar_livro{
+    opacity: 0;
+    z-index: 10;
+    align-self: flex-end;
+    /* justify-self: flex-end; */
+    position: absolute;
+    top: 5px;
+    transition: 0.3s;
+
+}
+.btn_editar_cliente, .btn_editar_funcionario{
+    z-index: 10;
+    align-self: flex-end;
+    position: absolute;
+    top: 5px;
+    transition: 0.3s;
+    margin: 10px;
+
 }

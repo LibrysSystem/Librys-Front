@@ -241,7 +241,7 @@ main{
 .pesquisar span:hover{
     color: #CEAA89;
 }
-.pesquisar > input{
+#i_buscar{
     background-color: #F9F1E5;
     border: 1px solid #734C29;
     border-radius: 30px;
@@ -253,8 +253,19 @@ main{
     cursor: pointer;
     font-size: 1em;
     width: 100%;
+    z-index: 5;
 
 }
+
+#i_buscar:focus{
+    outline: 1px solid #734C29;
+
+}
+/* .pesquisar datalist{
+    display: flex;
+    background-color: #734C29;
+    color: #F9F1E5;
+} */
 .dados{
     position: relative;
     display: grid;

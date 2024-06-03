@@ -8,7 +8,7 @@ const err_email =document.getElementById("err_email")
 const err_login =document.getElementById("err_login")
 
 
-btn_entrar.addEventListener("click", (qmfoi)=>{
+btn_entrar.addEventListener("click", async (qmfoi)=>{
     err_email.innerHTML = ""
     err_senha.innerHTML = ""
 
@@ -20,25 +20,31 @@ btn_entrar.addEventListener("click", (qmfoi)=>{
             err_senha.innerHTML =`* ${i_senha.validationMessage}`
         }
     }else{
-        fetch(`http://localhost:8080/funcionarios/${document.getElementById("email").value}`, {
+        const primeiraResposta = await fetch(`http://localhost:8080/funcionarios/por-email?email=${i_email.value}`, {
             method: 'GET'
-        }).then(resp=>resp.json())
-        .then(rest=>{
-            console.log(rest)
-            if(!rest){
-                err_login.innerHTML = "* EMAIL OU SENHA INCORRETOS! *"
-            }else{
-                err_login.innerHTML = ""
-
-                Usuario.Tipo=rest.Tipo
-                Usuario.Nome=rest.Nome
-                Usuario.Cpf=rest.Cpf
-                Usuario.Email=rest.Email
-                Usuario.Senha=rest.Senha
-
-                window.open('../Main/main.html', '_self')
-            }
         })
+        if(primeiraResposta.ok){
+
+            let dadosDoUsuario = await primeiraResposta.json()
+            dadosDoUsuario = dadosDoUsuario[0]
+            console.log(dadosDoUsuario)
+
+            err_login.innerHTML = ""
+
+            Usuario.tipo=dadosDoUsuario.tipo
+            Usuario.nome=dadosDoUsuario.nome
+            Usuario.cpf=dadosDoUsuario.cpf
+            Usuario.email=dadosDoUsuario.email
+            Usuario.senha=dadosDoUsuario.senha
+
+            if( Usuario.senha == i_senha.value){
+                window.open('../Main/main.html', '_self')
+            }else{
+                err_login.innerHTML = "*SENHA INCORRETA!*"
+            } 
+        }else{
+            err_login.innerHTML = "*USUÁRIO NÃO ENCONTRADO!*"
+        }
     }
     
 })

@@ -1,4 +1,4 @@
-import { Funcionario, Livro, Cliente } from "../Classes/FLC.js"
+import { Formulario } from "./Formulario.js"
 
 class AbaDados{
 
@@ -55,49 +55,75 @@ class AbaDados{
 
 }
 
- async function pesquisar(oquePesquisar, submit){ 
+ async function buscar(oquePesquisar){ 
 
-    let aondePesquisar
+    let aondePesquisar = []
     switch (AbaDados.abaAtual) {
         case 'livros':
-            aondePesquisar = "endpoit_readLivros"
+            aondePesquisar.push(`http://localhost:8080/livros/${oquePesquisar}`)
+            aondePesquisar.push(`http://localhost:8080/livros/por-nome?nome=${oquePesquisar}`)
+            aondePesquisar.push(`http://localhost:8080/livros/por-autor?autor=${oquePesquisar}`)
 
             break;
 
         case 'clientes':
-            aondePesquisar = "endpoit_readClientes"
-        
+            aondePesquisar.push(`http://localhost:8080/clientes/${oquePesquisar}`)
+            aondePesquisar.push(`http://localhost:8080/clientes/por-nome?nome=${oquePesquisar}`)
+            aondePesquisar.push(`http://localhost:8080/clientes/por-email?email=${oquePesquisar}`) 
+            aondePesquisar.push(`http://localhost:8080/clientes/por-cpf?cpf=${oquePesquisar}`)        
+       
             break;
 
         case 'funcionarios':
-            aondePesquisar = "endpoit_readFuncionarios"
-
+            aondePesquisar.push(`http://localhost:8080/funcionarios/${oquePesquisar}`)
+            aondePesquisar.push(`http://localhost:8080/funcionarios/por-nome?nome=${oquePesquisar}`)
+            aondePesquisar.push(`http://localhost:8080/funcionarios/por-email?email=${oquePesquisar}`) 
+            aondePesquisar.push(`http://localhost:8080/funcionarios/por-cpf?cpf=${oquePesquisar}`)      
             break; 
 
         default:
             break;
     }
-    
-    fetch(aondePesquisar, {
-        method: 'GET'
-    })
-    .then(resp=>resp.json())
-    .then(async rest=>{
+    let respostas = []
 
-        const dados =  rest
-        if(submit){
-            await mostrarDados(dados, AbaDados.abaAtual)
-        }else{
-            document.getElementById("opcoesDados").innerHTML = ""
-            const titulos = dados.map(livro => livro.titulo)
-            titulos.map(async(el)=>{
-                const opcao = document.createElement("option")
-                opcao.innerHTML=el
-                document.getElementById("opcoesDados").appendChild(opcao)
-            })
-        }
-    })
+    const fechPromise = aondePesquisar.map(async (el) => {
+         const response = await fetch(el, {
+             method: 'GET'
+         })
+         if (response.ok) {
+             const responseDados = await response.json()
+             respostas.push(responseDados)
+         }
+     })
+
+    await Promise.all(fechPromise)
+
+    return respostas.flat();
+
 }
+
+async function pesquisar(dados, submit){
+    if(submit){
+        mostrarDados(dados, AbaDados.abaAtual)
+
+    }else{
+        document.getElementById("opcoesDados").innerHTML = ""
+
+        const nomes = dados.map(elemento => elemento.nome)
+        nomes.map(async(el)=>{
+
+            const opcao = document.createElement("option")
+            opcao.value=el
+            opcao.innerHTML=el
+            document.getElementById("opcoesDados").appendChild(opcao)
+
+        })
+
+    }
+
+}
+
+
  async function mostrarDados(dados, tipo){
     //pego a lista de objetos e transformo cada 1 em um modulo de mostar bonitinho e adiciono no DADOS conforme o tipo (cliente, livro, funcionario)
 
@@ -114,12 +140,20 @@ class AbaDados{
             dados.map(async(item, index)=>{
 
                 const modulo = document.createElement("div")
-                modulo.setAttribute("id", "modulo_livro_"+index)
+                modulo.setAttribute("id", "livros/"+item.id)
                 modulo.setAttribute("class", "modulo_livro")
 
                 const capa = document.createElement("img")
                 capa.setAttribute("src", item.imagemUrl)
                 modulo.appendChild(capa)
+
+                const botao = document.createElement("button")
+                botao.setAttribute("class", "btn_editar_isso btn_editar_livro")
+                const spanImg = document.createElement("span")
+                spanImg.setAttribute("class", "material-symbols-outlined")
+                spanImg.innerHTML= "edit_square"
+                botao.appendChild(spanImg)
+                modulo.appendChild(botao)
 
                 const detalhes = document.createElement("div")
                 detalhes.setAttribute("class", "livros_detalhes")
@@ -141,8 +175,16 @@ class AbaDados{
             dados.map(async(item, index)=>{
 
                 const modulo = document.createElement("div")
-                modulo.setAttribute("id", "modulo_cliente_"+index)
+                modulo.setAttribute("id", "clientes/"+item.id)
                 modulo.setAttribute("class", "modulo_cliente")
+
+                const botao = document.createElement("button")
+                botao.setAttribute("class", "btn_editar_isso btn_editar_cliente")
+                const spanImg = document.createElement("span")
+                spanImg.setAttribute("class", "material-symbols-outlined")
+                spanImg.innerHTML= "edit_square"
+                botao.appendChild(spanImg)
+                modulo.appendChild(botao)
     
                 for(let prop in item){
                     if(item.hasOwnProperty(prop)){
@@ -160,8 +202,16 @@ class AbaDados{
             dados.map(async(item, index)=>{
 
                 const modulo = document.createElement("div")
-                modulo.setAttribute("id", "modulo_funcionario_"+index)
+                modulo.setAttribute("id","funcionarios/"+item.id)
                 modulo.setAttribute("class", "modulo_funcionario")
+
+                const botao = document.createElement("button")
+                botao.setAttribute("class", "btn_editar_isso btn_editar_funcionario")
+                const spanImg = document.createElement("span")
+                spanImg.setAttribute("class", "material-symbols-outlined")
+                spanImg.innerHTML= "edit_square"
+                botao.appendChild(spanImg)
+                modulo.appendChild(botao)
     
                 for(let prop in item){
                     if(item.hasOwnProperty(prop)){
@@ -180,12 +230,36 @@ class AbaDados{
             break;
     }
     document.getElementById("dados").prepend(container)
+    editarInformacao()
 }
 
+async function editarInformacao(){
+    const todosOsBtnsVisiveis = [...document.querySelectorAll(".btn_editar_isso")]
 
+    todosOsBtnsVisiveis.map(async(item)=>{
+        item.addEventListener("click", async()=>{
 
+            switch( item.parentElement.className) {
+                case "modulo_livro":
+                    Formulario.abrirFormularioEdicao("cl", item.parentElement.id)
+                    
+                    break;
+                case "modulo_cliente":
+                    Formulario.abrirFormularioEdicao("cc", item.parentElement.id)
+                    
+                    break;
+                case "modulo_funcionario":
+                    Formulario.abrirFormularioEdicao("cf", item.parentElement.id)
 
+                    break;
+            
+                default:
+                    break;
+            }
+        })
+    })
 
+}
 
 async function criarJSONObject(quemEnviar) {
     let objJSON = {};
@@ -294,5 +368,6 @@ async function pegarIdDe(qualInput, tipo){
 
 }
 
-export{AbaDados, pesquisar, validarInputs, criarJSONObject, popUp, pegarIdDe}
+
+export{AbaDados, buscar, validarInputs, criarJSONObject, popUp, pegarIdDe, pesquisar, editarInformacao}
 
