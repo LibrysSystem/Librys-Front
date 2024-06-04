@@ -31,14 +31,14 @@ btn_entrar.addEventListener("click", async (qmfoi)=>{
 
             err_login.innerHTML = ""
 
-            Usuario.tipo=dadosDoUsuario.tipo
-            Usuario.nome=dadosDoUsuario.nome
-            Usuario.cpf=dadosDoUsuario.cpf
-            Usuario.email=dadosDoUsuario.email
-            Usuario.senha=dadosDoUsuario.senha
+            Usuario.setTipo(dadosDoUsuario.tipo)
+            Usuario.setNome(dadosDoUsuario.nome)
+            Usuario.setCpf(dadosDoUsuario.cpf)
+            Usuario.setEmail(dadosDoUsuario.email)
+            Usuario.setSenha(dadosDoUsuario.senha)
 
-            if( Usuario.senha == i_senha.value){
-                window.open('../Main/main.html', '_self')
+            if( Usuario.getSenha()== i_senha.value){
+                location.replace('../Main/main.html')
             }else{
                 err_login.innerHTML = "*SENHA INCORRETA!*"
             } 

@@ -9,13 +9,11 @@ class Formulario{
         const papeis = [...document.querySelectorAll(".papel")]
         papeis.map((el)=>{
             el.setAttribute("class", "papel disabled")
-        })
-    }
+        })}
 
     static abrirFormulario=async (tipo)=>{
         if(!this.TemFormAberto){
             this.TemFormAberto = true
-
             let ids = tipo.split("_")
             const qualFormAbrir = ids[1].charAt(0) + ids[2].charAt(0)
 
@@ -26,38 +24,28 @@ class Formulario{
                 this.fecharFormulario(qualFormAbrir)
                 if(qualFormAbrir == "cc"){
                     this.fecharFormulario("ccm")
-                }
-            })
+                }})
             
             this.preencherInformacoes(qualFormAbrir)
             if((qualFormAbrir != "cc") && (qualFormAbrir != "al") && (qualFormAbrir != "cf")){
                 document.getElementById(`btn_salvar_${qualFormAbrir}`).addEventListener("click", async ()=>{
                     const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                     if(okkk == "ok"){
-                        // const resposta = await this.enviarFormulario(qualFormAbrir)
                         await this.terminarFormulario(await this.enviarFormulario(qualFormAbrir), qualFormAbrir)
-                    }  
-                })
-            }
-            
+                    }})}
             switch (qualFormAbrir) {
                 case "al":
                     document.getElementById("btn_renovar_al").addEventListener("click", async ()=>{
                         document.getElementById("i_CodTrans_al").setAttribute("required", "true")
                         const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
-                            //const resposta = await this.enviarFormulario("rnl")
                             await this.terminarFormulario(await this.enviarFormulario("rnl"), qualFormAbrir)
-                        }                      
-                    })
-
+                        }})
                     document.getElementById("btn_alugar_al").addEventListener("click", async ()=>{
                         const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
-                            //const resposta = await this.enviarFormulario("al")
                             await this.terminarFormulario(await this.enviarFormulario("al"), qualFormAbrir)
-                        }    
-                    })
+                        }})
                     break;                   
                 case 'cc':
                     document.getElementById("btn_salvar_cc_E_menor").addEventListener("click", async ()=>{
@@ -69,15 +57,9 @@ class Formulario{
                             if(((dataAtual-dataNasc)/(31557600000)) < 18){
                                 document.getElementById("i_MenorIdade_cc").checked = true
                                 await this.abrirFormMenor()
-                            }
-                            else{
-                                //const resposta = await this.enviarFormulario(qualFormAbrir)
-                                await this.terminarFormulario(await this.enviarFormulario(qualFormAbrir), qualFormAbrir)
-                                //this.fecharFormulario("ccm")
-                                
-                            }
-                        } 
-                    })
+                            }else{
+                                await this.terminarFormulario(await this.enviarFormulario(qualFormAbrir), qualFormAbrir)   
+                            }}})
                     break;
                 case 'cf':
                     document.getElementById(`btn_salvar_${qualFormAbrir}`).addEventListener("click", async ()=>{
@@ -87,22 +69,17 @@ class Formulario{
                             if(document.getElementById("i_senha_cf").value != document.getElementById("i_ConfirmaSenha_cf").value){
                                 document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML ="AS SENHAS NÃO COINCIDEM"
                             }else{
-                                //const resposta = await this.enviarFormulario(qualFormAbrir)
                                 await this.terminarFormulario(await this.enviarFormulario(qualFormAbrir), qualFormAbrir)                                
-                            }
-                        }  
-                    })                    
+                            }}})                    
                     break;
                 default:
                     break;
             }
-
         }else{
             await popUp("FORMULÁRIO ABERTO", "Já existe em formulário em execução. Porfavor, complete-o ou feche-o antes de abrir um novo formulário.")
-        }
-    }
+        }}
+
     static async abrirFormularioEdicao(qualForm, quem){
-        
         const endpoit = "http://localhost:8080/"
         if(!this.TemFormAberto){
         document.getElementById(`papel_${qualForm}`).setAttribute("class", "papel")
@@ -121,8 +98,6 @@ class Formulario{
                     document.getElementById("i_CodLoc_cl").value = dadosDoItem.codigoLocalizacao
                     document.getElementById("i_capa_cl").value = dadosDoItem.imagemUrl
                     document.getElementById("i_genero_cl").value = dadosDoItem.generoLiterario
-
-
                     break;
                 case 'cc':
                     document.getElementById("i_nome_cc").value = dadosDoItem.nome
@@ -131,7 +106,6 @@ class Formulario{
                     document.getElementById("i_endereco_cc").value = dadosDoItem.endereco
                     document.getElementById("i_DataNasc_cc").value = dadosDoItem.dataNascimento
                     document.getElementById("i_email_cc").value = dadosDoItem.email
-
                     break;
                 case 'cf':
                     document.getElementById("i_nome_cf").value = dadosDoItem.nome
@@ -141,7 +115,6 @@ class Formulario{
                     document.getElementById("i_DataNasc_cf").value = dadosDoItem.dataNascimento
                     document.getElementById("i_email_cf").value = dadosDoItem.email  
                     document.getElementById("i_senha_cf").value = dadosDoItem.senha                  
-                  
                     break;
                 default:
                     break;
@@ -150,24 +123,17 @@ class Formulario{
                 this.fecharFormulario(qualForm)
                 if(qualForm == "cc"){
                     this.fecharFormulario("ccm")
-                }
-            })
-
-        }
+                }})}
         switch (qualForm) {
             case "cf":
                 document.getElementById(`btn_salvar_${qualForm}`).addEventListener("click", async ()=>{
                     const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                     if(okkk == "ok"){
-
                         if(document.getElementById("i_senha_cf").value != document.getElementById("i_ConfirmaSenha_cf").value){
                             document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML ="AS SENHAS NÃO COINCIDEM"
                         }else{
-                            //const resposta = await this.enviarFormulario(qualFormAbrir)
                             await this.terminarFormulario(await this.enviarFormulario("ef", quem), qualForm)                                
-                        }
-                    }  
-                })  
+                        }}})  
                 break;
             case 'cc':
                 document.getElementById("btn_salvar_cc_E_menor").addEventListener("click", async ()=>{
@@ -178,43 +144,29 @@ class Formulario{
 
                         if(((dataAtual-dataNasc)/(31557600000)) < 18){
                             document.getElementById("i_MenorIdade_cc").checked = true
-                            await this.abrirFormMenor()
-                        }
-                        else{
-                            //const resposta = await this.enviarFormulario(qualFormAbrir)
-                            await this.terminarFormulario(await this.enviarFormulario("ec", quem), qualForm)
-                            //this.fecharFormulario("ccm")
-                            
-                        }
-                    } 
-                })
+                            await this.abrirFormMenor(true)
+                        }else{
+                            await this.terminarFormulario(await this.enviarFormulario("ec", quem), qualForm)                            
+                        }}})
                 break;
             case 'cl':
                 document.getElementById(`btn_salvar_cl`).addEventListener("click", async ()=>{
                     const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                     if(okkk == "ok"){
-                        // const resposta = await this.enviarFormulario(qualFormAbrir)
                         await this.terminarFormulario(await this.enviarFormulario("el", quem), qualForm)
-                    }  
-                })
+                    }})
                 break;
             default:
                 break;
         }
-
         this.avaliarFormulario(false, ".papel:not(.disabled) .input_form")
         }else{
-            await popUp("FORMULÁRIO ABERTO", "Já existe em formulário em execução. Porfavor, complete-o ou feche-o antes de abrir um novo formulário.")        }
-
-    }
-
+            await popUp("FORMULÁRIO ABERTO", "Já existe em formulário em execução. Porfavor, complete-o ou feche-o antes de abrir um novo formulário.")}}
 
     static async fecharFormulario(tipo){
 
         let quaisInputs = ".papel:not(.disabled) .input_form"
         if(tipo == "ccm"){quaisInputs = ".papel_especial .input_form"}
-
-        //if(this.TemFormAberto || tipo=="ccm"){
             this.TemFormAberto = false
 
             const inputs = [...document.querySelectorAll(quaisInputs)]
@@ -228,25 +180,19 @@ class Formulario{
             if(tipo == "ccm"){
                 document.getElementById("papel_ccm").setAttribute("class", "papel_especial disabled")
             }else{
-                document.getElementById(`papel_${tipo}`).setAttribute("class", "papel disabled")
-                
-            }
-        //}
+                document.getElementById(`papel_${tipo}`).setAttribute("class", "papel disabled")    
+            }}
 
-    }
     static async avaliarFormulario(enviar, quais){
-
         const inputs = [...document.querySelectorAll(quais)]
         if(!enviar){
             inputs.map(async (el)=>{
-                
                 el.addEventListener("click",async (qmfoi)=>{
                     await validarInputs(el.id, false, quais)
                 })
                 el.addEventListener("keyup",async (qmfoi)=>{
                     await validarInputs(el.id, false, quais)
-                })
-            })
+                })})
         }else{
             const okay =  await validarInputs(false, true, quais)
             if(okay == "erro"){
@@ -254,11 +200,9 @@ class Formulario{
                 document.querySelector(".papel_especial:not(.disabled) .err_geral_form").innerHTML ="*PREENCHA TODOS OS CAMPOS DO FORMULÁRIO CORRETAMENTE!"
             }
             return okay
+        }}
 
-        }
-
-    }
-    static async abrirFormMenor(){
+    static async abrirFormMenor(editar){
 
         document.getElementById("papel_ccm").setAttribute("class", "papel_especial")
         await this.avaliarFormulario(false, "#papel_ccm .input_form")
@@ -266,16 +210,14 @@ class Formulario{
         document.getElementById("btn_salvar_ccm").addEventListener("click", async ()=>{
             const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form, #papel_ccm .input_form")
             if(okkk == "ok"){
-
-                //const resposta = await this.enviarFormulario("ccm")
-                await this.terminarFormulario(await this.enviarFormulario("ccm"), 'cc')
-                await this.fecharFormulario("ccm")
-                
-            }  
-        })
-
-
-    }
+                if(editar){
+                    await this.terminarFormulario(await this.enviarFormulario("ecm"), 'cc')
+                    await this.fecharFormulario("ccm")
+                }else{
+                    await this.terminarFormulario(await this.enviarFormulario("ccm"), 'cc')
+                    await this.fecharFormulario("ccm")
+                }   
+            }})}
 
     static async enviarFormulario(defEnd, finalDoPoint){
         let endponit = `http://localhost:8080/`
@@ -288,43 +230,26 @@ class Formulario{
                 endponit += `livros`
                 metodo = "POST"
                 objetoAEnviar = await criarJSONObject(quemEnviar);
-
                 break;
             case "rl":
                 endponit += `livros/${document.getElementById("i_CodId_rl").value}`
                 metodo = "DELETE"
-                
                 break;
             case "al":
-
                 endponit += "gerencia-livro/alugar"
                 metodo = "POST"
                 objetoAEnviar = {
                     "livroId": parseInt(document.getElementById("i_CodId_al").value, 10),
                     "clienteId": await pegarIdDe("i_cpfC_al",'clientes')
                 }
-            
                 break;
             case "rnl":
-
                 endponit += `gerencia-livro/renovar/${document.getElementById("i_CodTrans_al").value}`
                 metodo = "PUT"
-                // objetoAEnviar = {
-                //     "livro": {
-                //         "id": `${document.getElementById("i_CodId_al").value}`
-                //     },
-                //     "cliente": {
-                //         "id": `${await pegarIdDe("i_cpfC_al")}`
-                //     }
-                // }
-
                 break;
             case "dl":
                 endponit += `gerencia-livro/devolver/${document.getElementById("i_codTrans_dl").value}`
                 metodo = "DELETE"
-
-
-
                 const respostaaas = await fetch(`http://localhost:8080/gerencia-livro/${document.getElementById("i_codTrans_dl").value}`,{
                     method: 'GET'
                 })
@@ -334,61 +259,44 @@ class Formulario{
                     let dataAtual = new Date()
                     if(dataDev < dataAtual){
                         popUp("LIVRO ATRASADO", `O livro a ser devolvido está atrasdo!\nCertifique-se que a multa referente ao(s) ${Math.floor((dataAtual-dataDev)/(1000*60*60*24))} dias de atraso foi paga, antes de efetuar a devolução!`)
-                    }
-                }
-
-            
+                    }}
                 break;
             case "cc":
                 console.log("entrou no cc")
                 endponit += "clientes"
                 metodo = "POST"
-                objetoAEnviar = await criarJSONObject(quemEnviar)
-                
+                objetoAEnviar = await criarJSONObject(quemEnviar) 
                 break;
             case "rc":
-                //(await pegarIdDe("i_cpf_rc") ? await pegarIdDe("i_cpf_rc") : "")
                 endponit = (await pegarIdDe("i_cpf_rc", "clientes") ? `http://localhost:8080/clientes/${await pegarIdDe("i_cpf_rc", "clientes")}` : " ")
                 metodo = "DELETE"
-                
                 break;
             case "cf":
                 endponit += "funcionarios"
                 metodo = "POST"
                 objetoAEnviar = await criarJSONObject(quemEnviar)
-            
                 break;
             case "rf":                
-
                 endponit += `funcionarios/${await pegarIdDe("i_cpf_rf", "funcionarios")}`
                 metodo = "DELETE"
-            
                 break;
             case "ec":
-                console.log("entrou no ec")
                 endponit += `${finalDoPoint}`
                 metodo = "PUT"
                 objetoAEnviar = await criarJSONObject(quemEnviar)
                 objetoAEnviar['id'] = finalDoPoint.split('/')[1]
-                delete objetoAEnviar.cpf
-                
                 break;
             case "ef":
                 endponit += `${finalDoPoint}`
                 metodo = "PUT"
                 objetoAEnviar = await criarJSONObject(quemEnviar)
                 objetoAEnviar['id'] = finalDoPoint.split('/')[1]
-                delete objetoAEnviar.cpf
-            
-                
                 break;
             case "el":
                 endponit += `${finalDoPoint}`
                 metodo = "PUT"
                 objetoAEnviar = await criarJSONObject(quemEnviar)
                 objetoAEnviar['id'] = finalDoPoint.split('/')[1]
-                delete objetoAEnviar.cpf
-                
                 break;                
             case "ccm": 
                 endponit += "clientes"
@@ -401,19 +309,10 @@ class Formulario{
                 metodo = "PUT"
                 quemEnviar = ".papel:not(.disabled) .input_form, #papel_ccm .input_form" 
                 objetoAEnviar = await criarJSONObject(quemEnviar)
-                
                 break;            
             default:
                 break;
         }
-        // async function main()
-        console.log('O objeto q eu enviei')
-        console.log(objetoAEnviar)
-        console.log('O endpoit q eu enviei')
-        console.log(endponit)
-        console.log('O metodo q eu enviei')
-        console.log(metodo)
- 
         let response;
         if (objetoAEnviar != null) {
             response = await fetch(endponit, {
@@ -428,9 +327,6 @@ class Formulario{
                 method: metodo
             });
         }
-
-        console.log("A RESPOSTA DA REQUISIÇAO")
-        console.log(response)
         return response
     }
 
@@ -439,22 +335,15 @@ class Formulario{
 
         if ( !(resposta.ok)){
             const resppp = await resposta.json()
-            console.log('entrou no if de erro')
-            console.log(resppp)
 
             document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = resppp.detalhe
-
         }else{
-
             let resp
             if(qualFormu != 'dl' && qualFormu != 'rc' && qualFormu != 'rl' && qualFormu != 'rf'){
                 resp = await resposta.json()
             }else{
                 resp = resposta
             }
-            console.log('PASSOU NO OK DO ELSE')
-            console.log(resp)
-
             this.fecharFormulario(qualFormu)
             switch (qualFormu) {
                 case 'al':
@@ -485,10 +374,8 @@ class Formulario{
                     break;                                          
                 default:
                     break;
-            }
-        }
+            }}}
 
-    }
     static async preencherInformacoes(qualForm){
         let endponit = `http://localhost:8080/`
 
@@ -496,27 +383,25 @@ class Formulario{
         switch (qualForm) {
             case 'rl':
                 document.getElementById("i_CodId_rl").addEventListener("keyup", async(qmfoi)=>{
-                    respostaaas = await fetch(`http://localhost:8080/livros/${qmfoi.target.value}`, {
+                    respostaaas = await fetch(`${endponit}livros/${qmfoi.target.value}`, {
                         method: 'GET'
                     })
                     const responseData = await respostaaas.json()
                     document.getElementById("i_titulo_rl").value = responseData.nome
-
                 })
                 break;
             case 'rc':
                 document.getElementById("i_cpf_rc").addEventListener("keyup", async(qmfoi)=>{
-                    respostaaas = await fetch(`http://localhost:8080/clientes/por-cpf?cpf=${qmfoi.target.value}`, {
+                    respostaaas = await fetch(`${endponit}clientes/por-cpf?cpf=${qmfoi.target.value}`, {
                         method: 'GET'
                     })
                     const responseData = await respostaaas.json()
                     document.getElementById("i_nome_rc").value = responseData[0].nome
-
                 })
                 break; 
             case 'al':
                 document.getElementById("i_CodTrans_al").addEventListener("keyup", async(oinput)=>{
-                    respostaaas = await fetch(`http://localhost:8080/gerencia-livro/${oinput.target.value}`,{
+                    respostaaas = await fetch(`${endponit}gerencia-livro/${oinput.target.value}`,{
                         method: 'GET'
                     })
                     const responseData = await respostaaas.json()
@@ -525,58 +410,47 @@ class Formulario{
 
                     document.getElementById("i_NomeC_al").value =responseData.cliente.nome
                     document.getElementById("i_cpfC_al").value =responseData.cliente.cpf
-
                 })
 
                 document.getElementById("i_CodId_al").addEventListener("keyup", async(oinput)=>{
-                    respostaaas = await fetch(`http://localhost:8080/livros/${oinput.target.value}`,{
+                    respostaaas = await fetch(`${endponit}livros/${oinput.target.value}`,{
                         method: 'GET'
                     })
                     const responseData2 = await respostaaas.json()
                     document.getElementById("i_titulo_al").value =responseData2.nome
-
                 })
                 document.getElementById("i_cpfC_al").addEventListener("keyup", async(oinput)=>{
-                    respostaaas = await fetch(`http://localhost:8080/clientes/por-cpf?cpf=${oinput.target.value}`,{
+                    respostaaas = await fetch(`${endponit}clientes/por-cpf?cpf=${oinput.target.value}`,{
                         method: 'GET'
                     })
                     const responseData3 = await respostaaas.json()
                     document.getElementById("i_NomeC_al").value =responseData3[0].nome
-
                 })
                 break;               
             case 'dl':
                 document.getElementById("i_codTrans_dl").addEventListener("keyup", async (oinput)=>{
-                    respostaaas = await fetch(`http://localhost:8080/gerencia-livro/${oinput.target.value}`,{
+                    respostaaas = await fetch(`${endponit}gerencia-livro/${oinput.target.value}`,{
                         method: 'GET'
                     })
                 const responseData = await respostaaas.json()
                 document.getElementById("i_CodId_dl").value =responseData.livro.id
                 document.getElementById("i_titulo_dl").value =responseData.livro.nome
-
                 document.getElementById("i_NomeC_dl").value =responseData.cliente.nome
                 document.getElementById("i_cpfC_dl").value =responseData.cliente.cpf                    
                 })
-
-
                 break;
             case 'rf':
                 document.getElementById("i_cpf_rf").addEventListener("keyup", async(qmfoi)=>{
-                    respostaaas = await fetch(`http://localhost:8080/funcionarios/por-cpf?cpf=${qmfoi.target.value}`, {
+                    respostaaas = await fetch(`${endponit}funcionarios/por-cpf?cpf=${qmfoi.target.value}`, {
                         method: 'GET'
                     })
                     const responseData = await respostaaas.json()
                     document.getElementById("i_nome_rf").value = responseData[0].nome
-
                 })
                 break;
             default:
                 break;
-        }
-
-    }
-
-}
+        }}}
 
 
 export{Formulario};

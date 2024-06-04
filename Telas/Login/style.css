@@ -276,3 +276,7 @@ input:focus{
 .pilhas{
     align-self: flex-end;
 }
+#livros_direita >img{
+    transform: scaleX(-1);
+
+}
