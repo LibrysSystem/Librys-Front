@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async (qmfoi)=>{
         document.getElementById("funcionarios").setAttribute("class", "sec_nav disabled")
     }
     await AbaDados.mudarAba("aba_de_livro")
-});
+})
 
 // NAVBAR
 const princ_btns = [...document.querySelectorAll(".sec_btn")]
