@@ -1,0 +1,87 @@
+/* POP UP */
+
+#divEscura{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    align-items: center;
+    justify-content:center;
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    z-index: 3;
+}
+#caixaPopUp{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    height: 300px;
+    width: 500px;
+    background-color: #F9F1E5;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    animation-name: modal-pop;
+    animation-duration: 0.2s;
+}
+@keyframes modal-pop{
+    from{
+        transform: scale(0.8);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+#caixaPopUp > h1{
+    font-family: var(--font-padrao);
+    color: #ffffff;
+    width: 100%;
+    font-size: 1.3em;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 20px 20px 0px 0px;
+    background-color: #734C29;
+}
+#caixaPopUp > div{
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-padrao);
+    line-height: 1.7em;
+    font-size: 0.9em;
+    color: #734C29;
+    text-align: center;
+    padding: 30px;
+}
+#caixaPopUp > button{
+    background-color: #734C29;
+    cursor: pointer;
+    color: white;
+    padding: 0px 35px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+    font-size: 0.8em;
+    transition: 0.2s;
+}
+#caixaPopUp > button:hover{
+    box-shadow: 0px 0px 3px white;
+}
+
+#xDoPopUp{
+    background-color: #734c2900;
+    color: #ffffff;
+    position: absolute;
+    align-self: flex-end;
+    top: 0;
+    margin: 25px 30px;
+    z-index: 5;
+    font-family: var(--font-especial);
+    font-size: 1.2em;
+    transition: 0.3s;
+
+}
+#xDoPopUp:hover{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    color: #F9F1E5;
+}

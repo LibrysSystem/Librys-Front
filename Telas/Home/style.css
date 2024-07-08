@@ -19,6 +19,7 @@
 
 }
 html body {
+    background-color: #F9F1E5;
     height: 100%;
 }
 
@@ -137,7 +138,7 @@ main{
         font-size: 1.2em;
         margin: auto;
         width: 80%;
-        color: white;
+        color: #734C29;
         line-height: 2em;
         font-family: var(--font-padrao);
 
