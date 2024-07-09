@@ -85,7 +85,10 @@ class Formulario{
         document.getElementById(`papel_${qualForm}`).setAttribute("class", "papel")
 
         const primeiraResposta = await fetch(`${endpoit}${quem}`,{
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+            }
         })
         if(primeiraResposta.ok){
             const dadosDoItem = await primeiraResposta.json()
@@ -251,7 +254,10 @@ class Formulario{
                 endponit += `gerencia-livro/devolver/${document.getElementById("i_codTrans_dl").value}`
                 metodo = "DELETE"
                 const respostaaas = await fetch(`http://localhost:8080/gerencia-livro/${document.getElementById("i_codTrans_dl").value}`,{
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                    }
                 })
                 if(respostaaas.ok){
                     const resp = await respostaaas.json()
@@ -318,7 +324,8 @@ class Formulario{
             response = await fetch(endponit, {
                 method: metodo,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
                 },
                 body: JSON.stringify(objetoAEnviar)
             });
@@ -384,7 +391,10 @@ class Formulario{
             case 'rl':
                 document.getElementById("i_CodId_rl").addEventListener("keyup", async(qmfoi)=>{
                     respostaaas = await fetch(`${endponit}livros/${qmfoi.target.value}`, {
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                        }
                     })
                     const responseData = await respostaaas.json()
                     document.getElementById("i_titulo_rl").value = responseData.nome
@@ -393,7 +403,10 @@ class Formulario{
             case 'rc':
                 document.getElementById("i_cpf_rc").addEventListener("keyup", async(qmfoi)=>{
                     respostaaas = await fetch(`${endponit}clientes/por-cpf?cpf=${qmfoi.target.value}`, {
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                        }
                     })
                     const responseData = await respostaaas.json()
                     document.getElementById("i_nome_rc").value = responseData[0].nome
@@ -402,7 +415,10 @@ class Formulario{
             case 'al':
                 document.getElementById("i_CodTrans_al").addEventListener("keyup", async(oinput)=>{
                     respostaaas = await fetch(`${endponit}gerencia-livro/${oinput.target.value}`,{
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                        }
                     })
                     const responseData = await respostaaas.json()
                     document.getElementById("i_CodId_al").value =responseData.livro.id
@@ -414,14 +430,20 @@ class Formulario{
 
                 document.getElementById("i_CodId_al").addEventListener("keyup", async(oinput)=>{
                     respostaaas = await fetch(`${endponit}livros/${oinput.target.value}`,{
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                        }
                     })
                     const responseData2 = await respostaaas.json()
                     document.getElementById("i_titulo_al").value =responseData2.nome
                 })
                 document.getElementById("i_cpfC_al").addEventListener("keyup", async(oinput)=>{
                     respostaaas = await fetch(`${endponit}clientes/por-cpf?cpf=${oinput.target.value}`,{
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                        }
                     })
                     const responseData3 = await respostaaas.json()
                     document.getElementById("i_NomeC_al").value =responseData3[0].nome
@@ -430,7 +452,10 @@ class Formulario{
             case 'dl':
                 document.getElementById("i_codTrans_dl").addEventListener("keyup", async (oinput)=>{
                     respostaaas = await fetch(`${endponit}gerencia-livro/${oinput.target.value}`,{
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                        }
                     })
                 const responseData = await respostaaas.json()
                 document.getElementById("i_CodId_dl").value =responseData.livro.id
@@ -442,7 +467,10 @@ class Formulario{
             case 'rf':
                 document.getElementById("i_cpf_rf").addEventListener("keyup", async(qmfoi)=>{
                     respostaaas = await fetch(`${endponit}funcionarios/por-cpf?cpf=${qmfoi.target.value}`, {
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                        }
                     })
                     const responseData = await respostaaas.json()
                     document.getElementById("i_nome_rf").value = responseData[0].nome

@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", async (qmfoi)=>{
     await Formulario.getForms()
     document.getElementById("user_nome").innerHTML = Usuario.getNome()
     document.getElementById("user_tipo").innerHTML = Usuario.getTipo()
-    if(Usuario.tipo == "Funcionario"){
+    if(Usuario.getTipo() == "Funcionário"){
+        console.log("entrou no if de funcionario")
         document.getElementById("funcionarios").setAttribute("class", "sec_nav disabled")
     }
     await AbaDados.mudarAba("aba_de_livro")

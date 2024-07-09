@@ -14,7 +14,10 @@ class AbaDados{
             this.abaAtual = "livros"
 
             const response = await fetch("http://localhost:8080/livros", {
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                }
             })
             if(response.ok){
                 const dados = await response.json()
@@ -26,7 +29,10 @@ class AbaDados{
             this.abaAtual = "funcionarios"
 
             const response2 = await fetch("http://localhost:8080/funcionarios", {
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                }
             })
             if(response2.ok){
                 const dados = await response2.json()
@@ -38,7 +44,10 @@ class AbaDados{
             this.abaAtual = "clientes"
 
             const response3 = await fetch("http://localhost:8080/clientes", {
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                }
             })
             if(response3.ok){
                 const dados = await response3.json()
@@ -77,7 +86,10 @@ class AbaDados{
     let respostas = []
     const fechPromise = aondePesquisar.map(async (el) => {
          const response = await fetch(el, {
-             method: 'GET'
+             method: 'GET',
+             headers: {
+                 'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+             }
          })
          if (response.ok) {
              const responseDados = await response.json()
@@ -325,7 +337,10 @@ async function popUp(titulo, mensagem, opcoes){
 async function pegarIdDe(qualInput, tipo){
     let response
     response = await fetch(`http://localhost:8080/${tipo}/por-cpf?cpf=${document.getElementById(qualInput).value}`, {
-    method: "GET"});
+    method: "GET",
+    headers: {
+        'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+    }});
     if(!(response.ok)){
         document.getElementById(qualInput).parentElement.parentElement.parentElement.firstElementChild.nextElementSibling.innerHTML = response.detalhe
         return null
