@@ -1,4 +1,4 @@
-import {Usuario} from "../../Classes/Usuario.js"
+import { Usuario } from "../../Classes/Usuario.js"
 import { popUp } from "../../Classes/FuncPack.js"
 
 const btn_entrar = document.getElementById("entrar")

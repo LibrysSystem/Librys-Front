@@ -478,7 +478,7 @@ class Formulario{
                 break;
             default:
                 break;
-        }}}
+        }}
+}
 
-
-export{Formulario};
+export {Formulario}

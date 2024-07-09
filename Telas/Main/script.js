@@ -1,6 +1,6 @@
 import { Usuario } from "../../Classes/Usuario.js";
 import { AbaDados, pesquisar, buscar, popUp} from "../../Classes/FuncPack.js";
-import {Formulario} from "../../Classes/Formulario.js";
+import { Formulario } from "../../Classes/Formulario.js";
 
 //INICIO
 document.addEventListener("DOMContentLoaded", async (qmfoi)=>{
@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async (qmfoi)=>{
     document.getElementById("user_nome").innerHTML = Usuario.getNome()
     document.getElementById("user_tipo").innerHTML = Usuario.getTipo()
     if(Usuario.getTipo() == "Funcionário"){
-        console.log("entrou no if de funcionario")
         document.getElementById("funcionarios").setAttribute("class", "sec_nav disabled")
     }
     await AbaDados.mudarAba("aba_de_livro")
@@ -32,7 +31,6 @@ navPequenosBtns.map( async (el)=>{
 })
 document.getElementById("btn_sair").addEventListener("click", async (qmfoi)=>{
     const resposta = await popUp("SAIR?", "Tem certeza que quer sair desta página e voltar para a página de login?", true)
-    console.log(resposta)
     if(resposta){
         localStorage.clear()
         location.replace('../Login/login.html')
