@@ -1,11 +1,9 @@
 import { validarInputs, criarJSONObject, popUp, pegarIdDe} from "./FuncPack.js";
 
 class Formulario{
-
     static TemFormAberto = false
     
     static getForms=async()=>{
-
         const papeis = [...document.querySelectorAll(".papel")]
         papeis.map((el)=>{
             el.setAttribute("class", "papel disabled")
@@ -478,7 +476,5 @@ class Formulario{
                 break;
             default:
                 break;
-        }}
-}
-
+        }}}
 export {Formulario}

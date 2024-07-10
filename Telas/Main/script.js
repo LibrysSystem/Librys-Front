@@ -1,6 +1,6 @@
-import { Usuario } from "../../Classes/Usuario.js";
-import { AbaDados, pesquisar, buscar, popUp} from "../../Classes/FuncPack.js";
-import { Formulario } from "../../Classes/Formulario.js";
+import { Usuario } from "../../Classes/Usuario.js"
+import { AbaDados, pesquisar, buscar, popUp} from "../../Classes/FuncPack.js"
+import { Formulario } from "../../Classes/Formulario.js"
 
 //INICIO
 document.addEventListener("DOMContentLoaded", async (qmfoi)=>{
