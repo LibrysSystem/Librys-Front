@@ -329,7 +329,11 @@ class Formulario{
             });
         } else {
             response = await fetch(endponit, {
-                method: metodo
+                method: metodo,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                }
             });
         }
         return response
