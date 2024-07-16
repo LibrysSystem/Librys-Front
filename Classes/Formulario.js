@@ -2,6 +2,11 @@ import { validarInputs, criarJSONObject, popUp, pegarIdDe} from "./FuncPack.js";
 
 class Formulario{
     static TemFormAberto = false
+    static FuncaoDoBotaoCl =  async ()=>{
+        const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
+        if(okkk == "ok"){
+            await this.terminarFormulario(await this.enviarFormulario('cl'), "cl")
+        }}
     
     static getForms=async()=>{
         const papeis = [...document.querySelectorAll(".papel")]
@@ -25,13 +30,16 @@ class Formulario{
                 }})
             
             this.preencherInformacoes(qualFormAbrir)
-            if((qualFormAbrir != "cc") && (qualFormAbrir != "al") && (qualFormAbrir != "cf")){
+            if((qualFormAbrir != "cc") && (qualFormAbrir != "al") && (qualFormAbrir != "cf") && (qualFormAbrir != "cl")){
                 document.getElementById(`btn_salvar_${qualFormAbrir}`).addEventListener("click", async ()=>{
                     const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                     if(okkk == "ok"){
                         await this.terminarFormulario(await this.enviarFormulario(qualFormAbrir), qualFormAbrir)
                     }})}
-            switch (qualFormAbrir) {
+            switch (qualFormAbrir){
+                case 'cl':
+                    document.getElementById(`btn_salvar_${qualFormAbrir}`).addEventListener("click", this.FuncaoDoBotaoCl)
+                    break;
                 case "al":
                     document.getElementById("btn_renovar_al").addEventListener("click", async ()=>{
                         document.getElementById("i_CodTrans_al").setAttribute("required", "true")
@@ -165,7 +173,6 @@ class Formulario{
             await popUp("FORMULÁRIO ABERTO", "Já existe em formulário em execução. Porfavor, complete-o ou feche-o antes de abrir um novo formulário.")}}
 
     static async fecharFormulario(tipo){
-
         let quaisInputs = ".papel:not(.disabled) .input_form"
         if(tipo == "ccm"){quaisInputs = ".papel_especial .input_form"}
             this.TemFormAberto = false
@@ -178,11 +185,15 @@ class Formulario{
             erros.map((el)=>{
                 el.innerHTML = " "
             })
-            if(tipo == "ccm"){
-                document.getElementById("papel_ccm").setAttribute("class", "papel_especial disabled")
-            }else{
-                document.getElementById(`papel_${tipo}`).setAttribute("class", "papel disabled")    
-            }}
+            const errinhos = [...document.querySelectorAll(".err")]
+            errinhos.map((el)=>{
+                el.innerHTML = " "
+            })
+            
+            document.getElementById("papel_ccm").setAttribute("class", "papel_especial disabled")
+            document.getElementById(`papel_${tipo}`).setAttribute("class", "papel disabled")    
+            document.getElementById(`btn_salvar_cl`).removeEventListener("click", this.FuncaoDoBotaoCl)
+        }
 
     static async avaliarFormulario(enviar, quais){
         const inputs = [...document.querySelectorAll(quais)]
@@ -204,7 +215,6 @@ class Formulario{
         }}
 
     static async abrirFormMenor(editar){
-
         document.getElementById("papel_ccm").setAttribute("class", "papel_especial")
         await this.avaliarFormulario(false, "#papel_ccm .input_form")
         
