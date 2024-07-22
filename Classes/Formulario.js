@@ -367,7 +367,12 @@ class Formulario{
             this.fecharFormulario(qualFormu)
             switch (qualFormu) {
                 case 'al':
-                    await popUp("LIVRO ALUGADO/RENOVADO COM SUCESSO", `Código da transação: ${resp.id}\nData da locação: ${resp.dataLocacao}\nData de devolução: ${resp.dataDevolucao}`)
+                    let dataDevFoma = resp.dataDevolucao.split("-")
+                    dataDevFoma = `${dataDevFoma[2]}-${dataDevFoma[1]}-${dataDevFoma[0]}}`
+                    let dataLocFoma = resp.dataLocacao.split("-")
+                    dataLocFoma = `${dataLocFoma[2]}-${dataLocFoma[1]}-${dataLocFoma[0]}}`
+                    
+                    await popUp("LIVRO ALUGADO/RENOVADO COM SUCESSO", `Código da transação: ${resp.id}\nData da locação: ${dataLocFoma}\nData de devolução: ${dataDevFoma}`)
                     break;
                 case 'rcm':
                 case 'rc':
