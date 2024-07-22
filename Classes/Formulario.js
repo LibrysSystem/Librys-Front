@@ -93,7 +93,7 @@ class Formulario{
         const primeiraResposta = await fetch(`${endpoit}${quem}`,{
             method: 'GET',
             headers: {
-                'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                'Authorization': `Bearer ${Usuario.getToken()}`
             }
         })
         if(primeiraResposta.ok){
@@ -190,6 +190,7 @@ class Formulario{
                 el.innerHTML = " "
             })
             
+            document.getElementById("i_MenorIdade_cc").checked = false
             document.getElementById("papel_ccm").setAttribute("class", "papel_especial disabled")
             document.getElementById(`papel_${tipo}`).setAttribute("class", "papel disabled")    
             document.getElementById(`btn_salvar_cl`).removeEventListener("click", this.FuncaoDoBotaoCl)
@@ -264,7 +265,7 @@ class Formulario{
                 const respostaaas = await fetch(`http://localhost:8080/gerencia-livro/${document.getElementById("i_codTrans_dl").value}`,{
                     method: 'GET',
                     headers: {
-                        'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                        'Authorization': `Bearer ${Usuario.getToken()}`
                     }
                 })
                 if(respostaaas.ok){
@@ -301,7 +302,7 @@ class Formulario{
                 objetoAEnviar['id'] = finalDoPoint.split('/')[1]
                 break;
             case "ef":
-                endponit += `${finalDoPoint}`
+                endponit += `funcionarios`
                 metodo = "PUT"
                 objetoAEnviar = await criarJSONObject(quemEnviar)
                 objetoAEnviar['id'] = finalDoPoint.split('/')[1]
@@ -333,7 +334,7 @@ class Formulario{
                 method: metodo,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                    'Authorization': `Bearer ${Usuario.getToken()}`
                 },
                 body: JSON.stringify(objetoAEnviar)
             });
@@ -342,7 +343,7 @@ class Formulario{
                 method: metodo,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                    'Authorization': `Bearer ${Usuario.getToken()}`
                 }
             });
         }
@@ -354,7 +355,6 @@ class Formulario{
 
         if ( !(resposta.ok)){
             const resppp = await resposta.json()
-
             document.querySelector(".papel:not(.disabled) .err_geral_form").innerHTML = resppp.detalhe
         }else{
             let resp
@@ -405,7 +405,7 @@ class Formulario{
                     respostaaas = await fetch(`${endponit}livros/${qmfoi.target.value}`, {
                         method: 'GET',
                         headers: {
-                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                            'Authorization': `Bearer ${Usuario.getToken()}`
                         }
                     })
                     const responseData = await respostaaas.json()
@@ -417,7 +417,7 @@ class Formulario{
                     respostaaas = await fetch(`${endponit}clientes/por-cpf?cpf=${qmfoi.target.value}`, {
                         method: 'GET',
                         headers: {
-                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                            'Authorization': `Bearer ${Usuario.getToken()}`
                         }
                     })
                     const responseData = await respostaaas.json()
@@ -429,7 +429,7 @@ class Formulario{
                     respostaaas = await fetch(`${endponit}gerencia-livro/${oinput.target.value}`,{
                         method: 'GET',
                         headers: {
-                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                            'Authorization': `Bearer ${Usuario.getToken()}`
                         }
                     })
                     const responseData = await respostaaas.json()
@@ -444,7 +444,7 @@ class Formulario{
                     respostaaas = await fetch(`${endponit}livros/${oinput.target.value}`,{
                         method: 'GET',
                         headers: {
-                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                            'Authorization': `Bearer ${Usuario.getToken()}`
                         }
                     })
                     const responseData2 = await respostaaas.json()
@@ -454,7 +454,7 @@ class Formulario{
                     respostaaas = await fetch(`${endponit}clientes/por-cpf?cpf=${oinput.target.value}`,{
                         method: 'GET',
                         headers: {
-                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                            'Authorization': `Bearer ${Usuario.getToken()}`
                         }
                     })
                     const responseData3 = await respostaaas.json()
@@ -466,7 +466,7 @@ class Formulario{
                     respostaaas = await fetch(`${endponit}gerencia-livro/${oinput.target.value}`,{
                         method: 'GET',
                         headers: {
-                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                            'Authorization': `Bearer ${Usuario.getToken()}`
                         }
                     })
                 const responseData = await respostaaas.json()
@@ -481,7 +481,7 @@ class Formulario{
                     respostaaas = await fetch(`${endponit}funcionarios/por-cpf?cpf=${qmfoi.target.value}`, {
                         method: 'GET',
                         headers: {
-                            'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                            'Authorization': `Bearer ${Usuario.getToken()}`
                         }
                     })
                     const responseData = await respostaaas.json()

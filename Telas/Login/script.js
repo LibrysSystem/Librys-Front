@@ -21,32 +21,37 @@ btn_entrar.addEventListener("click", async (qmfoi)=>{
             err_senha.innerHTML =`* ${i_senha.validationMessage}`
         }
     }else{
-        if(i_email.value == "bibliotecalibrys@gmail.com"){
-            if( i_senha.value== "librysbiblioteca"){
+        const login = btoa(`${i_email.value}:${i_senha.value}`)
+        const primeiraResposta = await fetch(`http://localhost:8080/usuario/login`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Basic ${login}`
+                // const token = btoa(`${i_email.value}:${i_senha.value}`)
+                // 'Authorization': `Bearer ${token}
+            }
+        })
+        if(primeiraResposta.ok){
+            err_login.innerHTML = "<3"
+            Usuario.setToken( await primeiraResposta.text())
 
+            if(i_email.value == "bibliotecalibrys@gmail.com"){
                 Usuario.setTipo("Suporte")
                 Usuario.setNome("Usuário Suporte")
                 Usuario.setEmail("bibliotecalibrys@gmail.com")
                 Usuario.setSenha("librysbiblioteca")
 
                 location.replace('../Main/main.html')
+
             }else{
-                err_login.innerHTML = "*SENHA INCORRETA!*"
-            } 
-        }else{
-            const primeiraResposta = await fetch(`http://localhost:8080/funcionarios/por-email?email=${i_email.value}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
-                }
-            })
-            if(primeiraResposta.ok){
-
-                let dadosDoUsuario = await primeiraResposta.json()
+            const dadosDoFuncionario = await fetch(`http://localhost:8080/funcionarios/por-email?email=${i_email.value}`,{
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                    }
+                })
+            if(dadosDoFuncionario.ok){
+                let dadosDoUsuario = await dadosDoFuncionario.json()
                 dadosDoUsuario = dadosDoUsuario[0]
-                console.log(dadosDoUsuario)
-
-                err_login.innerHTML = ""
 
                 Usuario.setTipo("Funcionário")
                 Usuario.setNome(dadosDoUsuario.nome)
@@ -54,17 +59,15 @@ btn_entrar.addEventListener("click", async (qmfoi)=>{
                 Usuario.setEmail(dadosDoUsuario.email)
                 Usuario.setSenha(dadosDoUsuario.senha)
 
-                if( Usuario.getSenha()== i_senha.value){
-                    location.replace('../Main/main.html')
-                }else{
-                    err_login.innerHTML = "*SENHA INCORRETA!*"
-                } 
-            }else{
-                err_login.innerHTML = "*USUÁRIO NÃO ENCONTRADO!*"
-            }
+                location.replace('../Main/main.html')
+
+            }}
+        }else{
+            err_login.innerHTML = "EMAIL OU SENHA INCORRETOS!"
+        }
     }}
     
-})
+)
 
 document.getElementById("esqueci").addEventListener("click", (qmfoi)=>{
     popUp("ESQUECI A SENHA", "Para recuperar ou alterar  sua senha, entre em contato com Usuário Suporte\nEmail: bibliotecalibrys@gmail.com")

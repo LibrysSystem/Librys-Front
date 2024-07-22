@@ -30,6 +30,12 @@ class Usuario {
     static getSenha() {
         return localStorage.getItem('senha');
     }
+    static setToken(novoToken) {
+        localStorage.setItem('token', novoToken);
+    }
+    static getToken() {
+        return localStorage.getItem('token');
+    }
 }
 
 export { Usuario }

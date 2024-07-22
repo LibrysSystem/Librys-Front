@@ -1,4 +1,5 @@
 import { Formulario } from "./Formulario.js"
+import { Usuario } from "./Usuario.js"
 
 class AbaDados{
 
@@ -13,10 +14,13 @@ class AbaDados{
             document.getElementById("h1_main").innerHTML = `LIVROS`
             this.abaAtual = "livros"
 
+            console.log(Usuario.getToken())
             const response = await fetch("http://localhost:8080/livros", {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                    // 'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                    'Authorization': `Bearer ${Usuario.getToken()}`
+
                 }
             })
             if(response.ok){
@@ -31,7 +35,7 @@ class AbaDados{
             const response2 = await fetch("http://localhost:8080/funcionarios", {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                    'Authorization': `Bearer ${Usuario.getToken()}`
                 }
             })
             if(response2.ok){
@@ -46,7 +50,7 @@ class AbaDados{
             const response3 = await fetch("http://localhost:8080/clientes", {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+                    'Authorization': `Bearer ${Usuario.getToken()}`
                 }
             })
             if(response3.ok){
@@ -88,8 +92,8 @@ class AbaDados{
          const response = await fetch(el, {
              method: 'GET',
              headers: {
-                 'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
-             }
+                'Authorization': `Bearer ${Usuario.getToken()}`
+            }
          })
          if (response.ok) {
              const responseDados = await response.json()
@@ -339,7 +343,7 @@ async function pegarIdDe(qualInput, tipo){
     response = await fetch(`http://localhost:8080/${tipo}/por-cpf?cpf=${document.getElementById(qualInput).value}`, {
     method: "GET",
     headers: {
-        'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
+        'Authorization': `Bearer ${Usuario.getToken()}`
     }});
     if(!(response.ok)){
         document.getElementById(qualInput).parentElement.parentElement.parentElement.firstElementChild.nextElementSibling.innerHTML = response.detalhe
