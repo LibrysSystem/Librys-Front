@@ -14,7 +14,6 @@ class AbaDados{
             document.getElementById("h1_main").innerHTML = `LIVROS`
             this.abaAtual = "livros"
 
-            console.log(Usuario.getToken())
             const response = await fetch("http://localhost:8080/livros", {
                 method: 'GET',
                 headers: {

@@ -1,4 +1,5 @@
 import { validarInputs, criarJSONObject, popUp, pegarIdDe} from "./FuncPack.js";
+import { Usuario } from "./Usuario.js";
 
 class Formulario{
     static TemFormAberto = false
