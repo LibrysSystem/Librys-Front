@@ -124,7 +124,6 @@ class Formulario{
                     document.getElementById("i_endereco_cf").value = dadosDoItem.endereco
                     document.getElementById("i_DataNasc_cf").value = dadosDoItem.dataNascimento
                     document.getElementById("i_email_cf").value = dadosDoItem.email  
-                    document.getElementById("i_senha_cf").value = dadosDoItem.senha                  
                     break;
                 default:
                     break;

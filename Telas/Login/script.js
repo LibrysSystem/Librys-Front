@@ -8,7 +8,6 @@ const err_senha =document.getElementById("err_senha")
 const err_email =document.getElementById("err_email")
 const err_login =document.getElementById("err_login")
 
-
 btn_entrar.addEventListener("click", async (qmfoi)=>{
     err_email.innerHTML = ""
     err_senha.innerHTML = ""
@@ -26,22 +25,21 @@ btn_entrar.addEventListener("click", async (qmfoi)=>{
             method: 'POST',
             headers: {
                 'Authorization': `Basic ${login}`
-                // const token = btoa(`${i_email.value}:${i_senha.value}`)
-                // 'Authorization': `Bearer ${token}
             }
         })
         if(primeiraResposta.ok){
-            err_login.innerHTML = "<3"
-            Usuario.setToken( await primeiraResposta.text())
 
-            if(i_email.value == "bibliotecalibrys@gmail.com"){
+            const resposts = await primeiraResposta.json()
+            err_login.innerHTML = " "
+            Usuario.setToken(await resposts.token)
+
+            if(await resposts.role == 'SUPORTE'){
                 Usuario.setTipo("Suporte")
                 Usuario.setNome("Usuário Suporte")
                 Usuario.setEmail("bibliotecalibrys@gmail.com")
                 Usuario.setSenha("librysbiblioteca")
 
                 location.replace('../Main/main.html')
-
             }else{
             const dadosDoFuncionario = await fetch(`http://localhost:8080/funcionarios/por-email?email=${i_email.value}`,{
                     method: 'GET',
@@ -66,7 +64,6 @@ btn_entrar.addEventListener("click", async (qmfoi)=>{
             err_login.innerHTML = "EMAIL OU SENHA INCORRETOS!"
         }
     }}
-    
 )
 
 document.getElementById("esqueci").addEventListener("click", (qmfoi)=>{
