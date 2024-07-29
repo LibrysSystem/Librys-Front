@@ -17,7 +17,6 @@ class AbaDados{
             const response = await fetch("http://localhost:8080/livros", {
                 method: 'GET',
                 headers: {
-                    // 'Authorization': `Basic ${btoa(`bibliotecalibrys@gmail.com:librysbiblioteca`)}`
                     'Authorization': `Bearer ${Usuario.getToken()}`
 
                 }
@@ -179,7 +178,11 @@ async function pesquisar(dados, submit){
                     if(item.hasOwnProperty(prop)){
                         if(item[prop] != null){
                             const propriedade = document.createElement("div")
+                            if(prop=='dataNascimento'){
+                                propriedade.innerHTML = `<strong>DataDeNascimento:</strong> ${item[prop]}`
+                            }else{
                             propriedade.innerHTML = `<strong>${prop.charAt(0).toUpperCase()+prop.slice(1)}:</strong> ${item[prop]}`
+                            }
                             modulo.appendChild(propriedade)
                         }}}
     
@@ -206,7 +209,11 @@ async function pesquisar(dados, submit){
                     if(item.hasOwnProperty(prop)){
                         if(item[prop] != null){
                             const propriedade = document.createElement("div")
+                            if(prop=='dataNascimento'){
+                                propriedade.innerHTML = `<strong>DataDeNascimento:</strong> ${item[prop]}`
+                            }else{
                             propriedade.innerHTML = `<strong>${prop.charAt(0).toUpperCase()+prop.slice(1)}:</strong> ${item[prop]}`
+                            }
                             modulo.appendChild(propriedade)
                         }}}
     

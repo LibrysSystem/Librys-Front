@@ -47,6 +47,7 @@ class Formulario{
                         const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
                         if(okkk == "ok"){
                             await this.terminarFormulario(await this.enviarFormulario("rnl"), qualFormAbrir)
+                            console.log("passou aqui B")
                         }})
                     document.getElementById("btn_alugar_al").addEventListener("click", async ()=>{
                         const okkk = await this.avaliarFormulario(true, ".papel:not(.disabled) .input_form")
@@ -154,6 +155,7 @@ class Formulario{
                         if(((dataAtual-dataNasc)/(31557600000)) < 18){
                             document.getElementById("i_MenorIdade_cc").checked = true
                             await this.abrirFormMenor(true)
+                            // document.getElementById("papel_ccm").setAttribute()
                         }else{
                             await this.terminarFormulario(await this.enviarFormulario("ec", quem), qualForm)                            
                         }}})
@@ -194,6 +196,10 @@ class Formulario{
             document.getElementById("papel_ccm").setAttribute("class", "papel_especial disabled")
             document.getElementById(`papel_${tipo}`).setAttribute("class", "papel disabled")    
             document.getElementById(`btn_salvar_cl`).removeEventListener("click", this.FuncaoDoBotaoCl)
+
+            const oldElement = document.getElementById(`btn_salvar_${tipo}`)
+            const newElement = oldElement.cloneNode(true)
+            oldElement.parentNode.replaceChild(newElement, oldElement)
         }
 
     static async avaliarFormulario(enviar, quais){
@@ -258,6 +264,7 @@ class Formulario{
             case "rnl":
                 endponit += `gerencia-livro/renovar/${document.getElementById("i_CodTrans_al").value}`
                 metodo = "PUT"
+                console.log("passou por aqui A")
                 break;
             case "dl":
                 endponit += `gerencia-livro/devolver/${document.getElementById("i_codTrans_dl").value}`
@@ -328,6 +335,7 @@ class Formulario{
             default:
                 break;
         }
+        
         let response;
         if (objetoAEnviar != null) {
             response = await fetch(endponit, {
@@ -342,7 +350,6 @@ class Formulario{
             response = await fetch(endponit, {
                 method: metodo,
                 headers: {
-                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${Usuario.getToken()}`
                 }
             });
@@ -367,9 +374,9 @@ class Formulario{
             switch (qualFormu) {
                 case 'al':
                     let dataDevFoma = resp.dataDevolucao.split("-")
-                    dataDevFoma = `${dataDevFoma[2]}-${dataDevFoma[1]}-${dataDevFoma[0]}}`
+                    dataDevFoma = `${dataDevFoma[2]}-${dataDevFoma[1]}-${dataDevFoma[0]}`
                     let dataLocFoma = resp.dataLocacao.split("-")
-                    dataLocFoma = `${dataLocFoma[2]}-${dataLocFoma[1]}-${dataLocFoma[0]}}`
+                    dataLocFoma = `${dataLocFoma[2]}-${dataLocFoma[1]}-${dataLocFoma[0]}`
                     
                     await popUp("LIVRO ALUGADO/RENOVADO COM SUCESSO", `Código da transação: ${resp.id}\nData da locação: ${dataLocFoma}\nData de devolução: ${dataDevFoma}`)
                     break;
