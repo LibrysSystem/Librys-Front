@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../Estilos/Imagens/logoIcone.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../Estilos/CSS's/PopUp.css">
+    <title>Redefinir Senha</title>
+</head>
+<body>
+    <div id="quad_esqueci" class="quad_esqueci">
+        <h1>REDEFINIR</h1>
+        <div id="err_esqueci"></div>
+        <div id="form" class="form">
+            <div id="form_senha" class="form_div">
+                <label id="l_senha" class="labels" for="senha">NOVA SENHA</label>
+                <div id="err_senha" class="erro"></div>
+                <input class="inputs" type="password" name="senha" id="senha" required minlength="8" placeholder="Digite sua senha...">
+            </div>
+        </div>
+        <div id="btns" class="btns">
+            <button id="alterar">REDEFINIR</button>
+        </div>
+    </div>
+    <script src="./script.js" type="module"></script>
+</body>
+</html>
