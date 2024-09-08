@@ -264,7 +264,6 @@ class Formulario{
             case "rnl":
                 endponit += `gerencia-livro/renovar/${document.getElementById("i_CodTrans_al").value}`
                 metodo = "PUT"
-                console.log("passou por aqui A")
                 break;
             case "dl":
                 endponit += `gerencia-livro/devolver/${document.getElementById("i_codTrans_dl").value}`
@@ -284,7 +283,6 @@ class Formulario{
                     }}
                 break;
             case "cc":
-                console.log("entrou no cc")
                 endponit += "clientes"
                 metodo = "POST"
                 objetoAEnviar = await criarJSONObject(quemEnviar) 
@@ -470,7 +468,7 @@ class Formulario{
                         }
                     })
                     const responseData3 = await respostaaas.json()
-                    document.getElementById("i_NomeC_al").value =responseData3[0].nome
+                    document.getElementById("i_NomeC_al").value = await responseData3[0].nome
                 })
                 break;               
             case 'dl':
